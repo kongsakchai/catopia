@@ -30,11 +30,11 @@ export default function Registerform() {
                 value={regisUsername}
                 onChange={e => setRegisUsername(e.target.value)}
                 type="text" placeholder="ชื่อผู้ใช้งาน" className="flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 mb-2 pl-2 border rounded border-textfield focus:outline-primary" />
-            <div className="flex items-start relative">
+            <div className="flex items-start relative mb-2">
                 <input
                     value={regisPassword}
                     onChange={e => setRegisPassword(e.target.value)}
-                    type="text" placeholder="รหัสผ่าน" className="flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 mb-2 pl-2 border rounded border-textfield focus:outline-primary" />
+                    type="text" placeholder="รหัสผ่าน" className="items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded border-textfield focus:outline-primary" />
                 <button
                     className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
                     onClick={togglePasswordVisibility}

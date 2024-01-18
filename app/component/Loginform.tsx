@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react"
-
+import Link from "next/link";
 
 export default function Loginform() {
 
@@ -37,7 +37,7 @@ export default function Loginform() {
                     <img src="/Eyeblocked.svg" alt="Password Visibility" />
                 </button>
             </div>
-            <small className="block mb-4 text-primary text-right">ลืมรหัสผ่าน?</small>
+            <Link href="/repassword" className="text-xs not-italic font-semibold leading-5 mb-4 text-primary text-right">ลืมรหัสผ่าน?</Link>
         </form>
     )
 }

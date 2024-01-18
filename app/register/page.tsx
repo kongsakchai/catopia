@@ -7,7 +7,7 @@ export default function Register() {
         <div className="flex flex-col justify-center items-center mt-40">
             <Registerform />
             <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid">
-                <span className="text-base not-italic font-normal leading-6">ลงทะเบียน</span>
+                <Link href="/" className="text-base not-italic font-normal leading-6">ลงทะเบียน</Link>
             </button>
             <div className="text-center mt-4">
                 <span className="text-xs not-italic font-normal leading-5 text-textfield">หรือ</span>

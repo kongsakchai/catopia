@@ -7,11 +7,11 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center mt-40">
       <Loginform />
       <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid">
-                <span className="text-base not-italic font-normal leading-6">เข้าสู่ระบบ</span>
-            </button>
+        <span className="text-base not-italic font-normal leading-6">เข้าสู่ระบบ</span>
+      </button>
       <div className="text-center mt-4">
         <span className="text-xs not-italic font-normal leading-5 text-textfield">หรือ</span>
-        <div className="flex mt-2">
+        <div className="flex mt-4">
           <span className="text-xs not-italic font-normal leading-5 text-textfield">ยังไม่มีบัญชีใช่ไหม?</span>
           <Link href="/register" className="text-xs not-italic font-semibold leading-5 ml-1 text-primary">ลงทะเบียน</Link>
         </div>
