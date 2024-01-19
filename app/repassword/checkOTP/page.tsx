@@ -1,25 +1,16 @@
-"use client";
-
-import { useState } from "react"
+import InputOTP from "@/app/component/InputOTP"
 import Link from "next/link"
 
-export default function Forgotpassword() {
 
-    const [username, setUsername] = useState('')
-
+export default function CheckOTP() {
     return (
         <div className="flex flex-col items-center gap-4 mt-52">
             <div className="flex flex-col items-start gap-4">
-                <h1 className="text-2xl not-italic font-semibold leading-8 text-black01">ลืมรหัสผ่าน</h1>
-                <input
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                    type="text"
-                    placeholder="ชื่อผู้ใช้งาน"
-                    className="flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded border-textfield focus:outline-primary" />
-                <Link href="/repassword/checkOTP">
+                <h1 className="text-2xl not-italic font-semibold leading-8 text-black01">กรุณาเช็คอีเมลของคุณ</h1>
+                <InputOTP />
+                <Link href="/repassword/newpassword">
                     <div className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
-                        ส่งรหัสยืนยัน
+                        รีเซ็ทรหัสผ่าน
                     </div>
                 </Link>
             </div>
