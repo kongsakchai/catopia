@@ -10,9 +10,16 @@ export default function Registerform() {
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const [passwordVisible, setPasswordVisible] = useState(false)
+    const [confirmPasswordVisible,setConfirmPasswordVisible] = useState(false)
 
-    const togglePasswordVisibility = () => {
+    const togglePasswordVisibility = (e) => {
+        e.preventDefault()
         setPasswordVisible(!passwordVisible)
+    }
+
+    const toggleConfirmPasswordVisibility = (e) => {
+        e.preventDefault()
+        setConfirmPasswordVisible(!confirmPasswordVisible)
     }
 
     return (
@@ -34,24 +41,30 @@ export default function Registerform() {
                 <input
                     value={regisPassword}
                     onChange={e => setRegisPassword(e.target.value)}
-                    type="text" placeholder="รหัสผ่าน" className="items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded border-textfield focus:outline-primary" />
+                    type={passwordVisible ? 'text' : 'password'}
+                    placeholder="รหัสผ่าน" className="items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded border-textfield focus:outline-primary" />
                 <button
                     className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
-                    onClick={togglePasswordVisibility}
+                    onClick={e => togglePasswordVisibility(e)}
                 >
-                    <img src="/Eyeblocked.svg" alt="Password Visibility" />
+                    <img
+                        src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"}
+                        alt="Password Visibility" />
                 </button>
             </div>
             <div className="flex items-start relative">
                 <input
                     value={confirmPassword}
                     onChange={e => setConfirmPassword(e.target.value)}
-                    type="text" placeholder="ยืนยันรหัสผ่าน" className="items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded border-textfield focus:outline-primary" />
+                    type={confirmPasswordVisible ? 'text' : 'password'}
+                    placeholder="ยืนยันรหัสผ่าน" className="items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded border-textfield focus:outline-primary" />
                 <button
                     className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
-                    onClick={togglePasswordVisibility}
+                    onClick={e => toggleConfirmPasswordVisibility(e)}
                 >
-                    <img src="/Eyeblocked.svg" alt="Password Visibility" />
+                    <img
+                        src={confirmPasswordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"}
+                        alt="Password Visibility" />
                 </button>
             </div>
             <div className="text-left mt-2 mb-4">

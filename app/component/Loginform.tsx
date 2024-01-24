@@ -10,7 +10,8 @@ export default function Loginform() {
 
     const [passwordVisible, setPasswordVisible] = useState(false)
 
-    const togglePasswordVisibility = () => {
+    const togglePasswordVisibility = (e) => {
+        e.preventDefault()
         setPasswordVisible(!passwordVisible)
     }
 
@@ -32,9 +33,11 @@ export default function Loginform() {
                 />
                 <button
                     className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
-                    onClick={togglePasswordVisibility}
+                    onClick={e => togglePasswordVisibility(e)}
                 >
-                    <img src="/Eyeblocked.svg" alt="Password Visibility" />
+                    <img
+                        src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"}
+                        alt="Password Visibility" />
                 </button>
             </div>
             <Link href="/repassword" className="text-xs not-italic font-semibold leading-5 mb-4 text-primary text-right">ลืมรหัสผ่าน?</Link>
