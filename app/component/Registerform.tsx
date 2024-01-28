@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react"
 
 export default function Registerform() {
@@ -10,7 +11,7 @@ export default function Registerform() {
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const [passwordVisible, setPasswordVisible] = useState(false)
-    const [confirmPasswordVisible,setConfirmPasswordVisible] = useState(false)
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false)
 
     const togglePasswordVisibility = (e) => {
         e.preventDefault()
@@ -76,6 +77,11 @@ export default function Registerform() {
                     <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">หญิง</span>
                 </div>
             </div>
+            <Link href="/">
+                <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
+                    ลงทะเบียน
+                </button>
+            </Link>
         </form>
     )
 }
