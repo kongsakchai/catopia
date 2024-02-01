@@ -77,7 +77,7 @@ export default function Registerform() {
                     <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">หญิง</span>
                 </div>
             </div>
-            <Link href="/">
+            <Link href="/register/getquestion">
                 <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
                     ลงทะเบียน
                 </button>

@@ -1,11 +1,20 @@
-import Genquestion from "@/app/component/Genquestion"
-import Headerquestion from "@/app/component/Headerquestion"
+"use client";
+import Ansquestion from "@/app/component/Ansquestion"
+import { createContext, useState } from "react"
+import Completeregister from "../completeregister/page";
+
+export const DataContext = createContext()
 
 export default function Getquestion() {
+
+    const [questionState, setQuestionState] = useState("questions")
+
     return (
-        <div>
-            <Headerquestion />
-            <Genquestion />
-        </div>
+        <DataContext.Provider value={{ questionState, setQuestionState }}>
+            <div>
+                {questionState === "questions" && <Ansquestion />}
+                {questionState === "complete" && <Completeregister/>}
+            </div>
+        </DataContext.Provider>
     )
 }

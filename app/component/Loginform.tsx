@@ -65,11 +65,11 @@ export default function Loginform() {
                 </button>
             </div>
             <Link href="/repassword" className="text-xs not-italic font-semibold leading-5 mb-2 text-primary text-right">ลืมรหัสผ่าน?</Link>
-            {/* <Link href="/"> */}
+            <Link href="/">
             <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
                 เข้าสู่ระบบ
             </button>
-            {/* </Link> */}
+            </Link>
             <div className="flex items-center justify-center w-full mt-2 mb-4">
                 <span className="text-xs not-italic font-normal leading-5 text-error">{errorLigon}</span>
             </div>
