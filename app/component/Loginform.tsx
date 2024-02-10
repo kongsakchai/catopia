@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react"
+// import { useRouter } from 'next/router';
 import Link from "next/link";
 
 export default function Loginform() {
@@ -17,23 +18,25 @@ export default function Loginform() {
         setPasswordVisible(!passwordVisible)
     }
 
+    
     const validateForm = (e) => {
-        e.preventDefault();
-
-        const isUsernameValid = username.length > 8;
-        const isPasswordValid = password.length > 8;
-
-        setErrorUsername(!isUsernameValid);
-        setErrorPassword(!isPasswordValid);
-
-        setErrorLogin(isUsernameValid && isPasswordValid ? '' : 'ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง');
+        e.preventDefault()
+        // const router = useRouter()
+        
+        const isUsernameValid = username.length >= 4
+        const isPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password)
+    
+        setErrorUsername(!isUsernameValid)
+        setErrorPassword(!isPasswordValid)
+    
+        setErrorLogin(isUsernameValid && isPasswordValid ? '' : 'ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง')
     };
 
     return (
         <form onSubmit={validateForm} className="flex flex-col items-end gap-2">
             <input
                 value={username}
-                onChange={(e) => {
+                onChange={e => {
                     setUsername(e.target.value);
                     setErrorUsername(false);
                 }}
@@ -47,7 +50,10 @@ export default function Loginform() {
             <div className="flex items-start relative">
                 <input
                     value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    onChange={e => {
+                        setPassword(e.target.value)
+                        setErrorPassword(false)
+                    }}
                     type={passwordVisible ? 'text' : 'password'}
                     placeholder="รหัสผ่าน"
                     className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorPassword ? 'border-error' : 'border-textfield'}
@@ -65,11 +71,11 @@ export default function Loginform() {
                 </button>
             </div>
             <Link href="/repassword" className="text-xs not-italic font-semibold leading-5 mb-2 text-primary text-right">ลืมรหัสผ่าน?</Link>
-            <Link href="/">
+            {/* <Link href="/"> */}
             <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
                 เข้าสู่ระบบ
             </button>
-            </Link>
+            {/* </Link> */}
             <div className="flex items-center justify-center w-full mt-2 mb-4">
                 <span className="text-xs not-italic font-normal leading-5 text-error">{errorLigon}</span>
             </div>
