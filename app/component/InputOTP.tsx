@@ -19,30 +19,48 @@ export default function InputOTP() {
             <div className="flex items-start gap-4">
                 <input
                     value={firstOTP}
-                    onChange={e => setFirstOTP(e.target.value)}
+                    onChange={e => {
+                        const firstInputOTP = e.target.value
+                        if(firstInputOTP === '' || /^\d$/.test(firstInputOTP)){
+                            setFirstOTP(firstInputOTP)
+                        }
+                        
+                    }}
                     type="text"
-                    placeholder="1"
                     className="text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid border-textfield focus:outline-primary"
                 />
                 <input
                     value={secondtOTP}
-                    onChange={e => setSecondOTP(e.target.value)}
+                    onChange={e => {
+                        const secondInputOTP = e.target.value
+                        if(secondInputOTP === '' || /^\d$/.test(secondInputOTP)){
+                            setSecondOTP(secondInputOTP)
+                        }
+                    }}
                     type="text"
-                    placeholder="2"
                     className="text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid border-textfield focus:outline-primary"
                 />
                 <input
                     value={thirdOTP}
-                    onChange={e => setThirdOTP(e.target.value)}
+                    onChange={e => {
+                        const thirdInputOTP = e.target.value
+                        if(thirdInputOTP === '' || /^\d$/.test(thirdInputOTP)){
+                            setThirdOTP(thirdInputOTP)
+                        }
+                    }}
                     type="text"
-                    placeholder="3"
                     className="text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid border-textfield focus:outline-primary"
                 />
                 <input
                     value={fourthOTP}
-                    onChange={e => setFourthOTP(e.target.value)}
+                    onChange={e => {
+                        const fourthInputOTP = e.target.value
+                        if(fourthInputOTP === '' || /^\d$/.test(fourthInputOTP)){
+                            setFourthOTP(fourthInputOTP)
+                        }
+                    }}
                     type="text"
-                    placeholder="4"
+                    // placeholder="4"
                     className="text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid border-textfield focus:outline-primary"
                 />
             </div>
