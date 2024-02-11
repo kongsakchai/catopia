@@ -1,20 +1,25 @@
 "use client";
-import Link from "next/link";
+
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 
+
 export default function Registerform() {
+    const router = useRouter()
 
     const [email, setEmail] = useState('')
     const [date, setDate] = useState('')
     const [regisUsername, setRegisUsername] = useState('')
     const [regisPassword, setRegisPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [gender, setGender] = useState()
 
     const [errorEmail, setErrorEmail] = useState(false)
     const [errorDate, setErrorDate] = useState(false)
     const [errorRegisUsername, setErrorRegisUsername] = useState(false)
     const [errorRegisPassword, setErrorRegisPassword] = useState(false)
     const [errorRegisConfirmPassword, setErrorConfirmPassword] = useState(false)
+    const [errorGender, setErrorGender] = useState(false)
     const [errorRegister, setErrorRegister] = useState('')
 
     const [passwordVisible, setPasswordVisible] = useState(false)
@@ -30,6 +35,10 @@ export default function Registerform() {
         setConfirmPasswordVisible(!confirmPasswordVisible)
     }
 
+    const handleGender = (e) => {
+        setGender(e.target.value)
+    }
+
     const validateForm = (e) => {
         e.preventDefault()
 
@@ -39,14 +48,20 @@ export default function Registerform() {
         const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(regisPassword)
         const isRegisPasswordMatch = confirmPassword === regisPassword
         const isConfirmPasswordNotEmpty = confirmPassword.trim() !== ''
+        const isGenderSelected = !!gender
 
         setErrorEmail(!isEmailValid)
         setErrorDate(!isDateValid)
         setErrorRegisUsername(!isRegisUsernameValid)
         setErrorRegisPassword(!isRegisPasswordValid)
         setErrorConfirmPassword(!isConfirmPasswordNotEmpty || !isRegisPasswordMatch)//if confirmPassword is empty or if it doesn't match regisPassword
+        setErrorGender(!isGenderSelected)
 
-        setErrorRegister(isEmailValid && isDateValid && isRegisUsernameValid && isRegisPasswordValid && isRegisPasswordMatch && isConfirmPasswordNotEmpty ? '' : 'ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง')
+        if (isEmailValid && isDateValid && isRegisUsernameValid && isRegisPasswordValid && isRegisPasswordMatch && isConfirmPasswordNotEmpty && isGenderSelected) {
+            router.push('/')
+        } else {
+            setErrorRegister('ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง')
+        }
     };
 
     return (
@@ -115,19 +130,37 @@ export default function Registerform() {
                 </button>
             </div>
             <div className="text-left mt-2 mb-4">
-                <span className=" text-black01">เพศ</span>
+                <span className={`${errorGender ? 'text-error' : 'text-black01' }`}>เพศ</span>
                 <div className="flex items-center">
-                    <input type="radio" id="male" name="gender" className="ml-2 mr-2 mt-2" />
+                    <input
+                        type="radio"
+                        id="male"
+                        name="gender"
+                        value="male"
+                        checked={gender === "male"}
+                        onChange={e =>{
+                            handleGender(e)
+                            setErrorGender(false)
+                        }}
+                        className="ml-2 mr-2 mt-2" />
                     <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">ชาย</span>
-                    <input type="radio" id="female" name="gender" className="ml-6 mr-2 mt-2" />
+                    <input
+                        type="radio"
+                        id="female"
+                        name="gender"
+                        value="female"
+                        checked={gender === "female"}
+                        onChange={e =>{
+                            handleGender(e)
+                            setErrorGender(false)
+                        }}
+                        className="ml-6 mr-2 mt-2" />
                     <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">หญิง</span>
                 </div>
             </div>
-            {/* <Link href="/register/getquestion"> */}
             <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
                 ลงทะเบียน
             </button>
-            {/* </Link> */}
             <div className="flex items-center justify-center w-full mt-4">
                 <span className="text-xs not-italic font-normal leading-5 text-error">{errorRegister}</span>
             </div>

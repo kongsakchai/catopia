@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react"
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import Link from "next/link";
 
 export default function Loginform() {
+    const router = useRouter()
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -17,19 +18,23 @@ export default function Loginform() {
         e.preventDefault()
         setPasswordVisible(!passwordVisible)
     }
-
     
+
     const validateForm = (e) => {
         e.preventDefault()
-        // const router = useRouter()
         
+
         const isUsernameValid = username.length >= 4
         const isPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password)
-    
+
         setErrorUsername(!isUsernameValid)
         setErrorPassword(!isPasswordValid)
-    
-        setErrorLogin(isUsernameValid && isPasswordValid ? '' : 'ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง')
+
+        if (isUsernameValid && isPasswordValid) {
+            router.push('/register')
+        } else {
+            setErrorLogin('ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง')
+        }
     };
 
     return (
