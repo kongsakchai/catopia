@@ -1,37 +1,52 @@
 "use client";
 import QuestionData from "@/public/QuestionData"
-import Image from "next/image";
-import Link from "next/link";
 import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../register/getquestion/page";
 
 
 export default function Genquestion() {
 
-    const [current, setCurrent] = useState(0)
-    const [selectChoice, setSelectChoice] = useState("")
-    const { setQuestionState } = useContext(DataContext)
+    const [current, setCurrent] = useState(0);
+const [selectChoice, setSelectChoice] = useState("");
+const [allSelected, setAllSelected] = useState([]);
+const { setQuestionState } = useContext(DataContext);
 
-    useEffect(() => {
-        selectAnswer()
-    }, [selectChoice])
+useEffect(() => {
+    console.log(allSelected);
+}, [allSelected]);
 
-    const selectAnswer = () => {
-        if (selectChoice !== "") {
-            nextQuestion()
-        }
+const prevQuestion = () => {
+    if (current === 0) {
+        return;
+    } else {
+        clearLastAnswer();
+        setCurrent(current - 1);
     }
+};
 
-    const nextQuestion = () => {
-        // setSelectChoice("")
-        if (current === QuestionData.length - 1) {
-            setQuestionState("complete")
-        }
-        setCurrent(current + 1)
+const clearLastAnswer = () => {
+    setAllSelected(prevAllSelected => prevAllSelected.slice(0, -1));
+};
+
+const nextQuestion = () => {
+    setSelectChoice(""); // Clear selectChoice
+    if (current === QuestionData.length - 1) {
+        setQuestionState("complete");
     }
+    setCurrent(current + 1);
+};
 
+const handleSelectChoice = () => {
+    setAllSelected(prevAllSelected => [...prevAllSelected, selectChoice]);
+    nextQuestion(); 
+};
+
+    
     return (
         <div className="flex flex-col items-start gap-4 mt-4">
+            <button onClick={prevQuestion}>
+                <img src="/ArrowLeft.svg" alt="Back" />
+            </button>
             <div className="w-[364px]">
                 <span className="text-black01 text-2xl not-italic font-bold leading-10">
                     {QuestionData[current].question}
@@ -41,21 +56,20 @@ export default function Genquestion() {
                 <button
                     key={index}
                     onClick={() => setSelectChoice(choice)}
-                    className="flex w-[364px] flex-col items-start gap-2.5 p-4 border-black01 rounded-lg border-2 border-solid">
-                    {choice}
+                    className="flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 rounded-lg border-2 border-solid hover:bg-primary hover:text-white">
+                    <span>{choice}</span>
+                    {choice === selectChoice && (
+                        <img src="/Check.svg" alt="Check" style={{ marginRight: '5px', alignSelf: 'center' }} />
+                    )}
                 </button>
+
             ))}
+            <button
+                type="submit"
+                onClick={handleSelectChoice}
+                className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
+                ถัดไป
+            </button>
         </div>
-
-        // {/* <Link href="/register">
-        //             <Image src="ArrowLeft.svg" alt="ArrowLeft" width={24} height={24}/>
-        //     </Link> */}
-
-        // {/* <Link href="/">
-        //                 <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
-        //                     ถัดไป
-        //                 </button>
-        //             </Link> */}
-
     )
 }

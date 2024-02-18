@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react"
 
-
 export default function Registerform() {
     const router = useRouter()
 
@@ -62,7 +61,7 @@ export default function Registerform() {
         } else {
             setErrorRegister('ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง')
         }
-    };
+    }
 
     return (
         <form onSubmit={validateForm} className="flex flex-col items-start gap-4;">

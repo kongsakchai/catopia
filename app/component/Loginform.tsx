@@ -18,11 +18,10 @@ export default function Loginform() {
         e.preventDefault()
         setPasswordVisible(!passwordVisible)
     }
-    
+
 
     const validateForm = (e) => {
         e.preventDefault()
-        
 
         const isUsernameValid = username.length >= 4
         const isPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password)
@@ -31,7 +30,7 @@ export default function Loginform() {
         setErrorPassword(!isPasswordValid)
 
         if (isUsernameValid && isPasswordValid) {
-            router.push('/register')
+            router.push('/register/getquestion')
         } else {
             setErrorLogin('ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง')
         }
@@ -77,7 +76,9 @@ export default function Loginform() {
             </div>
             <Link href="/repassword" className="text-xs not-italic font-semibold leading-5 mb-2 text-primary text-right">ลืมรหัสผ่าน?</Link>
             {/* <Link href="/"> */}
-            <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
+            <button
+                type="submit"
+                className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
                 เข้าสู่ระบบ
             </button>
             {/* </Link> */}
