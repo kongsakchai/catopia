@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image";
 
 export default function Forgotpassword() {
 
@@ -9,6 +10,7 @@ export default function Forgotpassword() {
 
     return (
         <div className="flex flex-col items-center gap-4 mt-52">
+            <Image src="Catlogo.svg" width={194} height={181} alt="Logo" priority={true} />
             <div className="flex flex-col items-start gap-4">
                 <h1 className="text-2xl not-italic font-semibold leading-8 text-black01">ลืมรหัสผ่าน</h1>
                 <input

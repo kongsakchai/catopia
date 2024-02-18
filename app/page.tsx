@@ -1,10 +1,11 @@
 import Link from "next/link"
 import Loginform from "./component/Loginform"
-
+import Image from "next/image"
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center mt-40">
+      <Image src="Catlogo.svg" width={194} height={181} alt="Logo" priority={true} />
       <Loginform />
       <div className="text-center">
         <div className="flex items-center">

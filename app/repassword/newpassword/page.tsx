@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image";
 
 export default function Newpassword() {
 
@@ -22,6 +23,7 @@ export default function Newpassword() {
 
     return (
         <div className="flex flex-col items-center gap-4 mt-52">
+            <Image src="../Catlogo.svg" width={194} height={181} alt="Logo" priority={true} />
             <div className="flex flex-col items-start gap-2">
                 <h1 className="text-2xl not-italic font-semibold leading-8 text-black01 mb-2">รีเซ็ทรหัสผ่าน</h1>
                 <div className="flex items-start relative ">

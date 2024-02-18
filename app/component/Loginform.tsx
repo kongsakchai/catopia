@@ -37,7 +37,7 @@ export default function Loginform() {
     };
 
     return (
-        <form onSubmit={validateForm} className="flex flex-col items-end gap-2">
+        <form onSubmit={validateForm} className="flex flex-col items-end gap-2 mt-8">
             <input
                 value={username}
                 onChange={e => {

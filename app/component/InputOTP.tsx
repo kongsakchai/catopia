@@ -30,10 +30,16 @@ export default function InputOTP() {
                                 secondInputRef.current.focus()
                             }
                         }
-
                     }}
                     type="text"
                     className="text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid border-textfield focus:outline-primary"
+                    style={{
+                        fontSize: '40px',
+                        fontStyle: 'normal',
+                        fontWeight: 400,
+                        lineHeight: '56px',
+                        color: 'var(--Black01, #2E2E2E)',
+                    }}
                 />
                 <input
                     ref={secondInputRef}
@@ -42,13 +48,20 @@ export default function InputOTP() {
                         const secondInputOTP = e.target.value
                         if (secondInputOTP === '' || /^\d$/.test(secondInputOTP)) {
                             setSecondOTP(secondInputOTP)
-                            if(secondInputOTP !== ''){
+                            if (secondInputOTP !== '') {
                                 thirdInputRef.current.focus()
                             }
                         }
                     }}
                     type="text"
                     className="text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid border-textfield focus:outline-primary"
+                    style={{
+                        fontSize: '40px',
+                        fontStyle: 'normal',
+                        fontWeight: 400,
+                        lineHeight: '56px',
+                        color: 'var(--Black01, #2E2E2E)',
+                    }}
                 />
                 <input
                     ref={thirdInputRef}
@@ -57,13 +70,20 @@ export default function InputOTP() {
                         const thirdInputOTP = e.target.value
                         if (thirdInputOTP === '' || /^\d$/.test(thirdInputOTP)) {
                             setThirdOTP(thirdInputOTP)
-                            if(thirdInputOTP !== ''){
+                            if (thirdInputOTP !== '') {
                                 fourthInputRef.current.focus()
                             }
                         }
                     }}
                     type="text"
                     className="text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid border-textfield focus:outline-primary"
+                    style={{
+                        fontSize: '40px',
+                        fontStyle: 'normal',
+                        fontWeight: 400,
+                        lineHeight: '56px',
+                        color: 'var(--Black01, #2E2E2E)',
+                    }}
                 />
                 <input
                     ref={fourthInputRef}
@@ -76,6 +96,13 @@ export default function InputOTP() {
                     }}
                     type="text"
                     className="text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid border-textfield focus:outline-primary"
+                    style={{
+                        fontSize: '40px',
+                        fontStyle: 'normal',
+                        fontWeight: 400,
+                        lineHeight: '56px',
+                        color: 'var(--Black01, #2E2E2E)',
+                    }}
                 />
             </div>
         </div>

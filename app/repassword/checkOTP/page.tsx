@@ -1,10 +1,11 @@
 import InputOTP from "@/app/component/InputOTP"
+import Image from "next/image"
 import Link from "next/link"
-
 
 export default function CheckOTP() {
     return (
         <div className="flex flex-col items-center gap-4 mt-52">
+            <Image src="../Catlogo.svg" width={194} height={181} alt="Logo" priority={true} />
             <div className="flex flex-col items-start gap-4">
                 <h1 className="text-2xl not-italic font-semibold leading-8 text-black01">กรุณาเช็คอีเมลของคุณ</h1>
                 <InputOTP />
