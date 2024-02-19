@@ -64,7 +64,7 @@ export default function Registerform() {
     }
 
     return (
-        <form onSubmit={validateForm} className="flex flex-col items-start gap-4;">
+        <form onSubmit={validateForm} className="flex flex-col justify-center items-start gap-2">
             <h1 className="text-2xl not-italic font-semibold leading-8 text-black01 text-left mb-4">ลงทะเบียน</h1>
             <input
                 value={email}
@@ -73,7 +73,7 @@ export default function Registerform() {
                     setErrorEmail(false)
                 }}
                 type="text" placeholder="อีเมล"
-                className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 mb-2 pl-2 border rounded ${errorEmail ? 'border-error' : 'border-textfield'} focus:outline-primary`} />
+                className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? 'border-error' : 'border-textfield'} focus:outline-primary`} />
             <input
                 value={date}
                 onChange={e => {
@@ -81,7 +81,7 @@ export default function Registerform() {
                     setErrorDate(false)
                 }}
                 type="text" placeholder="วัน เดือน ปี เกิด(DD/MM/YYYY)"
-                className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 mb-2 pl-2 border rounded ${errorDate ? 'border-error' : 'border-textfield'} focus:outline-primary`} />
+                className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? 'border-error' : 'border-textfield'} focus:outline-primary`} />
             <input
                 value={regisUsername}
                 onChange={e => {
@@ -89,8 +89,8 @@ export default function Registerform() {
                     setErrorRegisUsername(false)
                 }}
                 type="text" placeholder="ชื่อผู้ใช้งาน"
-                className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 mb-2 pl-2 border rounded ${errorRegisUsername ? 'border-error' : 'border-textfield'} focus:outline-primary`} />
-            <div className="flex items-start relative mb-2">
+                className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? 'border-error' : 'border-textfield'} focus:outline-primary`} />
+            <div className="flex items-start relative">
                 <input
                     value={regisPassword}
                     onChange={e => {
@@ -129,7 +129,7 @@ export default function Registerform() {
                 </button>
             </div>
             <div className="text-left mt-2 mb-4">
-                <span className={`${errorGender ? 'text-error' : 'text-black01' }`}>เพศ</span>
+                <span className={`${errorGender ? 'text-error' : 'text-black01'}`}>เพศ</span>
                 <div className="flex items-center">
                     <input
                         type="radio"
@@ -137,7 +137,7 @@ export default function Registerform() {
                         name="gender"
                         value="male"
                         checked={gender === "male"}
-                        onChange={e =>{
+                        onChange={e => {
                             handleGender(e)
                             setErrorGender(false)
                         }}
@@ -149,7 +149,7 @@ export default function Registerform() {
                         name="gender"
                         value="female"
                         checked={gender === "female"}
-                        onChange={e =>{
+                        onChange={e => {
                             handleGender(e)
                             setErrorGender(false)
                         }}
@@ -160,9 +160,7 @@ export default function Registerform() {
             <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
                 ลงทะเบียน
             </button>
-            <div className="flex items-center justify-center w-full mt-4">
-                <span className="text-xs not-italic font-normal leading-5 text-error">{errorRegister}</span>
-            </div>
+            <span className="flex text-center items-center justify-center text-xs not-italic font-normal mt-2 mb-2 leading-5 text-error" style={{ width: '100%', textAlign: 'center' }}>{errorRegister}</span>
         </form>
     )
 }

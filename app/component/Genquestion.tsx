@@ -7,41 +7,41 @@ import { DataContext } from "../register/getquestion/page";
 export default function Genquestion() {
 
     const [current, setCurrent] = useState(0);
-const [selectChoice, setSelectChoice] = useState("");
-const [allSelected, setAllSelected] = useState([]);
-const { setQuestionState } = useContext(DataContext);
+    const [selectChoice, setSelectChoice] = useState("");
+    const [allSelected, setAllSelected] = useState([]);
+    const { setQuestionState } = useContext(DataContext);
 
-useEffect(() => {
-    console.log(allSelected);
-}, [allSelected]);
+    useEffect(() => {
+        console.log(allSelected);
+    }, [allSelected]);
 
-const prevQuestion = () => {
-    if (current === 0) {
-        return;
-    } else {
-        clearLastAnswer();
-        setCurrent(current - 1);
-    }
-};
+    const prevQuestion = () => {
+        if (current === 0) {
+            return;
+        } else {
+            clearLastAnswer();
+            setCurrent(current - 1);
+        }
+    };
 
-const clearLastAnswer = () => {
-    setAllSelected(prevAllSelected => prevAllSelected.slice(0, -1));
-};
+    const clearLastAnswer = () => {
+        setAllSelected(prevAllSelected => prevAllSelected.slice(0, -1));
+    };
 
-const nextQuestion = () => {
-    setSelectChoice(""); // Clear selectChoice
-    if (current === QuestionData.length - 1) {
-        setQuestionState("complete");
-    }
-    setCurrent(current + 1);
-};
+    const nextQuestion = () => {
+        setSelectChoice(""); // Clear selectChoice
+        if (current === QuestionData.length - 1) {
+            setQuestionState("complete");
+        }
+        setCurrent(current + 1);
+    };
 
-const handleSelectChoice = () => {
-    setAllSelected(prevAllSelected => [...prevAllSelected, selectChoice]);
-    nextQuestion(); 
-};
+    const handleSelectChoice = () => {
+        setAllSelected(prevAllSelected => [...prevAllSelected, selectChoice]);
+        nextQuestion();
+    };
 
-    
+
     return (
         <div className="flex flex-col items-start gap-4 mt-4">
             <button onClick={prevQuestion}>

@@ -6,7 +6,7 @@ export default function Register() {
     return (
         <div className="flex flex-col justify-center items-center mt-40">
             <Registerform />
-            <div className="text-center mt-4">
+            <div className="text-center">
                 <div className="flex items-center">
                     <div className="flex-1 w-[320px] h-[0.001px] shrink-0 border border-line"></div>
                     <span className="text-xs not-italic font-normal leading-5 text-textfield px-2">หรือ</span>

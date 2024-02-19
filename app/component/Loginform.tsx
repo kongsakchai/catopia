@@ -37,7 +37,7 @@ export default function Loginform() {
     };
 
     return (
-        <form onSubmit={validateForm} className="flex flex-col items-end gap-2 mt-8">
+        <form onSubmit={validateForm} className="flex justify-center flex-col items-end gap-2 mt-8">
             <input
                 value={username}
                 onChange={e => {
@@ -82,9 +82,10 @@ export default function Loginform() {
                 เข้าสู่ระบบ
             </button>
             {/* </Link> */}
-            <div className="flex items-center justify-center w-full mt-2 mb-4">
-                <span className="text-xs not-italic font-normal leading-5 text-error">{errorLigon}</span>
-            </div>
+            {/* <div className="flex items-center justify-center w-full  mb-4"> */}
+            {/* <span className="flex justify-center text-center items-center text-xs not-italic font-normal mt-2 leading-5 text-error">{errorLigon}</span> */}
+            <span className="flex text-center items-center justify-center text-xs not-italic font-normal mt-2 mb-2 leading-5 text-error" style={{ width: '100%', textAlign: 'center' }}>{errorLigon}</span>
+            {/* </div> */}
         </form>
     )
 }
