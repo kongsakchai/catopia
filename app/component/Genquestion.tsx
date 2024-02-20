@@ -9,6 +9,7 @@ export default function Genquestion() {
     const [current, setCurrent] = useState(0);
     const [selectChoice, setSelectChoice] = useState("");
     const [allSelected, setAllSelected] = useState([]);
+    // const [allSelected, setAllSelected] = useState({});
     const { setQuestionState } = useContext(DataContext);
 
     useEffect(() => {
@@ -41,6 +42,10 @@ export default function Genquestion() {
         nextQuestion();
     };
 
+    // const handleSelectChoice = () => {
+    //     setAllSelected({...allSelected, [current]: selectChoice});
+    //     nextQuestion();
+    // };
 
     return (
         <div className="flex flex-col items-start gap-4 mt-4">

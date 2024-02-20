@@ -1,18 +1,18 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useEffect, use } from "react"
+import { useState, useEffect } from "react"
 
 export default function Registerform() {
     const router = useRouter()
 
     const [email, setEmail] = useState('')
     const [date, setDate] = useState('')
-    const [regisUsername, setRegisUsername] = useState('')
-    const [regisPassword, setRegisPassword] = useState('')
+    const [username, setRegisUsername] = useState('')
+    const [password, setRegisPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [gender, setGender] = useState()
-    const [registerData, setRegisterData] = useState([])
+    const [registerData, setRegisterData] = useState({})
 
     const [errorEmail, setErrorEmail] = useState(false)
     const [errorDate, setErrorDate] = useState(false)
@@ -44,7 +44,7 @@ export default function Registerform() {
     }, [registerData])
 
     const storeRegisterData = () => {
-        setRegisterData([...registerData, email, date, regisUsername, regisPassword, confirmPassword, gender])
+        setRegisterData({...registerData, email, date, username, password, confirmPassword, gender})
     }
 
     const validateForm = (e) => {
@@ -52,9 +52,9 @@ export default function Registerform() {
 
         const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
         const isDateValid = /^\d{2}\/\d{2}\/\d{4}$/.test(date)
-        const isRegisUsernameValid = regisUsername.length >= 4;
-        const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(regisPassword)
-        const isRegisPasswordMatch = confirmPassword === regisPassword
+        const isRegisUsernameValid = username.length >= 4;
+        const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password)
+        const isRegisPasswordMatch = confirmPassword === password
         const isConfirmPasswordNotEmpty = confirmPassword.trim() !== ''
         const isGenderSelected = !!gender
 
@@ -72,6 +72,10 @@ export default function Registerform() {
             setErrorRegister('ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง')
         }
     }
+
+    // async function fetchAPIDB() {
+    //     const res = await fetch()
+    // }
 
     return (
         <form onSubmit={validateForm} className="flex flex-col justify-center items-start gap-2">
@@ -93,7 +97,7 @@ export default function Registerform() {
                 type="text" placeholder="วัน เดือน ปี เกิด(DD/MM/YYYY)"
                 className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? 'border-error' : 'border-textfield'} focus:outline-primary`} />
             <input
-                value={regisUsername}
+                value={username}
                 onChange={e => {
                     setRegisUsername(e.target.value)
                     setErrorRegisUsername(false)
@@ -102,7 +106,7 @@ export default function Registerform() {
                 className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? 'border-error' : 'border-textfield'} focus:outline-primary`} />
             <div className="flex items-start relative">
                 <input
-                    value={regisPassword}
+                    value={password}
                     onChange={e => {
                         setRegisPassword(e.target.value)
                         setErrorRegisPassword(false)

@@ -1,7 +1,26 @@
-export default function Headerquestion() {
+import { useState, useEffect } from 'react';
+
+export default function ProgressBar() {
+    const [progress, setProgress] = useState<number>(0);
+
+    useEffect(() => {
+        setProgress(prevProgress => prevProgress + 10);
+    }, []);
+
     return (
-        <div className="flex flex-col w-full items-center gap-4 pt-12 pb-[38px] px-8">
-            <h1>Headerquestion</h1>
+        <div className="container mx-auto mt-8">
+            <div className="progress w-full bg-gray-200 h-8 rounded-full">
+                <div
+                    className="progress-bar bg-blue-500 h-8 rounded-full"
+                    role="progressbar"
+                    aria-valuenow={progress}
+                    aria-valuemin={0}
+                    aria-valuemax={100}
+                    style={{ width: `${progress}%` }}
+                >
+                    <span className="sr-only">{progress}% Complete</span>
+                </div>
+            </div>
         </div>
-    )
+    );
 }
