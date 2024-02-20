@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../register/getquestion/page";
 
 
-export default function Genquestion() {
+export default function Genquestion({ progress, setProgress }) {
 
     const [current, setCurrent] = useState(0);
     const [selectChoice, setSelectChoice] = useState("");
@@ -22,6 +22,7 @@ export default function Genquestion() {
         } else {
             clearLastAnswer();
             setCurrent(current - 1);
+            setProgress(progress - 100/7);
         }
     };
 
@@ -39,6 +40,7 @@ export default function Genquestion() {
 
     const handleSelectChoice = () => {
         setAllSelected(prevAllSelected => [...prevAllSelected, selectChoice]);
+        setProgress(progress + 100/7);
         nextQuestion();
     };
 

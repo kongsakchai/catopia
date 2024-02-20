@@ -1,24 +1,22 @@
+"use client";
 import { useState, useEffect } from 'react';
 
-export default function ProgressBar() {
-    const [progress, setProgress] = useState<number>(0);
-
-    useEffect(() => {
-        setProgress(prevProgress => prevProgress + 10);
-    }, []);
-
+export default function ProgressBar({ progress }) {
     return (
-        <div className="container mx-auto mt-8">
-            <div className="progress w-full bg-gray-200 h-8 rounded-full">
+        <div className="flex justify-center container mx-auto mt-12 mb-10">
+            <div className="progress w-[364px] bg-line h-2 rounded-full">
                 <div
-                    className="progress-bar bg-blue-500 h-8 rounded-full"
+                    className="progress-bar bg-primary h-2 rounded-full"
                     role="progressbar"
                     aria-valuenow={progress}
                     aria-valuemin={0}
                     aria-valuemax={100}
-                    style={{ width: `${progress}%` }}
+                    style={{
+                        width: `${progress}%`,
+                        transition: 'width 0.5s ease-in-out'
+                    }}
                 >
-                    <span className="sr-only">{progress}% Complete</span>
+                    <span className="sr-only">{progress}</span>
                 </div>
             </div>
         </div>
