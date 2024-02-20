@@ -135,14 +135,10 @@ export default function InputOTP() {
                     }}
                 />
             </div>
-            {/* <Link href="/repassword/newpassword"> */}
             <button className="flex w-[364px] justify-center items-center gap-2.5 mt-4 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
                 รีเซ็ทรหัสผ่าน
             </button>
-            {/* </Link> */}
-            <div className="flex items-center justify-center mt-4 w-full">
-                <span className="text-xs not-italic font-normal leading-5 text-error">{errorOTP}</span>
-            </div>
+            <span className="flex text-center items-center justify-center text-xs not-italic font-normal mt-4  leading-5 text-error" style={{ width: '100%', textAlign: 'center' }}>{errorOTP}</span>
         </form>
     )
 }

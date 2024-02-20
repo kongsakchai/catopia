@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react"
+import { useState, useEffect, use } from "react"
 
 export default function Registerform() {
     const router = useRouter()
@@ -12,6 +12,7 @@ export default function Registerform() {
     const [regisPassword, setRegisPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [gender, setGender] = useState()
+    const [registerData, setRegisterData] = useState([])
 
     const [errorEmail, setErrorEmail] = useState(false)
     const [errorDate, setErrorDate] = useState(false)
@@ -38,6 +39,14 @@ export default function Registerform() {
         setGender(e.target.value)
     }
 
+    useEffect(() => {
+        console.log(registerData);
+    }, [registerData])
+
+    const storeRegisterData = () => {
+        setRegisterData([...registerData, email, date, regisUsername, regisPassword, confirmPassword, gender])
+    }
+
     const validateForm = (e) => {
         e.preventDefault()
 
@@ -57,6 +66,7 @@ export default function Registerform() {
         setErrorGender(!isGenderSelected)
 
         if (isEmailValid && isDateValid && isRegisUsernameValid && isRegisPasswordValid && isRegisPasswordMatch && isConfirmPasswordNotEmpty && isGenderSelected) {
+            storeRegisterData()
             router.push('/')
         } else {
             setErrorRegister('ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง')

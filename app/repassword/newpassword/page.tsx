@@ -44,8 +44,10 @@ export default function Newpassword() {
     }
 
     return (
-        <div className="flex flex-col items-center gap-4 mt-52">
-            <Image src="../Catlogo.svg" width={194} height={181} alt="Logo" priority={true} />
+        <div className="flex flex-col items-center mt-40">
+            <div className="mb-8">
+                <Image src="../Catlogo.svg" width={194} height={181} alt="Logo" priority={true} />
+            </div>
             <form onSubmit={validateForm} className="flex flex-col items-start gap-2">
                 <h1 className="text-2xl not-italic font-semibold leading-8 text-black01 mb-2">รีเซ็ทรหัสผ่าน</h1>
                 <div className="flex items-start relative ">
@@ -86,18 +88,13 @@ export default function Newpassword() {
                             alt="Password Visibility" />
                     </button>
                 </div>
-                {/* <Link href="/repassword/checkOTP"> */}
                 <button className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
                     ส่งรหัสยืนยัน
                 </button>
-                {/* </Link> */}
             </form>
-            <div className="text-center">
-                <div className="flex items-center justify-center w-full mt-2 mb-4">
-                    <span className="text-xs not-italic font-normal leading-5 text-error">{errorPassword}</span>
-                </div>
+            <span className="flex text-center items-center justify-center text-xs not-italic font-normal mt-4  leading-5 text-error" style={{ width: '100%', textAlign: 'center' }}>{errorPassword}</span>
+            <div className="text-center mt-2 mb-4">
                 <div className="flex items-center">
-
                     <div className="flex-1 w-[320px] h-[0.001px] shrink-0 border border-line"></div>
                     <span className="text-xs not-italic font-normal leading-5 text-textfield px-2">หรือ</span>
                     <div className="flex-1 border border-line"></div>
