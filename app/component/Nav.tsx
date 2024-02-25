@@ -2,19 +2,27 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export default function Nav() {
+
+  const router = useRouter();
+
   const [active, setActive] = useState("home");
 
   const handleActive = (page: string) => {
     setActive(page);
   };
 
+  useEffect(() => {
+    router.push("/main/home")
+  }, []);
+
   return (
     <div className=" flex w-full h-[104px] items-center justify-center shrink-0 border border-solid border-[red]">
       <div className="flex w-[364px] justify-between gap-14 border border-solid border-[red]">
-        <Link href="/main">
+        <Link href="/main/home">
           <button
             onClick={() => handleActive("home")}
             className="flex flex-col items-center justify-center"
