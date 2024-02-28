@@ -48,9 +48,8 @@ export default function Loginform() {
         }}
         type="text"
         placeholder="ชื่อผู้ใช้งาน"
-        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-          errorUsername ? "border-error" : "border-textfield"
-        } focus:outline-primary`}
+        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorUsername ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
         style={{
           color: errorUsername ? "#e50914" : "",
         }}
@@ -64,9 +63,8 @@ export default function Loginform() {
           }}
           type={passwordVisible ? "text" : "password"}
           placeholder="รหัสผ่าน"
-          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-            errorPassword ? "border-error" : "border-textfield"
-          }
+          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorPassword ? "border-error" : "border-textfield"
+            }
                      focus:outline-primary`}
           style={{
             color: errorPassword ? "#e50914" : "",
