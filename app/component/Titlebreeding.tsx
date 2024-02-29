@@ -4,9 +4,9 @@ import { useContext } from "react";
 
 export default function Titlebreeding() {
 
-  const { setBreedingState } = useContext(DataContext);
+  const { setBreedingState } = useContext(DataContext) as { setBreedingState: (state: string) => void };
 
-  const handleBreedingState = (state) => {
+  const handleBreedingState = (state: string) => {
     setBreedingState(state);
   }
 
@@ -26,7 +26,7 @@ export default function Titlebreeding() {
         ข้อมูลที่แสดงผลเป็นเป็นเพียงการคาดคะเนจากข้อมูลเท่านั้น
       </p>
       <button
-      onClick={() => handleBreedingState("selectbreeding")}
+        onClick={() => handleBreedingState("selectbreeding")}
         type="submit"
         className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6"
       >

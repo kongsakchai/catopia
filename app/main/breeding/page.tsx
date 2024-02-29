@@ -8,7 +8,7 @@ export const DataContext = createContext();
 
 export default function Breeding() {
 
-    const [breedingState, setBreedingState] = useState("titlebreeding");
+    const [breedingState, setBreedingState] = useState<string>("titlebreeding");
 
   return (
     <DataContext.Provider value={{breedingState,setBreedingState}}>

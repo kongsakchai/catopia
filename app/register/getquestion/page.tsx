@@ -6,7 +6,7 @@ import Completeregister from "../completeregister/page";
 export const DataContext = createContext();
 
 export default function Getquestion() {
-  const [questionState, setQuestionState] = useState("questions");
+  const [questionState, setQuestionState] = useState<string>("questions");
 
   return (
     <DataContext.Provider value={{ questionState, setQuestionState }}>
