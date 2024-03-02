@@ -1,0 +1,278 @@
+[
+  {
+    "id": "F01",
+    "color": "Black",
+    "sex": "F",
+    "type_color": "Solid"
+  },
+  {
+    "id": "F02",
+    "color": "Blue",
+    "sex": "F",
+    "type_color": "Solid"
+  },
+  {
+    "id": "F03",
+    "color": "Red",
+    "sex": "F",
+    "type_color": "Solid"
+  },
+  {
+    "id": "F04",
+    "color": "Cream",
+    "sex": "F",
+    "type_color": "Solid"
+  },
+  {
+    "id": "F05",
+    "color": "Tortoiseshell",
+    "sex": "F",
+    "type_color": "Solid"
+  },
+  {
+    "id": "F06",
+    "color": "Blue-Cream",
+    "sex": "F",
+    "type_color": "Solid"
+  },
+  {
+    "id": "F13",
+    "color": "Brown Tabby & White",
+    "sex": "F",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "F14",
+    "color": "Blue Tabby & White",
+    "sex": "F",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "F15",
+    "color": "Red Tabby & White",
+    "sex": "F",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "F16",
+    "color": "Cream Tabby & White",
+    "sex": "F",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "F17",
+    "color": "Brown Pitch Tabby & Whites",
+    "sex": "F",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "F18",
+    "color": "Blue Pitch Tabby & Whites",
+    "sex": "F",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "F19",
+    "color": "Black & White Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F20",
+    "color": "Blue & White Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F21",
+    "color": "Red & White Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F22",
+    "color": "Cream & White Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F23",
+    "color": "Caloco Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F24",
+    "color": "Dilute Calico Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F25",
+    "color": "Silver Tabby & White",
+    "sex": "F",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "F26",
+    "color": "Silver Patch Tabby & White",
+    "sex": "F",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "F27",
+    "color": "Black & White",
+    "sex": "F",
+    "type_color": "Bi-color"
+  },
+  {
+    "id": "F28",
+    "color": "Blue & White",
+    "sex": "F",
+    "type_color": "Bi-color"
+  },
+  {
+    "id": "F29",
+    "color": "Red & White",
+    "sex": "F",
+    "type_color": "Bi-color"
+  },
+  {
+    "id": "F30",
+    "color": "Cream & White",
+    "sex": "F",
+    "type_color": "Bi-color"
+  },
+  {
+    "id": "F31",
+    "color": "Caloco",
+    "sex": "F",
+    "type_color": "Bi-color"
+  },
+  {
+    "id": "F32",
+    "color": "Dilute Calico",
+    "sex": "F",
+    "type_color": "Bi-color"
+  },
+  {
+    "id": "F33",
+    "color": "Black & White Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F34",
+    "color": "Blue & White Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F35",
+    "color": "Red & White Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F36",
+    "color": "Cream & White Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F37",
+    "color": "Caloco Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "F38",
+    "color": "Dilute Calico Van",
+    "sex": "F",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "M01",
+    "color": "Black & White",
+    "sex": "M",
+    "type_color": "Bi-color"
+  },
+  {
+    "id": "M02",
+    "color": "Blue & White",
+    "sex": "M",
+    "type_color": "Bi-color"
+  },
+  {
+    "id": "M03",
+    "color": "Red & White",
+    "sex": "M",
+    "type_color": "Bi-color"
+  },
+  {
+    "id": "M04",
+    "color": "Cream & White",
+    "sex": "M",
+    "type_color": "Bi-color"
+  },
+  {
+    "id": "M05",
+    "color": "Black & White Van",
+    "sex": "M",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "M06",
+    "color": "Blue & White Van",
+    "sex": "M",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "M07",
+    "color": "Red & White Van",
+    "sex": "M",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "M08",
+    "color": "Cream & White Van",
+    "sex": "M",
+    "type_color": "Bi-color Van"
+  },
+  {
+    "id": "M09",
+    "color": "Brown Tabby & White",
+    "sex": "M",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "M10",
+    "color": "Blue Tabby & White",
+    "sex": "M",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "M11",
+    "color": "Red Tabby & White",
+    "sex": "M",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "M12",
+    "color": "Cream Tabby & White",
+    "sex": "M",
+    "type_color": "Tabby & Whites"
+  },
+  {
+    "id": "M13",
+    "color": "Black",
+    "sex": "M",
+    "type_color": "Solid"
+  },
+  {
+    "id": "M14",
+    "color": "Blue",
+    "sex": "M",
+    "type_color": "Solid"
+  }
+]

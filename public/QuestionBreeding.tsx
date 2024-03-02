@@ -1,12 +1,29 @@
-const QuestionData = [
+const QuestionBreeding = [
     {
-        question: "เลือกลวดลายของแมวพ่อพันธุ์ที่ต้องการนำมาผสมพันธุ์",
-        choices:["Solid","Tabby & Whites","Bi-color Van","Bi-color"],
+        questionHeader: "เลือกลวดลายของแมว",
+        sex: " พ่อพันธุ์ ",
+        questionTail: "ที่ต้องการนำมาผสมพันธุ์",
     },
     {
-        question: "เลือกสีของแมวพ่อพันธุ์ที่ต้องการนำมาผสมพันธุ์",
-        choices:["Black","Blue","Red","Cream","Tortoiseshell","Blue-Cream","Brown Tabby & White ","Blue Tabby & White "],
+        questionHeader: "เลือกสีของแมว",
+        sex: " พ่อพันธุ์ ",
+        questionTail: "ที่ต้องการนำมาผสมพันธุ์"
+    },
+    {
+        questionHeader: "เลือกลวดลายของแมว",
+        sex: " แม่พันธุ์ ",
+        questionTail: "ที่ต้องการนำมาผสมพันธุ์"
+    },
+    {
+        questionHeader: "เลือกสีของแมว",
+        sex: " แม่พันธุ์ ",
+        questionTail: "ที่ต้องการนำมาผสมพันธุ์"
+    },
+    {
+        questionHeader: "คุณยืนยันการเลือก",
+        sex: " พ่อพันธุ์และแม่พันธุ์ ",
+        questionTail: "ที่ต้องการนำมาผสมพันธุ์แล้วหรือไม่?"
     },
 ]
 
-export default QuestionData
+export default QuestionBreeding
