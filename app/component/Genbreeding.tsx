@@ -1,8 +1,16 @@
 "use client";
 
 import QuestionBreeding from "@/public/QuestionBreeding";
-import { useState, useContext } from "react";
+import Catparent from "@/public/Catparent";
+import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../main/breeding/page";
+
+interface Catparent {
+    id: string;
+    color: string;
+    sex: string;
+    typecolor: string
+}
 
 export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
 
@@ -11,6 +19,20 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
     const [current, setCurrent] = useState(0);
     const [selectChoice, setSelectChoice] = useState("");
     const [allSelected, setAllSelected] = useState([]);
+    const [typecolorDad, setTypecolorDad] = useState<string>("");
+    const [dadId, setDadId] = useState<string>("");
+    const [typecolorMom, setTypecolorMom] = useState<string>("");
+    const [momId, setMomId] = useState<string>("");
+
+    const maleParent = Catparent.filter((parent: string) => parent.sex === "M")
+    const typecolorMale = [...new Set(maleParent.map((parent: string) => parent.type_color))]//unique typecolor
+
+    useEffect(() => {
+        console.log(allSelected);
+    }, [allSelected]);
+
+    const femaleParent = Catparent.filter((parent: string) => parent.sex === "F")
+    const typecolorFemale = [...new Set(femaleParent.map((parent: string) => parent.type_color))]//unique typecolor
 
     const prevQuestion = () => {
         if (current === 0) {
@@ -50,12 +72,34 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
                     {QuestionBreeding[current].questionHeader}
                 </span>
                 <span className="text-primary text-2xl not-italic font-bold leading-10">
-                    { QuestionBreeding[current].sex }
+                    {QuestionBreeding[current].sex}
                 </span>
                 <span className="text-black01 text-2xl not-italic font-bold leading-10">
                     {QuestionBreeding[current].questionTail}
                 </span>
             </div>
+            {current === 0 ? (
+                typecolorMale.map((choice, index) => (
+                    <button
+                        key={index}
+                        onClick={() => setSelectChoice(choice)}
+                        className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice === selectChoice ? 'border-primary rounded-lg border-2 border-solid' : 'rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
+                    >
+                        <span>{choice}</span>
+                        {choice === selectChoice && (
+                            <img
+                                src="/Check.svg"
+                                alt="Check"
+                                style={{ marginRight: "5px", alignSelf: "center" }}
+                            />
+                        )}
+                    </button>
+                ))
+            ) : current === 1 ? (
+                <span>Test</span>
+            ) : (
+                <span>Test2</span>
+            )}
             <button
                 type="submit"
                 onClick={handleSelectChoice}

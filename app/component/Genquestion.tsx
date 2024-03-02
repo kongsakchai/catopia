@@ -33,7 +33,7 @@ export default function Genquestion({ progress, setProgress }) {
     if (current === QuestionData.length - 1) {
       setQuestionState("complete");
       // console.log(allSelected)
-    }else setCurrent(current + 1);
+    } else setCurrent(current + 1);
   };
 
   const handleSelectChoice = () => {
@@ -61,7 +61,7 @@ export default function Genquestion({ progress, setProgress }) {
         <button
           key={index}
           onClick={() => setSelectChoice(choice)}
-          className="flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 rounded-lg border-2 border-solid hover:bg-primary hover:text-white"
+          className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice !== selectChoice ? 'rounded-lg border-2 border-solid' : 'border-primary rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
         >
           <span>{choice}</span>
           {choice === selectChoice && (
