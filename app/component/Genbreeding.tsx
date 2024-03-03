@@ -25,14 +25,14 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
     const [momId, setMomId] = useState<string>("");
 
     const maleParent = Catparent.filter((parent: string) => parent.sex === "M")
-    const typecolorMale = [...new Set(maleParent.map((parent: string) => parent.type_color))]//unique typecolor
+    const typecolorMaleList = [...new Set(maleParent.map((parent: string) => parent.type_color))]//unique typecolor
+
+    const femaleParent = Catparent.filter((parent: string) => parent.sex === "F")
+    const typecolorFemaleList = [...new Set(femaleParent.map((parent: string) => parent.type_color))]//unique typecolor
 
     useEffect(() => {
         console.log(allSelected);
     }, [allSelected]);
-
-    const femaleParent = Catparent.filter((parent: string) => parent.sex === "F")
-    const typecolorFemale = [...new Set(femaleParent.map((parent: string) => parent.type_color))]//unique typecolor
 
     const prevQuestion = () => {
         if (current === 0) {
@@ -79,10 +79,14 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
                 </span>
             </div>
             {current === 0 ? (
-                typecolorMale.map((choice, index) => (
+                typecolorMaleList.map((choice, index) => (
                     <button
                         key={index}
-                        onClick={() => setSelectChoice(choice)}
+                        value={choice}
+                        onClick={() => {
+                            setTypecolorDad(choice)
+                            setSelectChoice(choice)
+                        }}
                         className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice === selectChoice ? 'border-primary rounded-lg border-2 border-solid' : 'rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
                     >
                         <span>{choice}</span>
@@ -96,8 +100,24 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
                     </button>
                 ))
             ) : current === 1 ? (
-                <span>Test</span>
-            ) : (
+                maleParent.filter((dad: string) => dad.type_color === typecolorDad).map((choice, index) => (
+                    <button
+                        key={index}
+                        value={choice.id}
+                        onClick={() => setSelectChoice(choice.color)}
+                        className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice.color === selectChoice ? 'border-primary rounded-lg border-2 border-solid' : 'rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
+                    >
+                        <span>{choice.color}</span>
+                        {choice.color === selectChoice && (
+                            <img
+                                src="/Check.svg"
+                                alt="Check"
+                                style={{ marginRight: "5px", alignSelf: "center" }}
+                            />
+                        )}
+                    </button>
+                )
+                )) : (
                 <span>Test2</span>
             )}
             <button
