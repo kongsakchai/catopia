@@ -18,7 +18,7 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
 
     const [current, setCurrent] = useState(0);
     const [selectChoice, setSelectChoice] = useState("");
-    const [allSelected, setAllSelected] = useState([]);
+    const [allSelectedParent, setAllSelectedParent] = useState([]);
     const [typecolorDad, setTypecolorDad] = useState<string>("");
     const [dadId, setDadId] = useState<string>("");
     const [typecolorMom, setTypecolorMom] = useState<string>("");
@@ -31,8 +31,8 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
     const typecolorFemaleList = [...new Set(femaleParent.map((parent: string) => parent.type_color))]//unique typecolor
 
     useEffect(() => {
-        console.log(allSelected);
-    }, [allSelected]);
+        console.log(allSelectedParent);
+    }, [allSelectedParent]);
 
     const prevQuestion = () => {
         if (current === 0) {
@@ -45,19 +45,19 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
     };
 
     const clearLastAnswer = () => {
-        setAllSelected((prevAllSelected) => prevAllSelected.slice(0, -1));
+        setAllSelectedParent((prevAllSelected) => prevAllSelected.slice(0, -1));
     };
 
     const nextQuestion = () => {
         setSelectChoice(""); // Clear selectChoice
         if (current === QuestionBreeding.length - 1) {
-            setBreedingState("selectbreeding");
+            setBreedingState("titlebreeding");
             // console.log(allSelected)
         } else setCurrent(current + 1);
     };
 
     const handleSelectChoice = () => {
-        setAllSelected((prevAllSelected) => [...prevAllSelected, selectChoice]);
+        setAllSelectedParent((prevAllSelected) => [...prevAllSelected, selectChoice]);
         setProgressBreeding(progressBreeding + 100 / 4);
         nextQuestion();
     };
@@ -78,52 +78,91 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
                     {QuestionBreeding[current].questionTail}
                 </span>
             </div>
-            {current === 0 ? (
-                typecolorMaleList.map((choice, index) => (
-                    <button
-                        key={index}
-                        value={choice}
-                        onClick={() => {
-                            setTypecolorDad(choice)
-                            setSelectChoice(choice)
-                        }}
-                        className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice === selectChoice ? 'border-primary rounded-lg border-2 border-solid' : 'rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
-                    >
-                        <span>{choice}</span>
-                        {choice === selectChoice && (
-                            <img
-                                src="/Check.svg"
-                                alt="Check"
-                                style={{ marginRight: "5px", alignSelf: "center" }}
-                            />
-                        )}
-                    </button>
-                ))
-            ) : current === 1 ? (
-                maleParent.filter((dad: string) => dad.type_color === typecolorDad).map((choice, index) => (
-                    <button
-                        key={index}
-                        value={choice.id}
-                        onClick={() => setSelectChoice(choice.color)}
-                        className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice.color === selectChoice ? 'border-primary rounded-lg border-2 border-solid' : 'rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
-                    >
-                        <span>{choice.color}</span>
-                        {choice.color === selectChoice && (
-                            <img
-                                src="/Check.svg"
-                                alt="Check"
-                                style={{ marginRight: "5px", alignSelf: "center" }}
-                            />
-                        )}
-                    </button>
-                )
-                )) : (
-                <span>Test2</span>
-            )}
+            <div className="flex flex-col items-start gap-4 border border-solid max-h-[400px] overflow-auto border-orange-400">
+                {current === 0 ? (
+                    typecolorMaleList.map((choice, index) => (
+                        <button
+                            key={index}
+                            value={choice}
+                            onClick={() => {
+                                setTypecolorDad(choice)
+                                setSelectChoice(choice)
+                            }}
+                            className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice === selectChoice ? 'border-primary rounded-lg border-2 border-solid' : 'rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
+                        >
+                            <span>{choice}</span>
+                            {choice === selectChoice && (
+                                <img
+                                    src="/Check.svg"
+                                    alt="Check"
+                                    style={{ marginRight: "5px", alignSelf: "center" }}
+                                />
+                            )}
+                        </button>
+                    ))
+                ) : current === 1 ? (
+                    maleParent.filter((dad: string) => dad.type_color === typecolorDad).map((choice, index) => (
+                        <button
+                            key={index}
+                            value={choice.id}
+                            onClick={() => setSelectChoice(choice.color)}
+                            className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice.color === selectChoice ? 'border-primary rounded-lg border-2 border-solid' : 'rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
+                        >
+                            <span>{choice.color}</span>
+                            {choice.color === selectChoice && (
+                                <img
+                                    src="/Check.svg"
+                                    alt="Check"
+                                    style={{ marginRight: "5px", alignSelf: "center" }}
+                                />
+                            )}
+                        </button>
+                    )
+                    )) : current === 2 ? (
+                        typecolorFemaleList.map((choice, index) => (
+                            <button
+                                key={index}
+                                value={choice}
+                                onClick={() => {
+                                    setTypecolorMom(choice)
+                                    setSelectChoice(choice)
+                                }}
+                                className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice === selectChoice ? 'border-primary rounded-lg border-2 border-solid' : 'rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
+                            >
+                                <span>{choice}</span>
+                                {choice === selectChoice && (
+                                    <img
+                                        src="/Check.svg"
+                                        alt="Check"
+                                        style={{ marginRight: "5px", alignSelf: "center" }}
+                                    />
+                                )}
+                            </button>
+                        ))
+                    ) : current === 3 ? (
+                        femaleParent.filter((mom: string) => mom.type_color === typecolorMom).map((choice, index) => (
+                            <button
+                                key={index}
+                                value={choice.id}
+                                onClick={() => setSelectChoice(choice.color)}
+                                className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice.color === selectChoice ? 'border-primary rounded-lg border-2 border-solid' : 'rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
+                            >
+                                <span>{choice.color}</span>
+                                {choice.color === selectChoice && (
+                                    <img
+                                        src="/Check.svg"
+                                        alt="Check"
+                                        style={{ marginRight: "5px", alignSelf: "center" }}
+                                    />
+                                )}
+                            </button>
+                        ))
+                    ) : null}
+            </div>
             <button
                 type="submit"
                 onClick={handleSelectChoice}
-                className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6"
+                className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2  bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6"
             >
                 ถัดไป
             </button>
