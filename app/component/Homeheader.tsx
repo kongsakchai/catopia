@@ -19,7 +19,7 @@ export default function Homeheader() {
             <div className="flex w-full justify-between items-center">
                 <h1 className="shrink-0 text-2xl text-primary not-italic font-semibold leading-8">เลือกแมวที่คุณต้องการ</h1>
                 <button className="flex justify-center items-center shrink-0">
-                    <Image src="/Notificationr.svg" width={24} height={24} alt="Notification-btn" />
+                    <Image src="/Notification.svg" width={24} height={24} alt="Notification-btn" />
                 </button>
             </div>
             <span className="text-base text-textfield not-italic font-normal leading-6">

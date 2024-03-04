@@ -12,7 +12,6 @@ export default function Registerform() {
   const [password, setRegisPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [gender, setGender] = useState();
-  const [registerData, setRegisterData] = useState({});
 
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorDate, setErrorDate] = useState(false);
@@ -39,23 +38,11 @@ export default function Registerform() {
     setGender(e.target.value);
   };
 
-  useEffect(() => {
-    console.log(registerData);
-  }, [registerData]);
+  // useEffect(() => {
+  //   console.log(registerData);
+  // }, [registerData]);
 
-  const storeRegisterData = () => {
-    setRegisterData({
-      ...registerData,
-      email,
-      date,
-      username,
-      password,
-      confirmPassword,
-      gender,
-    });
-  };
-
-  const validateForm = (e) => {
+  const validateForm = async (e) => {
     e.preventDefault();
 
     const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
@@ -88,16 +75,42 @@ export default function Registerform() {
       isConfirmPasswordNotEmpty &&
       isGenderSelected
     ) {
-      storeRegisterData();
+      const res = await fetchRegisterDB();
+      //
       router.push("/");
     } else {
       setErrorRegister("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
 
-  // async function fetchAPIDB() {
-  //     const res = await fetch()
-  // }
+  async function fetchRegisterDB() {
+    const data = {
+      email,
+      date,
+      username,
+      password,
+      confirmPassword,
+      gender,
+    }
+    try {
+      const response = await fetch("https://catopia-backend-7sgneqnvla-as.a.run.app/api/auth/sign-up", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          return true;
+        }
+        return false;
+      } else {
+        throw new Error("Something went wrong");
+      }
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
 
   return (
     <form
@@ -115,22 +128,22 @@ export default function Registerform() {
         }}
         type="text"
         placeholder="อีเมล"
-        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-          errorEmail ? "border-error" : "border-textfield"
-        } focus:outline-primary`}
+        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
       />
-      <input
-        value={date}
-        onChange={(e) => {
-          setDate(e.target.value);
-          setErrorDate(false);
-        }}
-        type="text"
-        placeholder="วัน เดือน ปี เกิด(DD/MM/YYYY)"
-        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-          errorDate ? "border-error" : "border-textfield"
-        } focus:outline-primary`}
-      />
+      <div>
+        <input
+          value={date}
+          onChange={(e) => {
+            setDate(e.target.value);
+            setErrorDate(false);
+          }}
+          type="text"
+          placeholder="วัน เดือน ปี เกิด (วว/ดด/ปป)"
+          className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
+        />
+      </div>
       <input
         value={username}
         onChange={(e) => {
@@ -139,9 +152,8 @@ export default function Registerform() {
         }}
         type="text"
         placeholder="ชื่อผู้ใช้งาน"
-        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-          errorRegisUsername ? "border-error" : "border-textfield"
-        } focus:outline-primary`}
+        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
       />
       <div className="flex items-start relative">
         <input
@@ -152,9 +164,8 @@ export default function Registerform() {
           }}
           type={passwordVisible ? "text" : "password"}
           placeholder="รหัสผ่าน"
-          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-            errorRegisPassword ? "border-error" : "border-textfield"
-          } focus:outline-primary`}
+          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisPassword ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
         />
         <button
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
@@ -175,9 +186,8 @@ export default function Registerform() {
           }}
           type={confirmPasswordVisible ? "text" : "password"}
           placeholder="ยืนยันรหัสผ่าน"
-          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-            errorRegisConfirmPassword ? "border-error" : "border-textfield"
-          } focus:outline-primary`}
+          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisConfirmPassword ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
         />
         <button
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"

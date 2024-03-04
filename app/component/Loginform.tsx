@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -14,12 +14,12 @@ export default function Loginform() {
   const [errorLigon, setErrorLogin] = useState("");
 
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const togglePasswordVisibility = (e) => {
+  const togglePasswordVisibility = (e: MouseEvent) => {
     e.preventDefault();
     setPasswordVisible(!passwordVisible);
   };
 
-  const validateForm = (e) => {
+  const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const isUsernameValid = username.length >= 4;
@@ -29,11 +29,40 @@ export default function Loginform() {
     setErrorPassword(!isPasswordValid);
 
     if (isUsernameValid && isPasswordValid) {
+      const res = await fetchLoginrDB();
       router.push("/register/getquestion");
     } else {
       setErrorLogin("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
+
+  async function fetchLoginrDB() {
+    console.log(username, password);
+    try {
+      const response = await fetch("https://catopia-backend-7sgneqnvla-as.a.run.app/api/auth/sign-in", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          return true;
+        }
+        return false;
+      } else {
+        throw new Error("Something went wrong");
+      }
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
 
   return (
     <form
@@ -72,7 +101,7 @@ export default function Loginform() {
         />
         <button
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
-          onClick={(e) => togglePasswordVisibility(e)}
+          onClick={(e) => togglePasswordVisibility}
         >
           <img
             src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"}
