@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import React, { MouseEvent, ChangeEvent, useState, FormEvent } from "react";
 
 export default function Registerform() {
   const router = useRouter();
@@ -11,7 +11,7 @@ export default function Registerform() {
   const [username, setRegisUsername] = useState("");
   const [password, setRegisPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [gender, setGender] = useState();
+  const [gender, setGender] = useState("");
 
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorDate, setErrorDate] = useState(false);
@@ -24,17 +24,17 @@ export default function Registerform() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-  const togglePasswordVisibility = (e) => {
+  const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setPasswordVisible(!passwordVisible);
   };
 
-  const toggleConfirmPasswordVisibility = (e) => {
+  const toggleConfirmPasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
-  const handleGender = (e) => {
+  const handleGender = (e: ChangeEvent<HTMLInputElement>) => {
     setGender(e.target.value);
   };
 
@@ -42,7 +42,7 @@ export default function Registerform() {
   //   console.log(registerData);
   // }, [registerData]);
 
-  const validateForm = async (e) => {
+  const validateForm = async (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
@@ -131,7 +131,7 @@ export default function Registerform() {
         className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? "border-error" : "border-textfield"
           } focus:outline-primary`}
       />
-      <div>
+      <div className="flex items-start relative">
         <input
           value={date}
           onChange={(e) => {
@@ -143,6 +143,14 @@ export default function Registerform() {
           className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? "border-error" : "border-textfield"
             } focus:outline-primary`}
         />
+        <button
+          className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
+        >
+          <img
+            src={"/Calenda.svg"}
+            alt="Password Visibility"
+          />
+        </button>
       </div>
       <input
         value={username}
