@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import React, { MouseEvent, ChangeEvent, useState, FormEvent } from "react";
-import Datetime from "react-datetime";
-import "react-datetime/css/react-datetime.css";
+// import Datetime from "react-datetime";
+// import "react-datetime/css/react-datetime.css";
 
 export default function Registerform() {
   const router = useRouter();
@@ -27,18 +27,19 @@ export default function Registerform() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-  const handleDateChange = (selectedDate: string | Date | null) => {
-    if (selectedDate instanceof Date) {
-      const formattedDate = selectedDate.toLocaleDateString("en-GB");
-      setDate(formattedDate);
-      setErrorDate(false);
-    } else {
-      setDate(selectedDate);
-      setErrorDate(false);
-    }
-  };
+  // const handleDateChange = (selectedDate: string | Date | null) => {
+  //   if (selectedDate instanceof Date) {
+  //     const formattedDate = selectedDate.toLocaleDateString("en-GB");
+  //     setDate(formattedDate);
+  //     setErrorDate(false);
+  //   } else {
+  //     setDate(selectedDate);
+  //     setErrorDate(false);
+  //   }
+  // };
 
-  const toggleCalendar = () => {
+  const toggleCalendar = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setShowCalendar(!showCalendar);
   };
 
@@ -64,7 +65,7 @@ export default function Registerform() {
     e.preventDefault();
 
     const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-    const isDateValid = /^\d{2}\/\d{2}\/\d{4}$/.test(date);
+    const isDateValid = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/\d{4}$/.test(date);
     const isRegisUsernameValid = username.length >= 4;
     const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(
       password
@@ -147,75 +148,27 @@ export default function Registerform() {
         className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? "border-error" : "border-textfield"
           } focus:outline-primary`}
       />
-      {/* <div className="flex items-start relative">
-        {showCalendar ? (
-          <Datetime
-            value={date}
-            onChange={handleDateChange}
-            input={true}
-            inputProps={{
-              placeholder: "วัน เดือน ปี เกิด (วว/ดด/ปป)",
-              className: `flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-                } focus:outline-primary`
-            }}
-            closeOnSelect={true}
-          />
-        ) : (
-          <input
-            value={date}
-            onChange={(e) => {
-              setDate(e.target.value);
-              setErrorDate(false);
-            }}
-            type="text"
-            placeholder="วัน เดือน ปี เกิด (วว/ดด/ปป)"
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
-          />
-        )}
-        <button
+      <div className="flex items-start relative">
+        <input
+          value={date}
+          onChange={(e) => {
+            setDate(e.target.value);
+            setErrorDate(false);
+          }}
+          type={"text"}
+          placeholder="วัน เดือน ปี เกิด (ดด/วว/ปปปป)"
+          className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
+        />
+        {/* <button
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
-          onClick={() => setShowCalendar(!showCalendar)}
+          onClick={(e) => toggleCalendar(e)}
         >
           <img
             src={"/Calenda.svg"}
             alt="Password Visibility"
           />
-        </button>
-      </div> */}
-      <div className="flex items-start relative">
-        {showCalendar ? (
-          <Datetime
-            value={date}
-            onChange={handleDateChange}
-            input={true}
-            inputProps={{
-              placeholder: "วัน เดือน ปี เกิด (วว/ดด/ปป)",
-              className: `flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-                } focus:outline-primary`
-            }}
-            dateFormat="DD/MM/YYYY"
-            closeOnSelect={true}
-          />
-        ) : (
-          <input
-            value={date as string}
-            onChange={(e) => {
-              setDate(e.target.value);
-              setErrorDate(false);
-            }}
-            type="text"
-            placeholder="วัน เดือน ปี เกิด (วว/ดด/ปป)"
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
-          />
-        )}
-        <button
-          className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
-          onClick={toggleCalendar}
-        >
-          <img src={"/Calenda.svg"} alt="Calendar" />
-        </button>
+        </button> */}
       </div>
       <input
         value={username}
@@ -291,7 +244,7 @@ export default function Registerform() {
             }}
             className="ml-2 mr-2 mt-2"
           />
-          <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">
+          <span className="rounded-full h-6 w-6 flex items-center justify-center  text-black01 mt-2">
             ชาย
           </span>
           <input
