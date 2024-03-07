@@ -65,7 +65,7 @@ export default function Registerform() {
     e.preventDefault();
 
     const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-    const isDateValid = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/\d{4}$/.test(date);
+    const isDateValid = date.trim() !== "";
     const isRegisUsernameValid = username.length >= 4;
     const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(
       password
@@ -148,19 +148,20 @@ export default function Registerform() {
         className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? "border-error" : "border-textfield"
           } focus:outline-primary`}
       />
-      <div className="flex items-start relative">
-        <input
-          value={date}
-          onChange={(e) => {
-            setDate(e.target.value);
-            setErrorDate(false);
-          }}
-          type={"text"}
-          placeholder="วัน เดือน ปี เกิด (ดด/วว/ปปปป)"
-          className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
-        />
-        {/* <button
+      <input
+        value={date}
+        onChange={(e) => {
+          setDate(e.target.value);
+          setErrorDate(false);
+        }}
+        type={"text"}
+        placeholder="วัน เดือน ปี เกิด"
+        onFocus={(e) => (e.target.type = "date")}
+        onBlur={(e) => (e.target.type = "text")}
+        className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+          } focus:outline-primary custom-date-input`}
+      />
+      {/* <button
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
           onClick={(e) => toggleCalendar(e)}
         >
@@ -169,7 +170,6 @@ export default function Registerform() {
             alt="Password Visibility"
           />
         </button> */}
-      </div>
       <input
         value={username}
         onChange={(e) => {
