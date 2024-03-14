@@ -1,16 +1,16 @@
 "use client"
 
 import { useRouter } from "next/navigation";
-import React, { MouseEvent, ChangeEvent, useState, FormEvent } from "react";
-// import Datetime from "react-datetime";
-// import "react-datetime/css/react-datetime.css";
+import React, { MouseEvent, ChangeEvent, useState, FormEvent, useEffect } from "react";
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 
 export default function Registerform() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
-  const [showCalendar, setShowCalendar] = useState(false);
+  // const [showCalendar, setShowCalendar] = useState(false);
   const [username, setRegisUsername] = useState("");
   const [password, setRegisPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -38,10 +38,15 @@ export default function Registerform() {
   //   }
   // };
 
-  const toggleCalendar = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setShowCalendar(!showCalendar);
-  };
+  // const toggleCalendar = (e: MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault();
+  //   setShowCalendar(!showCalendar);
+  // };
+
+  useEffect(() => {
+    console.log(date);
+    
+  },[date])
 
   const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -57,19 +62,13 @@ export default function Registerform() {
     setGender(e.target.value);
   };
 
-  // useEffect(() => {
-  //   console.log(registerData);
-  // }, [registerData]);
-
   const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-    const isDateValid = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/\d{4}$/.test(date);
+    const isDateValid = date.trim() !== "";
     const isRegisUsernameValid = username.length >= 4;
-    const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(
-      password
-    );
+    const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password);
     const isRegisPasswordMatch = confirmPassword === password;
     const isConfirmPasswordNotEmpty = confirmPassword.trim() !== "";
     const isGenderSelected = !!gender;
@@ -148,7 +147,7 @@ export default function Registerform() {
         className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? "border-error" : "border-textfield"
           } focus:outline-primary`}
       />
-      <div className="flex items-start relative">
+      {/* <div className="flex items-start relative">
         <input
           value={date}
           onChange={(e) => {
@@ -160,7 +159,7 @@ export default function Registerform() {
           className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? "border-error" : "border-textfield"
             } focus:outline-primary`}
         />
-        {/* <button
+        <button
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
           onClick={(e) => toggleCalendar(e)}
         >
@@ -168,8 +167,21 @@ export default function Registerform() {
             src={"/Calenda.svg"}
             alt="Password Visibility"
           />
-        </button> */}
-      </div>
+        </button>
+      </div> */}
+      <input
+        value={date}
+        onChange={(e) => {
+          setDate(e.target.value);
+          setErrorDate(false);
+        }}
+        type={"text"}
+        placeholder="วัน เดือน ปี เกิด"
+        onFocus={(e) => (e.target.type = "date")}
+        onBlur={(e) => (e.target.type = "text")}
+        className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
+      />
       <input
         value={username}
         onChange={(e) => {
