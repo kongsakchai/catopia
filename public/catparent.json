@@ -3,276 +3,280 @@
     "id": "F01",
     "color": "Black",
     "sex": "F",
-    "type_color": "Solid"
+    "type_color": "Solid",
+    "img_url" : "https://www.katdootje.nl/wp-content/uploads/What-Breed-Are-Black-Cats.webp"
   },
   {
     "id": "F02",
     "color": "Blue",
     "sex": "F",
-    "type_color": "Solid"
+    "type_color": "Solid",
+    "img_url" : "https://www.hepper.com/wp-content/uploads/2021/06/chartreux-cat-lying_congerdesign_Pixabay.jpg"
   },
   {
     "id": "F03",
     "color": "Red",
     "sex": "F",
-    "type_color": "Solid"
+    "type_color": "Solid",
+    "img_url" : "https://www.thesprucepets.com/thmb/whvFIY9Epn7ITmGk1pfYMuHCRO0=/1471x0/filters:no_upscale():strip_icc()/GettyImages-1288261359-4016b054680e41d28451f081babd0c45.jpg"
   },
   {
     "id": "F04",
     "color": "Cream",
     "sex": "F",
-    "type_color": "Solid"
+    "type_color": "Solid",
+    "img_url" : "https://i.pinimg.com/originals/5a/ca/6c/5aca6c2fb95d7706e033d58b43648e1b.jpg"
   },
   {
     "id": "F05",
     "color": "Tortoiseshell",
     "sex": "F",
-    "type_color": "Solid"
+    "type_color": "Solid",
+    "img_url" : "https://www.azpetvet.com/wp-content/uploads/AdobeStock_503976678-scaled.jpeg"
   },
   {
     "id": "F06",
     "color": "Blue-Cream",
     "sex": "F",
-    "type_color": "Solid"
+    "type_color": "Solid",
+    "img_url" : "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/1-blue-cream-british-shorthair-cat-gerard-lacz.jpg"
   },
   {
     "id": "F13",
     "color": "Brown Tabby & White",
     "sex": "F",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://upload.wikimedia.org/wikipedia/commons/7/73/Brown_and_white_tabby_cat_with_green_eyes-Hisashi-01.jpg"
   },
   {
     "id": "F14",
     "color": "Blue Tabby & White",
     "sex": "F",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://upload.wikimedia.org/wikipedia/commons/1/15/Blue_spotted_tabby_and_white_stray_Cat_1.jpg"
   },
   {
     "id": "F15",
     "color": "Red Tabby & White",
     "sex": "F",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://www.kimballstock.com/pix/ani/p/02/cat-03-gr0853-01p.jpg"
   },
   {
     "id": "F16",
     "color": "Cream Tabby & White",
     "sex": "F",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://i.pinimg.com/originals/5a/ca/6c/5aca6c2fb95d7706e033d58b43648e1b.jpg"
   },
   {
     "id": "F17",
     "color": "Brown Pitch Tabby & Whites",
     "sex": "F",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://i0.wp.com/lizskittybootcamp.com/wp-content/uploads/2020/04/wp-1586355844095.jpg?resize=580%2C435&ssl=1"
   },
   {
     "id": "F18",
     "color": "Blue Pitch Tabby & Whites",
     "sex": "F",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://www.shutterstock.com/image-photo/cute-blue-tabby-white-maine-600nw-1680768562.jpg"
   },
   {
     "id": "F19",
     "color": "Black & White Van",
     "sex": "F",
-    "type_color": "Bi-color Van"
+    "type_color": "Bi-color Van",
+    "img_url" : "https://i.pinimg.com/564x/af/5a/cb/af5acbe02a0bf01b0740120b15063dba.jpg"
   },
   {
     "id": "F20",
     "color": "Blue & White Van",
     "sex": "F",
-    "type_color": "Bi-color Van"
+    "type_color": "Bi-color Van",
+    "img_url" : "https://upload.wikimedia.org/wikipedia/commons/b/b1/VAN_CAT.png"
   },
   {
     "id": "F21",
     "color": "Red & White Van",
     "sex": "F",
-    "type_color": "Bi-color Van"
+    "type_color": "Bi-color Van",
+    "img_url" : "https://1.bp.blogspot.com/-ECiOazXYETU/WCy94zFNoDI/AAAAAAAACm8/Dq-56nfabTQRuL9Ypx73mDdsmIVlHwA_gCLcB/s1600/Van_Cat_1.jpg"
   },
   {
     "id": "F22",
     "color": "Cream & White Van",
     "sex": "F",
-    "type_color": "Bi-color Van"
+    "type_color": "Bi-color Van",
+    "img_url" : "https://cdn.britannica.com/48/159848-050-90A64DE9/cat-Turkish-Van.jpg"
   },
   {
     "id": "F23",
-    "color": "Caloco Van",
+    "color": "Calico Van",
     "sex": "F",
-    "type_color": "Bi-color Van"
+    "type_color": "Bi-color Van",
+    "img_url" : "https://www.litter-robot.com/media/magefan_blog/2020/04/Japanese-Bobtail.jpg"
   },
   {
     "id": "F24",
     "color": "Dilute Calico Van",
     "sex": "F",
-    "type_color": "Bi-color Van"
+    "type_color": "Bi-color Van",
+    "img_url" : "https://i.pinimg.com/736x/8c/c2/d7/8cc2d70554f361049819d3052790baf9.jpg"
   },
   {
     "id": "F25",
     "color": "Silver Tabby & White",
     "sex": "F",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://i1.pickpik.com/photos/390/484/981/animal-cat-curiosity-cute-preview.jpg"
   },
   {
     "id": "F26",
     "color": "Silver Patch Tabby & White",
     "sex": "F",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://www.catster.com/wp-content/uploads/2023/11/a-silver-tabby-cat-on-gray-background_Oleksandr-Volchanskyi_Shuttersock-800x533.jpg"
   },
   {
     "id": "F27",
     "color": "Black & White",
     "sex": "F",
-    "type_color": "Bi-color"
+    "type_color": "Bi-color",
+    "img_url" : "https://coleandmarmalade.com/wp-content/uploads/2019/09/Canva-Black-and-White-Cat-e1569611884531.jpg"
   },
   {
     "id": "F28",
     "color": "Blue & White",
     "sex": "F",
-    "type_color": "Bi-color"
+    "type_color": "Bi-color",
+    "img_url" : "https://www.warrenphotographic.co.uk/photography/bigs/18246-Blue-and-white-Burmese-cross-cat-white-background.jpg"
   },
   {
     "id": "F29",
     "color": "Red & White",
     "sex": "F",
-    "type_color": "Bi-color"
+    "type_color": "Bi-color",
+    "img_url" : "https://st2.depositphotos.com/4201529/6239/i/950/depositphotos_62392629-stock-photo-red-and-white-colored-cat.jpg"
   },
   {
     "id": "F30",
     "color": "Cream & White",
     "sex": "F",
-    "type_color": "Bi-color"
+    "type_color": "Bi-color",
+    "img_url" : "https://i.pinimg.com/originals/5a/ca/6c/5aca6c2fb95d7706e033d58b43648e1b.jpg"
   },
   {
     "id": "F31",
-    "color": "Caloco",
+    "color": "Calico",
     "sex": "F",
-    "type_color": "Bi-color"
+    "type_color": "Bi-color",
+    "img_url" : "https://www.thesprucepets.com/thmb/4H4K_nta-Zvv4yJgndStugkeqtg=/2782x0/filters:no_upscale():strip_icc()/calico-cats-profile-554694-hero-c7ba9806ce1f4fb1b4d4edc2fd820a0d.jpg"
   },
   {
     "id": "F32",
     "color": "Dilute Calico",
     "sex": "F",
-    "type_color": "Bi-color"
+    "type_color": "Bi-color",
+    "img_url" : "https://www.catster.com/wp-content/uploads/2023/11/diluted-calico-cat_Seattle-Cat-Photo_Shutterstock.jpg"
   },
   {
-    "id": "F33",
-    "color": "Black & White Van",
-    "sex": "F",
-    "type_color": "Bi-color Van"
-  },
-  {
-    "id": "F34",
-    "color": "Blue & White Van",
-    "sex": "F",
-    "type_color": "Bi-color Van"
-  },
-  {
-    "id": "F35",
-    "color": "Red & White Van",
-    "sex": "F",
-    "type_color": "Bi-color Van"
-  },
-  {
-    "id": "F36",
-    "color": "Cream & White Van",
-    "sex": "F",
-    "type_color": "Bi-color Van"
-  },
-  {
-    "id": "F37",
-    "color": "Caloco Van",
-    "sex": "F",
-    "type_color": "Bi-color Van"
-  },
-  {
-    "id": "F38",
-    "color": "Dilute Calico Van",
-    "sex": "F",
-    "type_color": "Bi-color Van"
-  },
-{
     "id": "M01",
     "color": "Black & White",
     "sex": "M",
-    "type_color": "Bi-color"
+    "type_color": "Bi-color",
+    "img_url" : "https://www.thesprucepets.com/thmb/vgvK9_iqmLpIHezaqZ_Mi5evmQM=/1600x0/filters:no_upscale():strip_icc()/black-and-white-cat-breeds-4843190-hero-8ea9ae92c05c46fb9495f789ca595f37.jpg"
   },
   {
     "id": "M02",
     "color": "Blue & White",
     "sex": "M",
-    "type_color": "Bi-color"
+    "type_color": "Bi-color",
+    "img_url" : "https://www.warrenphotographic.co.uk/photography/bigs/18246-Blue-and-white-Burmese-cross-cat-white-background.jpg"
   },
   {
     "id": "M03",
     "color": "Red & White",
     "sex": "M",
-    "type_color": "Bi-color"
+    "type_color": "Bi-color",
+    "img_url" : "https://img.freepik.com/premium-photo/white-cat-with-red-spots_219901-8.jpg"
   },
   {
     "id": "M04",
     "color": "Cream & White",
     "sex": "M",
-    "type_color": "Bi-color"
+    "type_color": "Bi-color",
+    "img_url" : "https://i.pinimg.com/originals/5a/ca/6c/5aca6c2fb95d7706e033d58b43648e1b.jpg"
   },
   {
     "id": "M05",
     "color": "Black & White Van",
     "sex": "M",
-    "type_color": "Bi-color Van"
+    "type_color": "Bi-color Van",
+    "img_url" : "https://cdn-images.vetstreet.com/1a/ccad00a34f11e087a80050568d634f/file/Turkish-Van-3-645mk062211.jpg"
   },
   {
     "id": "M06",
     "color": "Blue & White Van",
     "sex": "M",
-    "type_color": "Bi-color Van"
+    "type_color": "Bi-color Van",
+    "img_url" : "https://www.dailypaws.com/thmb/ffnDWAclAUiu1LX1EPMAdxCgjkw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/turkish-van-from-above-386550048-bf294ffdf4bc426e9227266cbe4a5eef.jpg"
   },
   {
     "id": "M07",
     "color": "Red & White Van",
     "sex": "M",
-    "type_color": "Bi-color Van"
+    "type_color": "Bi-color Van",
+    "img_url" : "https://www.hillspet.com.ph/content/dam/cp-sites/hills/hills-pet/en_us/exported/cat-care/images/turkish-van-cat-lying-on-bed.jpg"
   },
   {
     "id": "M08",
     "color": "Cream & White Van",
     "sex": "M",
-    "type_color": "Bi-color Van"
+    "type_color": "Bi-color Van",
+    "img_url" : "https://cdn.britannica.com/48/159848-050-90A64DE9/cat-Turkish-Van.jpg"
   },
   {
     "id": "M09",
     "color": "Brown Tabby & White",
     "sex": "M",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://upload.wikimedia.org/wikipedia/commons/7/73/Brown_and_white_tabby_cat_with_green_eyes-Hisashi-01.jpg"
   },
   {
     "id": "M10",
     "color": "Blue Tabby & White",
     "sex": "M",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://upload.wikimedia.org/wikipedia/commons/1/15/Blue_spotted_tabby_and_white_stray_Cat_1.jpg"
   },
   {
     "id": "M11",
     "color": "Red Tabby & White",
     "sex": "M",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://www.kimballstock.com/pix/ani/p/02/cat-03-gr0853-01p.jpg"
   },
   {
     "id": "M12",
     "color": "Cream Tabby & White",
     "sex": "M",
-    "type_color": "Tabby & Whites"
+    "type_color": "Tabby & Whites",
+    "img_url" : "https://i.pinimg.com/originals/5a/ca/6c/5aca6c2fb95d7706e033d58b43648e1b.jpg"
   },
   {
     "id": "M13",
     "color": "Black",
     "sex": "M",
-    "type_color": "Solid"
+    "type_color": "Solid",
+    "img_url" : "https://image.petmd.com/files/inline-images/black-cat-breeds-american-shorthair.jpeg?VersionId=FHXiYOmOykNtIdlZ.V5LQC_E8wXzlgyG"
   },
   {
     "id": "M14",
     "color": "Blue",
     "sex": "M",
-    "type_color": "Solid"
+    "type_color": "Solid",
+    "img_url" : "https://www.thesprucepets.com/thmb/hTeGj1f3dJVvVZtVEwZ2-82PRNE=/1500x0/filters:no_upscale():strip_icc()/blue-cat-breeds-4801270-hero-7f4a958430174ea2be825fb80daf0645.jpg"
   }
 ]

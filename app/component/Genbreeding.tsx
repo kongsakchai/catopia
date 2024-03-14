@@ -9,7 +9,7 @@ interface Catparent {
     id: string;
     color: string;
     sex: string;
-    typecolor: string
+    type_color: string
 }
 
 export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
@@ -19,10 +19,10 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
     const [current, setCurrent] = useState(0);
     const [selectChoice, setSelectChoice] = useState("");
     const [allSelectedParent, setAllSelectedParent] = useState([]);
-    const [typecolorDad, setTypecolorDad] = useState<string>("");
-    const [dadId, setDadId] = useState<string>("");
-    const [typecolorMom, setTypecolorMom] = useState<string>("");
-    const [momId, setMomId] = useState<string>("");
+    const [typecolorDad, setTypecolorDad] = useState("");
+    const [dadId, setDadId] = useState("");
+    const [typecolorMom, setTypecolorMom] = useState("");
+    const [momId, setMomId] = useState("");
 
     const maleParent = Catparent.filter((parent: string) => parent.sex === "M")
     const typecolorMaleList = [...new Set(maleParent.map((parent: string) => parent.type_color))]//unique typecolor
