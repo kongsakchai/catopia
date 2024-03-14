@@ -147,28 +147,6 @@ export default function Registerform() {
         className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? "border-error" : "border-textfield"
           } focus:outline-primary`}
       />
-      {/* <div className="flex items-start relative">
-        <input
-          value={date}
-          onChange={(e) => {
-            setDate(e.target.value);
-            setErrorDate(false);
-          }}
-          type={"text"}
-          placeholder="วัน เดือน ปี เกิด (ดด/วว/ปปปป)"
-          className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
-        />
-        <button
-          className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
-          onClick={(e) => toggleCalendar(e)}
-        >
-          <img
-            src={"/Calenda.svg"}
-            alt="Password Visibility"
-          />
-        </button>
-      </div> */}
       <input
         value={date}
         onChange={(e) => {
