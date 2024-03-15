@@ -36,8 +36,8 @@ export default function Genquestion({ progress, setProgress }) {
     } else setCurrent(current + 1);
   };
 
-  const handleSelectChoice = () => {
-    setAllSelected((prevAllSelected) => [...prevAllSelected, selectChoice]);
+  const handleSelectChoice = async () => {
+    await setAllSelected((prevAllSelected) => [...prevAllSelected, selectChoice]);
     setProgress(progress + 100 / 7);
     nextQuestion();
   };
@@ -61,7 +61,11 @@ export default function Genquestion({ progress, setProgress }) {
         <button
           key={index}
           onClick={() => setSelectChoice(choice)}
-          className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice !== selectChoice ? 'rounded-lg border-2 border-solid' : 'border-primary rounded-lg border-2 border-solid'} hover:bg-primary hover:text-white`}
+          className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${
+            choice !== selectChoice
+              ? "rounded-lg border-2 border-solid"
+              : "border-primary rounded-lg border-2 border-solid"
+          } hover:bg-primary hover:text-white`}
         >
           <span>{choice}</span>
           {choice === selectChoice && (

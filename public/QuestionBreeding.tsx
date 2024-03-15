@@ -19,11 +19,6 @@ const QuestionBreeding = [
         sex: " แม่พันธุ์ ",
         questionTail: "ที่ต้องการนำมาผสมพันธุ์"
     },
-    {
-        questionHeader: "คุณยืนยันการเลือก",
-        sex: " พ่อพันธุ์และแม่พันธุ์ ",
-        questionTail: "ที่ต้องการนำมาผสมพันธุ์แล้วหรือไม่?"
-    },
 ]
 
 export default QuestionBreeding

@@ -27,10 +27,6 @@ const QuestionData = [
         question: "คุณเคยใช้แอพที่ให้ข้อมูลเกี่ยวกับการดูแลแมวมาก่อนหรือไม่?",
         choices: ["เคย", "ไม่เคย"],
     },
-    {
-        question: "คุณยืนยันคำตอบของคุณทุกข้อแล้วใช่หรือไม่?",
-        choices: [],
-    },
 ]
 
 export default QuestionData
