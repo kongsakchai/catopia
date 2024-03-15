@@ -1,9 +1,10 @@
 "use client";
 
-import QuestionBreeding from "@/public/QuestionBreeding";
-import Catparent from "@/public/Catparent";
 import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../main/breeding/page";
+import QuestionBreeding from "@/public/QuestionBreeding";
+import Catparent from "@/public/Catparent.json";
+
 
 interface Catparent {
   id: string;
@@ -25,7 +26,6 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
   const [momId, setMomId] = useState("");
 
   const maleParent = Catparent.filter((parent: string) => parent.sex === "M");
-
   const typecolorMaleList = [
     ...new Set(maleParent.map((parent: string) => parent.type_color)),
   ]; //unique typecolor
