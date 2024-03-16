@@ -37,7 +37,7 @@ export default function Genquestion({ progress, setProgress }) {
   };
 
   const handleSelectChoice = async () => {
-    await setAllSelected((prevAllSelected) => [...prevAllSelected, selectChoice]);
+    await setAllSelected((prevAllSelected):any => [...prevAllSelected, selectChoice]);
     setProgress(progress + 100 / 7);
     nextQuestion();
   };

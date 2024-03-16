@@ -5,7 +5,6 @@ import { DataContext } from "../main/breeding/page";
 import QuestionBreeding from "@/public/QuestionBreeding";
 import Catparent from "@/public/Catparent.json";
 
-
 interface Catparent {
   id: string;
   color: string;
@@ -13,30 +12,40 @@ interface Catparent {
   type_color: string;
 }
 
-export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
-  const { setBreedingState, allSelectedParent, setAllSelectedParent } =
-    useContext(DataContext);
+export default function Genbreeding() {
+  const {
+    setBreedingState,
+    allSelectedParent,
+    setAllSelectedParent,
+    current,
+    setCurrent,
+    progressBreeding,
+    setProgressBreeding,
+  }: any = useContext(DataContext);
 
-  const [current, setCurrent] = useState(0);
   const [selectChoice, setSelectChoice] = useState("");
   const [typecolorDad, setTypecolorDad] = useState("");
-  const [dadId, setDadId] = useState("");
   const [typecolorMom, setTypecolorMom] = useState("");
-  const [momId, setMomId] = useState("");
 
-  const maleParent = Catparent.filter((parent: string) => parent.sex === "M");
+  const maleParent = Catparent.filter((parent) => parent.sex === "M");
   const typecolorMaleList = [
-    ...new Set(maleParent.map((parent: string) => parent.type_color)),
+    ...new Set(maleParent.map((parent) => parent.type_color)),
   ]; //unique typecolor
 
-  const femaleParent = Catparent.filter((parent: string) => parent.sex === "F");
+  const femaleParent = Catparent.filter((parent) => parent.sex === "F");
   const typecolorFemaleList = [
-    ...new Set(femaleParent.map((parent: string) => parent.type_color)),
+    ...new Set(femaleParent.map((parent) => parent.type_color)),
   ]; //unique typecolor
 
   useEffect(() => {
     console.log(allSelectedParent);
   }, [allSelectedParent]);
+
+  const clearLastAnswer = () => {
+    setAllSelectedParent((prevAllSelected: any) =>
+      prevAllSelected.slice(0, -1)
+    );
+  };
 
   const prevQuestion = () => {
     if (current === 0) {
@@ -48,10 +57,6 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
     }
   };
 
-  const clearLastAnswer = () => {
-    setAllSelectedParent((prevAllSelected) => prevAllSelected.slice(0, -1));
-  };
-
   const nextQuestion = () => {
     setSelectChoice(""); // Clear selectChoice
     if (current === QuestionBreeding.length - 1) {
@@ -61,7 +66,7 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
   };
 
   const handleSelectChoice = async () => {
-    await setAllSelectedParent((prevAllSelected) => [
+    await setAllSelectedParent((prevAllSelected: any) => [
       ...prevAllSelected,
       selectChoice,
     ]);
@@ -107,8 +112,8 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
                 <img
                   src={
                     maleParent
-                      .filter((dad: string) => dad.type_color === choice)
-                      .map((dad: string) => dad.img_url)[0]
+                      .filter((dad) => dad.type_color === choice)
+                      .map((dad) => dad.img_url)[0]
                   }
                   alt={choice.color}
                   style={{ width: "100%", height: "auto", borderRadius: "8px" }}
@@ -117,7 +122,7 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
             ))
           : current === 1
           ? maleParent
-              .filter((dad: string) => dad.type_color === typecolorDad)
+              .filter((dad) => dad.type_color === typecolorDad)
               .map((choice, index) => (
                 <button
                   key={index}
@@ -164,8 +169,8 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
                 <img
                   src={
                     femaleParent
-                      .filter((mom: string) => mom.type_color === choice)
-                      .map((mom: string) => mom.img_url)[0]
+                      .filter((mom) => mom.type_color === choice)
+                      .map((mom) => mom.img_url)[0]
                   }
                   alt={choice.color}
                   style={{ width: "100%", height: "auto", borderRadius: "8px" }}
@@ -174,7 +179,7 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
             ))
           : current === 3
           ? femaleParent
-              .filter((mom: string) => mom.type_color === typecolorMom)
+              .filter((mom) => mom.type_color === typecolorMom)
               .map((choice, index) => (
                 <button
                   key={index}
