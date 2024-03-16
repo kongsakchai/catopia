@@ -67,7 +67,7 @@ export default function Resultbreeding() {
 
   const clearLastAnswer = () => {
     setAllSelectedParent((prevAllSelected: any) =>
-      prevAllSelected.slice(0, -1)
+      prevAllSelected.slice(0, -4)
     );
   };
 
@@ -76,8 +76,8 @@ export default function Resultbreeding() {
       return;
     } else {
       clearLastAnswer();
-      await setCurrent(3);
-      setProgressBreeding(75);
+      await setCurrent(0);
+      setProgressBreeding(0);
       setBreedingState("selectbreeding");
     }
   };
