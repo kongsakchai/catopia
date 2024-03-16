@@ -4,9 +4,10 @@ import { useContext, useEffect } from "react";
 import { DataContext } from "../main/breeding/page";
 import DataKitten from "@/public/DataKitten.json";
 import Catparent from "@/public/Catparent.json";
+import { get } from "http";
 
 export default function Resultbreeding() {
-  const { allSelectedParent } = useContext(DataContext);
+  const { allSelectedParent, setAllSelectedParent } = useContext(DataContext);
 
   useEffect(() => {
     getKitten();
@@ -34,9 +35,12 @@ export default function Resultbreeding() {
         kitten.father_id === getFather_id[0].id &&
         kitten.mother_id === getMother_id[0].id
     );
-    const getKittenColor = getKitten.map((kitten) => kitten.color);
     console.log(getKitten.length === 0 ? "No kitten" : getKitten);
-    console.log(getKittenColor.length === 0 ? "No kitten" : getKittenColor);
+
+    const getKittenMale = getKitten.filter((kitten)=> kitten.sex === "M").map((kitten) => kitten.color);
+    const getKittenFemale = getKitten.filter((kitten)=> kitten.sex === "F").map((kitten) => kitten.color);
+    console.log(getKittenMale.length === 0 ? "No kitten" : `getKittenMale: ${getKittenMale}`);
+    console.log(getKittenFemale.length === 0 ? "No kitten" : `getKittenFemale: ${getKittenFemale}`);
   }
 
   return (

@@ -19,7 +19,6 @@ export default function Genbreeding({ progressBreeding, setProgressBreeding }) {
 
   const [current, setCurrent] = useState(0);
   const [selectChoice, setSelectChoice] = useState("");
-  // const [allSelectedParent, setAllSelectedParent] = useState([]);
   const [typecolorDad, setTypecolorDad] = useState("");
   const [dadId, setDadId] = useState("");
   const [typecolorMom, setTypecolorMom] = useState("");
