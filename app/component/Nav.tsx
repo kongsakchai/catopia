@@ -21,7 +21,7 @@ export default function Nav() {
 
   return (
     <div className=" flex w-full h-[104px] items-center justify-center shrink-0 fixed left-0 bottom-0 border-t-2 border-line">
-      <div className="flex w-[364px] justify-between gap-14">
+      <div className="flex w-[364px] h-auto justify-between pl-6 pr-6 ">
         <Link href="/main/home">
           <button
             onClick={() => handleActive("home")}

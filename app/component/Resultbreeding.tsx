@@ -40,6 +40,7 @@ export default function Resultbreeding() {
     console.log("father_id :", getFather_id[0].id);
     console.log("mother_id :", getMother_id[0].id);
 
+    //show kitten
     const getKitten = DataKitten.filter(
       (kitten) =>
         kitten.father_id === getFather_id[0].id &&
@@ -50,14 +51,17 @@ export default function Resultbreeding() {
     const getKittenMale = getKitten
       .filter((kitten) => kitten.sex === "M")
       .map((kitten) => kitten.color);
+
     const getKittenFemale = getKitten
       .filter((kitten) => kitten.sex === "F")
       .map((kitten) => kitten.color);
+
     console.log(
       getKittenMale.length === 0
         ? "No kitten"
         : `getKittenMale: ${getKittenMale}`
     );
+
     console.log(
       getKittenFemale.length === 0
         ? "No kitten"
@@ -97,10 +101,24 @@ export default function Resultbreeding() {
           สำหรับสีของลูกแมว
         </h3>
       </div>
-      {/* <h1>{allSelectedParent[0]}</h1>
-      <h1>{allSelectedParent[1]}</h1>
-      <h1>{allSelectedParent[2]}</h1>
-      <h1>{allSelectedParent[3]}</h1> */}
+      <div className="flex flex-col relative items-center h-full border border-solid border-red-500">
+        <div className="flex flex-col justify-center items-center relative shrink-0 z-10 w-[364px] h-[424px] rounded-2xl bg-white shadow-[0px_4px_25px_0px_rgba(0,0,0,0.16)] border border-solid border-blue-500">
+          <h1>text div 1</h1>
+        </div>
+        <div className="flex flex-col justify-center items-center absolute shrink-0 z-0 top-[115px] w-full h-screen rounded-2xl bg-black01">
+          <h1 className="text-white">text div 2</h1>
+        </div>
+      </div>
+
+      {/* <div className="relative flex flex-col items-center h-full border border-solid border-red-500">
+        <div className="flex-shrink-0 w-[364px] h-[424px] rounded-2xl bg-white shadow-[0px_4px_25px_0px_rgba(0,0,0,0.16)] border border-solid border-blue-500 relative">
+          <h1>text div 1</h1>
+        </div>
+        <div className="absolute top-[-100px] left-0 w-full h-[250px] bg-black flex justify-center items-center">
+          <h1 className="text-white">text div 2</h1>
+        </div>
+      </div> */}
+
     </div>
   );
 }
