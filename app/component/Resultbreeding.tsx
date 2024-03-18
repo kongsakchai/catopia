@@ -1,11 +1,22 @@
 "use client";
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../main/breeding/page";
+import Image from "next/image";
 import DataKitten from "@/public/DataKitten.json";
 import Catparent from "@/public/Catparent.json";
+import Homeinterest from "./Homeinterest";
 
 export default function Resultbreeding() {
+
+  useEffect(() => {
+    getKitten();
+  }, []);
+
+  const [showKitten, setShowKitten] = useState([{}]);
+  const [showMaleKitten, setShowMaleKitten] = useState(true);
+  const [showFemaleKitten, setShowFemaleKitten] = useState(false);
+
   const {
     allSelectedParent,
     setAllSelectedParent,
@@ -15,13 +26,19 @@ export default function Resultbreeding() {
     setProgressBreeding,
   }: any = useContext(DataContext);
 
-  useEffect(() => {
-    getKitten();
-  }, []);
+  function isShowGender(show: string) {
+    if (show === "showMaleKitten") {
+      setShowMaleKitten(true);
+      setShowFemaleKitten(false);
+    } else {
+      setShowFemaleKitten(true);
+      setShowMaleKitten(false);
+    }
+  }
 
-  useEffect(() => {
-    console.log(allSelectedParent);
-  }, [allSelectedParent]);
+  // useEffect(() => {
+  //   console.log(allSelectedParent);
+  // }, [allSelectedParent]);
 
   function getKitten() {
     const getFather_id = Catparent.filter(
@@ -46,7 +63,7 @@ export default function Resultbreeding() {
         kitten.father_id === getFather_id[0].id &&
         kitten.mother_id === getMother_id[0].id
     );
-    console.log(getKitten.length === 0 ? "No kitten" : getKitten);
+    // console.log(getKitten.length === 0 ? "No kitten" : getKitten);
 
     const getKittenMale = getKitten
       .filter((kitten) => kitten.sex === "M")
@@ -67,7 +84,11 @@ export default function Resultbreeding() {
         ? "No kitten"
         : `getKittenFemale: ${getKittenFemale}`
     );
+    setShowKitten(getKitten);
   }
+
+  console.log("showKitten: ", showKitten);
+
 
   const clearLastAnswer = () => {
     setAllSelectedParent((prevAllSelected: any) =>
@@ -101,24 +122,69 @@ export default function Resultbreeding() {
           สำหรับสีของลูกแมว
         </h3>
       </div>
-      <div className="flex flex-col relative items-center h-full border border-solid border-red-500">
+      <div className="flex flex-col relative items-center h-full mt-4 border border-solid border-red-500">
         <div className="flex flex-col justify-center items-center relative shrink-0 z-10 w-[364px] h-[424px] rounded-2xl bg-white shadow-[0px_4px_25px_0px_rgba(0,0,0,0.16)] border border-solid border-blue-500">
-          <h1>text div 1</h1>
+          <div className="flex flex-col shrink-0 items-center gap-2 w-[316px] h-[376px] overflow-auto border border-solid border-orange-500">
+            <div className="flex items-center justify-between p-1 shrink-0 w-[316px] h-[42px] bg-blue02 rounded-lg">
+              <button
+                type="button"
+                onClick={() => isShowGender("showMaleKitten")}
+                style={{transition: "background-color 0.3s, color 0.3s"}}
+                className={`flex items-center justify-center gap-[6px] shrink-0 w-[152px] h-[34px] rounded ${showMaleKitten ? "bg-primary" : "bg-none"}`}>
+                <Image src="/male-gender.svg" width={14} height={14} alt="male-gender" />
+                <p className="text-xs not-italic font-semibold leading-5 text-white">เพศชาย</p>
+              </button>
+              <button
+                type="button"
+                onClick={() => isShowGender("showFemaleKitten")}
+                style={{transition: "background-color 0.3s, color 0.3s"}}
+                className={`flex items-center justify-center gap-[6px] shrink-0 w-[152px] h-[34px] rounded ${showFemaleKitten ? "bg-primary" : "bg-none"}`}>
+                <Image src="/female-gender.svg" width={14} height={14} alt="male-gender" />
+                <p className="text-xs not-italic font-semibold leading-5 text-white">เพศหญิง</p>
+              </button>
+            </div>
+            {showMaleKitten && (
+              showKitten.filter((kitten) => kitten.sex === "M").map((kitten, index) => (
+                <div key={index} className="flex shrink-0 items-center justify-between w-full h-14 pr-[10px] pl-[10px] bg-white border-b-2">
+                  <div className="flex items-center justify-center gap-4">
+                    <img
+                      src={kitten.img_url}
+                      alt={kitten.color}
+                      style={{ width: "40px", height: "40px", borderRadius: "50%", overflow: "hidden", border: "1px solid #3FA8D0" }}
+                    />
+                    <span className="text-xs text-black01 not-italic font-normal leading-5">{kitten.color}</span>
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <span className="text-xs text-primary not-italic font-semibold leading-5">เพศชาย</span>
+                  </div>
+                </div>
+              ))
+            )}
+            {showFemaleKitten && (
+              showKitten.filter((kitten) => kitten.sex === "F").map((kitten, index) => (
+                <div key={index} className="flex shrink-0 items-center justify-between w-full h-14 pr-[10px] pl-[10px] bg-white border-b-2">
+                  <div className="flex items-center justify-center gap-4">
+                    <img
+                      src={kitten.img_url}
+                      alt={kitten.color}
+                      style={{ width: "40px", height: "40px", borderRadius: "50%", overflow: "hidden", border: "1px solid #3FA8D0" }}
+                    />
+                    <span className="text-xs text-black01 not-italic font-normal leading-5">{kitten.color}</span>
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <span className="text-xs text-primary not-italic font-semibold leading-5">เพศหญิง</span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
         </div>
-        <div className="flex flex-col justify-center items-center absolute shrink-0 z-0 top-[115px] w-full h-screen rounded-2xl bg-black01">
-          <h1 className="text-white">text div 2</h1>
+        <div className="flex flex-col items-center absolute shrink-0 z-0 top-[115px] w-full h-[550px] rounded-t-2xl bg-black01">
+          <div className="flex mt-[320px]">
+            <Homeinterest />
+          </div>
         </div>
       </div>
-
-      {/* <div className="relative flex flex-col items-center h-full border border-solid border-red-500">
-        <div className="flex-shrink-0 w-[364px] h-[424px] rounded-2xl bg-white shadow-[0px_4px_25px_0px_rgba(0,0,0,0.16)] border border-solid border-blue-500 relative">
-          <h1>text div 1</h1>
-        </div>
-        <div className="absolute top-[-100px] left-0 w-full h-[250px] bg-black flex justify-center items-center">
-          <h1 className="text-white">text div 2</h1>
-        </div>
-      </div> */}
-
     </div>
   );
 }

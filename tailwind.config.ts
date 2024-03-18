@@ -19,7 +19,9 @@ const config: Config = {
         'error' : '#e50914',
         'black01' : '#2e2e2e',
         'textfield' : '#9e9e9e',
-        'line' : '#ebebeb'
+        'line' : '#ebebeb',
+        'blue01' : '#1E2237',
+        'blue02' : '#252A40'
       },
     },
   },
