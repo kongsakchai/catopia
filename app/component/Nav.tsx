@@ -16,7 +16,7 @@ export default function Nav() {
   };
 
   useEffect(() => {
-    router.push("/main/home")
+    router.push(`/main/${active}`)
   }, []);
 
   return (
@@ -45,7 +45,7 @@ export default function Nav() {
         </Link>
         <Link href="/main/breeding">
           <button
-            onClick={() => handleActive("Breeding")}
+            onClick={() => handleActive("breeding")}
             className="flex flex-col items-center justify-center"
           >
             <Image
@@ -68,7 +68,7 @@ export default function Nav() {
         </Link>
         <Link href="/main/suggest">
           <button
-            onClick={() => handleActive("Suggest")}
+            onClick={() => handleActive("suggest")}
             className="flex flex-col items-center justify-center"
           >
             <Image
@@ -91,7 +91,7 @@ export default function Nav() {
         </Link>
         <Link href="/main/profile">
           <button
-            onClick={() => handleActive("Profile")}
+            onClick={() => handleActive("profile")}
             className="flex flex-col items-center justify-center"
           >
             <Image
