@@ -19,7 +19,7 @@ export default function Homeheader() {
   const router = useRouter();
 
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [newListCats, setNewListCats] = useState({});
+  const [newListCats, setNewListCats] = useState([]);
   const [activeSearch, setActiveSearch] = useState([]);
 
   useEffect(() => {
@@ -38,19 +38,20 @@ export default function Homeheader() {
   }
 
   function handleSearch(e: any) {
-    if (e.target.value === '') {
+    if (e.target.value === "") {
       setActiveSearch([]);
       return false;
     }
-    setActiveSearch(newListCats.filter((words: any) => words.includes(e.target.value)).slice(0, 8));
+    setActiveSearch(
+      newListCats
+        .filter((words: any) => words.includes(e.target.value))
+        .slice(0, 5)
+    );
   }
 
-  const afterSearch = (cat: string) => {
-    router.push({
-      pathname: "/main/home/learning",
-      query: { cat: cat },
-    } as unknown as string);
-  }
+  const selectSearch = (cat: string) => {
+    router.push(`/main/home/learning/${cat}`);
+  };
 
   return (
     <div className="flex flex-col justify-center items-start gap-2 w-full ">
@@ -80,28 +81,25 @@ export default function Homeheader() {
           <Image src="/Search.svg" width={18} height={18} alt="Search-btn" />
         </button>
         <input
-          type="search"
+          type="text"
           placeholder="ค้นหา"
           onChange={(e) => handleSearch(e)}
           className={`flex w-full h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 ml-8 focus:outline-none border-[none]`}
         />
-        {
-          activeSearch.length > 0 && (
-            <div className="flex flex-col gap-2 absolute top-10 p-4 bg-slate-800 text-textfield w-full rounded left-1/2 -translate-x-1/2 ">
-              {
-                activeSearch.map((cat: string, index: number) => (
-                  <button
-                    value={cat}
-                    key={index}
-                    onClick={() => afterSearch(cat)}
-                    className="flex items-center gap-2">
-                    <span>{cat}</span>
-                  </button>
-                ))
-              }
-            </div>
-          )
-        }
+        {activeSearch.length > 0 && (
+          <div className="flex flex-col gap-2 absolute top-10 p-4 bg-slate-800 text-textfield w-full rounded left-1/2 -translate-x-1/2 ">
+            {activeSearch.map((cat: string, index: number) => (
+              <button
+                value={cat}
+                key={index}
+                onClick={() => selectSearch(cat)}
+                className="flex items-center gap-2"
+              >
+                <span>{cat}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -15,9 +15,9 @@ export default function Nav() {
     setActive(page);
   };
 
-  useEffect(() => {
-    router.push(`/main/${active}`)
-  }, []);
+  // useEffect(() => {
+  //   router.push(`/main/${active}`)
+  // }, []);
 
   return (
     <div className=" flex w-full h-[104px] items-center justify-center shrink-0 fixed left-0 bottom-0 border-t-2 border-line">
@@ -50,7 +50,7 @@ export default function Nav() {
           >
             <Image
               src={`${
-                active === "Breeding" ? "/Breeding-active" : "/Breeding"
+                active === "breeding" ? "/Breeding-active" : "/Breeding"
               }.svg`}
               width={28}
               height={28}
@@ -59,7 +59,7 @@ export default function Nav() {
             />
             <span
               className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${
-                active === "Breeding" ? "text-primary" : "text-textfield"
+                active === "breeding" ? "text-primary" : "text-textfield"
               }`}
             >
               ผสมพันธุ์
@@ -73,7 +73,7 @@ export default function Nav() {
           >
             <Image
               src={`${
-                active === "Suggest" ? "/Suggest-active" : "/Suggest"
+                active === "suggest" ? "/Suggest-active" : "/Suggest"
               }.svg`}
               width={28}
               height={28}
@@ -82,7 +82,7 @@ export default function Nav() {
             />
             <span
               className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${
-                active === "Suggest" ? "text-primary" : "text-textfield"
+                active === "suggest" ? "text-primary" : "text-textfield"
               }`}
             >
               แนะนำ
@@ -96,7 +96,7 @@ export default function Nav() {
           >
             <Image
               src={`${
-                active === "Profile" ? "/Profile-active" : "/Profile"
+                active === "profile" ? "/Profile-active" : "/Profile"
               }.svg`}
               width={28}
               height={28}
@@ -105,7 +105,7 @@ export default function Nav() {
             />
             <span
               className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${
-                active === "Profile" ? "text-primary" : "text-textfield"
+                active === "profile" ? "text-primary" : "text-textfield"
               }`}
             >
               ประวัติ
