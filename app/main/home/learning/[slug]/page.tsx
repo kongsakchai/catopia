@@ -31,10 +31,10 @@ export default function Learning({params}: any) {
     
     return (
         <div>
-            Slug: {encodedCat}
-            {currentCat.overall.map((item: string, index: number) => (
+            {/* Slug: {encodedCat}
+            {currentCat.overall?.map((item: string, index: number) => (
                 <div key={index}>{item}</div>
-            ))}
+            ))} */}
         </div>
     )
 }
