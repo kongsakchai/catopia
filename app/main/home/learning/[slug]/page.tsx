@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, createContext } from "react";
+import { useRouter } from "next/navigation";
 import learningcats from "@/public/learningcats.json";
 import Headerlearning from "@/app/component/Headerlearning";
 import Detailslearning from "@/app/component/Detailslearning";
@@ -18,9 +19,14 @@ interface learningcats {
   overall: Array<string>;
 }
 
-export let CatsContext = createContext<learningcats | undefined>(undefined);
+// type CatsContextType = {
+//   currentCat: string;
+// };
+
+// export const CatsContext = createContext<CatsContextType | undefined>(undefined);
 
 export default function Learning({ params }: any): JSX.Element {
+  const router = useRouter();
   const [currentCat, setCurrentCat] = useState<any>({} as learningcats);
 
   const encodedCat = decodeURI(params.slug);
@@ -30,17 +36,28 @@ export default function Learning({ params }: any): JSX.Element {
   }, []);
 
   function findCat() {
-    const cat = learningcats.find((cat: any) => cat.name === encodedCat);
-    setCurrentCat(cat as learningcats);
+    setCurrentCat(learningcats.find((cat: any) => cat.name === encodedCat));
+  }
+
+  function blackToHomePage() {
+    setCurrentCat({} as learningcats);
+    router.push("/main/home");
   }
 
   return (
-    <CatsContext.Provider value={ currentCat }>
-      <div className="flex flex-col items-center min-h-screen border border-solid border-red-500">
-        {currentCat?.name}
-        <Headerlearning />
-        <Detailslearning />
+    <div className="flex flex-col items-center min-h-screen border border-solid border-red-500">
+      <div className="flex flex-col justify-center items-start w-[364px] mt-12 gap-4 border border-solid border-blue-500">
+        <button onClick={blackToHomePage}>
+          <img src="/ArrowLeft.svg" alt="Back" />
+        </button>
+        <div className="flex-grow w-full">
+          {currentCat && <Headerlearning currentCat={currentCat} />}
+        </div>
       </div>
-    </CatsContext.Provider>
+      <div className="w-full mt-6 h-[0.001px] shrink-0 border border-line" />
+      <div className="flex w-[364px] h-full mt-4 ">
+        {currentCat && <Detailslearning currentCat={currentCat} />}
+      </div>
+    </div>
   );
 }
