@@ -115,23 +115,18 @@ export default function Loginform() {
       >
         ลืมรหัสผ่าน?
       </Link>
-      {/* <Link href="/"> */}
       <button
         type="submit"
         className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6"
       >
         เข้าสู่ระบบ
       </button>
-      {/* </Link> */}
-      {/* <div className="flex items-center justify-center w-full  mb-4"> */}
-      {/* <span className="flex justify-center text-center items-center text-xs not-italic font-normal mt-2 leading-5 text-error">{errorLigon}</span> */}
       <span
         className="flex text-center items-center justify-center text-xs not-italic font-normal mt-2 mb-2 leading-5 text-error"
         style={{ width: "100%", textAlign: "center" }}
       >
         {errorLigon}
       </span>
-      {/* </div> */}
     </form>
   );
 }

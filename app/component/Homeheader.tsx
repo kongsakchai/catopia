@@ -87,7 +87,7 @@ export default function Homeheader() {
           className={`flex w-full h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 ml-8 focus:outline-none border-[none]`}
         />
         {activeSearch.length > 0 && (
-          <div className="flex flex-col gap-2 absolute top-10 p-4 bg-slate-800 text-textfield w-full rounded left-1/2 -translate-x-1/2 ">
+          <div className="flex flex-col gap-4 absolute top-12 p-4 bg-white text-black01 border-b-2 border-l-2 border-r-2 w-full rounded left-1/2 -translate-x-1/2 ">
             {activeSearch.map((cat: string, index: number) => (
               <button
                 value={cat}
