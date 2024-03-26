@@ -15,3 +15,7 @@
   color: #2e2e2e; /* Set your desired color */
   cursor: pointer;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

@@ -19,12 +19,6 @@ interface learningcats {
   overall: Array<string>;
 }
 
-// type CatsContextType = {
-//   currentCat: string;
-// };
-
-// export const CatsContext = createContext<CatsContextType | undefined>(undefined);
-
 export default function Learning({ params }: any): JSX.Element {
   const router = useRouter();
   const [currentCat, setCurrentCat] = useState<any>({} as learningcats);

@@ -1,6 +1,18 @@
+'use client';
+
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function NotFound() {
+  const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(() => {
+      router.push("/main/home/");
+    }, 3000);
+  }, []);
+
   return (
     <div className="flex flex-col h-screen items-center justify-center">
       <h1>Not Found</h1>
