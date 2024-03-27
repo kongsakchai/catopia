@@ -11,8 +11,8 @@ export default function Detailslearning({ currentCat }: any) {
   }
 
   return (
-    <div className="flex flex-col justify-center items-start max-h-[390px] w-full gap-4 overflow-x-auto border border-solid border-red-500">
-      <div className="flex justify-center gap-4 over border border-solid border-green-700">
+    <div className="flex flex-col h-[390px] w-full gap-4">
+      <div className="flex min-h-9 max-w-full overflow-x-auto gap-4">
         <button
           onClick={() => changeTab("nature")}
           className={`flex h-8 py-1 px-4 justify-center items-center rounded-2xl ${
@@ -86,32 +86,76 @@ export default function Detailslearning({ currentCat }: any) {
           </span>
         </button>
       </div>
-      <div className="flex justify-center overflow-auto">
+      <div className="flex overflow-auto">
         {currentTab === "nature" && (
           <div className="flex flex-col gap-4">
-            <p className="text-textfield text-base not-italic font-normal leading-6">
-              {currentCat.description}
-            </p>
+            {currentCat.description?.map((desc: string, index: number) => (
+              <p
+                className="text-textfield text-base not-italic font-normal leading-6"
+                key={index}
+              >
+                {desc}
+              </p>
+            ))}
             <h1 className="text-black01 text-base not-italic font-semibold leading-6">
               สุขภาพของ{currentCat.name}
             </h1>
-            <p className="text-textfield text-base not-italic font-normal leading-6">
-              {currentCat.health}
-            </p>
+            {currentCat.health?.map((health: string, index: number) => (
+              <p
+                className="text-textfield text-base not-italic font-normal leading-6"
+                key={index}
+              >
+                {health}
+              </p>
+            ))}
           </div>
         )}
         {currentTab === "overview" && (
           <div className="flex flex-col gap-4">
-            {currentCat.overall.map((item: string, index: number) => (
-              <li className="list-none text-textfield text-base not-italic font-normal leading-6" key={index}>{item}</li>
+            {currentCat.overall?.map((overall: string, index: number) => (
+              <li
+                className="list-none text-textfield text-base not-italic font-normal leading-6"
+                key={index}
+              >
+                {overall}
+              </li>
             ))}
           </div>
         )}
         {currentTab === "characteristics" && (
           <div className="flex flex-col gap-4">
-            <p className="text-textfield text-base not-italic font-normal leading-6">
-              {currentCat.characteristics}
-            </p>
+            {currentCat.characteristics?.map((charac: string, index: number) => (
+              <p
+                className="text-textfield text-base not-italic font-normal leading-6"
+                key={index}
+              >
+                {charac}
+              </p>
+            ))}
+          </div>
+        )}
+        {currentTab === "grooming" && (
+          <div className="flex flex-col gap-4">
+            {currentCat.grooming?.map((groom: string, index: number) => (
+              <p
+                className="text-textfield text-base not-italic font-normal leading-6"
+                key={index}
+              >
+                {groom}
+              </p>
+            ))}
+          </div>
+        )}
+        {currentTab === "playing_with_cats" && (
+          <div className="flex flex-col gap-4">
+            {currentCat.playing_with_cats?.map((playing: string, index: number) => (
+              <p
+                className="text-textfield text-base not-italic font-normal leading-6"
+                key={index}
+              >
+                {playing}
+              </p>
+            ))}
           </div>
         )}
       </div>

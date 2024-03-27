@@ -7,7 +7,7 @@ import React, { useContext, useEffect } from "react";
 export default function Headerlearning({ currentCat }: any) {
 
   return (
-    <div className="flex flex-col items-center w-full gap-4 border border-solid border-red-500">
+    <div className="flex flex-col items-center w-full gap-4">
       <img src={currentCat?.img_url} alt={currentCat.name} width={127} height={127} style={{ borderRadius: 16 }} />
       <div className="flex flex-col justify-center items-center w-full">
         <span className="text-black01 text-center text-2xl not-italic font-bold leading-10">{currentCat.name}</span>
