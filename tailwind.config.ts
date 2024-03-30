@@ -23,6 +23,9 @@ const config: Config = {
         'blue01' : '#1E2237',
         'blue02' : '#252A40'
       },
+      fontFamily: {
+        noto_sans_thai: ['var(--font-noto-sans-thai)']
+      }
     },
   },
   plugins: [],

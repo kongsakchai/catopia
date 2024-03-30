@@ -102,7 +102,16 @@ export default function Resultbreeding() {
   };
 
   return (
-    <div className="flex flex-col">
+    <div
+      className="flex flex-col"
+      style={{
+        backgroundImage: "url(/Mainbg.svg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center buttom", 
+        height: "full",
+        zIndex: 0,
+      }}
+    >
       <div className="flex flex-col items-start mt-[33px] ml-8">
         <button onClick={prevQuestion}>
           <img src="/ArrowLeft.svg" alt="Back" />
@@ -116,9 +125,9 @@ export default function Resultbreeding() {
           สำหรับสีของลูกแมว
         </h3>
       </div>
-      <div className="flex flex-col relative items-center h-full mt-4 border border-solid border-red-500">
-        <div className="flex flex-col justify-center items-center relative shrink-0 z-10 w-[364px] h-[424px] rounded-2xl bg-white shadow-[0px_4px_25px_0px_rgba(0,0,0,0.16)] border border-solid border-blue-500">
-          <div className="flex flex-col shrink-0 items-center gap-2 w-[316px] h-[376px] overflow-auto border border-solid border-orange-500">
+      <div className="flex flex-col relative items-center h-full mt-4">
+        <div className="flex flex-col justify-center items-center relative shrink-0 z-10 w-[364px] h-[424px] rounded-2xl bg-white shadow-[0px_4px_25px_0px_rgba(0,0,0,0.16)]">
+          <div className="flex flex-col shrink-0 items-center gap-2 w-[316px] h-[376px] overflow-auto">
             <div className="flex items-center justify-between p-1 shrink-0 w-[316px] h-[42px] fixed bg-blue02 rounded-lg">
               <button
                 type="button"
@@ -223,10 +232,10 @@ export default function Resultbreeding() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center absolute shrink-0 z-0 top-[115px] w-full h-[550px] rounded-t-2xl bg-black01">
-          <div className="flex mt-[320px]">
+        <div className="flex flex-col items-center absolute shrink-0 z-0 top-[115px] w-full h-[550px] rounded-t-2xl bg-white">
+          {/* <div className="flex mt-[320px]">
             <Homeinterest />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

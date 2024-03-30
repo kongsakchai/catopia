@@ -1,8 +1,11 @@
-import { Inter } from 'next/font/google'
+import { Noto_Sans_Thai } from "next/font/google";
 import Nav from '../component/Nav'
-const inter = Inter({ subsets: ['latin'] })
 
-
+const noto_san_thai = Noto_Sans_Thai({ 
+  subsets: ["latin"], 
+  weight: ["400"],
+  variable: '--font-noto-sans-thai',
+ });
 
 export default function RootLayout({
   children,
@@ -11,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={noto_san_thai.className}>
         {children}
         <Nav/>
       </body>
