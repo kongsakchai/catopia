@@ -1,6 +1,6 @@
 import { Noto_Sans_Thai } from "next/font/google";
 import Nav from '../component/Nav'
-import "./globals.css";
+import "../globals.css";
 
 const noto_san_thai = Noto_Sans_Thai({ 
   subsets: ["latin"], 

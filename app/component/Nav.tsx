@@ -15,9 +15,9 @@ export default function Nav() {
     setActive(page);
   };
 
-  // useEffect(() => {
-  //   router.push(`/main/${active}`)
-  // }, []);
+  useEffect(() => {
+    router.push(`/main/${active}`)
+  }, []);
 
   return (
     <div className=" flex w-full h-[104px] items-center justify-center shrink-0 fixed left-0 bottom-0 border-t-2 border-line">

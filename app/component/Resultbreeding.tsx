@@ -103,11 +103,11 @@ export default function Resultbreeding() {
 
   return (
     <div
-      className="flex flex-col"
+      className="flex flex-col border border-solid border-blue-500"
       style={{
         backgroundImage: "url(/Mainbg.svg)",
         backgroundSize: "cover",
-        backgroundPosition: "center buttom", 
+        backgroundPosition: "center buttom",
         height: "full",
         zIndex: 0,
       }}
@@ -125,119 +125,130 @@ export default function Resultbreeding() {
           สำหรับสีของลูกแมว
         </h3>
       </div>
-      <div className="flex flex-col relative items-center h-full mt-4">
-        <div className="flex flex-col justify-center items-center relative shrink-0 z-10 w-[364px] h-[424px] rounded-2xl bg-white shadow-[0px_4px_25px_0px_rgba(0,0,0,0.16)]">
-          <div className="flex flex-col shrink-0 items-center gap-2 w-[316px] h-[376px] overflow-auto">
-            <div className="flex items-center justify-between p-1 shrink-0 w-[316px] h-[42px] fixed bg-blue02 rounded-lg">
-              <button
-                type="button"
-                onClick={() => isShowGender("showMaleKitten")}
-                style={{ transition: "background-color 0.3s, color 0.3s" }}
-                className={`flex items-center justify-center gap-[6px] shrink-0 w-[152px] h-[34px] rounded ${
-                  showMaleKitten ? "bg-primary" : "bg-none"
-                }`}
-              >
-                <Image
-                  src="/male-gender.svg"
-                  width={14}
-                  height={14}
-                  alt="male-gender"
-                />
-                <p className="text-xs not-italic font-semibold leading-5 text-white">
-                  เพศชาย
-                </p>
-              </button>
-              <button
-                type="button"
-                onClick={() => isShowGender("showFemaleKitten")}
-                style={{ transition: "background-color 0.3s, color 0.3s" }}
-                className={`flex items-center justify-center gap-[6px] shrink-0 w-[152px] h-[34px] rounded ${
-                  showFemaleKitten ? "bg-primary" : "bg-none"
-                }`}
-              >
-                <Image
-                  src="/female-gender.svg"
-                  width={14}
-                  height={14}
-                  alt="male-gender"
-                />
-                <p className="text-xs not-italic font-semibold leading-5 text-white">
-                  เพศหญิง
-                </p>
-              </button>
+      {showKitten.length === 0 ? (
+        <div className="flex flex-col items-center shrink-0 z-0 top-[115px] w-full h-screen rounded-t-2xl bg-white">
+          <div className="flex flex-col items-center gap-6 mt-20 mb-20">
+            <Image src="/Warning.svg" width={80} height={80} alt="Alert no have kitten" />
+            <div className="flex flex-col items-center justify-center">
+              <p className="text-black01 text-center text-base not-italic font-bold leading-6">ไม่สามารถคาดคะเนสีของ</p>
+              <p className="text-black01 text-center text-base not-italic font-bold leading-6">ลูกแมวผ่านพ่อและแม่พันธุ์</p>
             </div>
-            <div className="flex flex-col items-center gap-2 w-[316px] h-full mt-12 overflow-y-auto">
-              {showMaleKitten &&
-                showKitten
-                  .filter((kitten: any) => kitten.sex === "M")
-                  .map((kitten: any, index: number) => (
-                    <div
-                      key={index}
-                      className="flex shrink-0 items-center justify-between w-full h-14 pr-[10px] pl-[10px] bg-white border-b-2"
-                    >
-                      <div className="flex items-center justify-center gap-4">
-                        <img
-                          src={kitten.img_url}
-                          alt={kitten.color}
-                          style={{
-                            width: "40px",
-                            height: "40px",
-                            borderRadius: "50%",
-                            overflow: "hidden",
-                            border: "1px solid #3FA8D0",
-                          }}
-                        />
-                        <span className="text-xs text-black01 not-italic font-normal leading-5">
-                          {kitten.color}
-                        </span>
+          </div>
+          <Homeinterest />
+        </div>
+      ) : (
+        <div className="flex flex-col relative items-center h-full mt-4">
+          <div className="flex flex-col justify-center items-center relative shrink-0 z-10 w-[364px] h-[424px] rounded-2xl bg-white shadow-[0px_4px_25px_0px_rgba(0,0,0,0.16)]">
+            <div className="flex flex-col shrink-0 items-center gap-2 w-[316px] h-[376px] overflow-auto">
+              <div className="flex items-center justify-between p-1 shrink-0 w-[316px] h-[42px] fixed bg-blue02 rounded-lg">
+                <button
+                  type="button"
+                  onClick={() => isShowGender("showMaleKitten")}
+                  style={{ transition: "background-color 0.3s, color 0.3s" }}
+                  className={`flex items-center justify-center gap-[6px] shrink-0 w-[152px] h-[34px] rounded ${showMaleKitten ? "bg-primary" : "bg-none"
+                    }`}
+                >
+                  <Image
+                    src="/male-gender.svg"
+                    width={14}
+                    height={14}
+                    alt="male-gender"
+                  />
+                  <p className="text-xs not-italic font-semibold leading-5 text-white">
+                    เพศชาย
+                  </p>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => isShowGender("showFemaleKitten")}
+                  style={{ transition: "background-color 0.3s, color 0.3s" }}
+                  className={`flex items-center justify-center gap-[6px] shrink-0 w-[152px] h-[34px] rounded ${showFemaleKitten ? "bg-primary" : "bg-none"
+                    }`}
+                >
+                  <Image
+                    src="/female-gender.svg"
+                    width={14}
+                    height={14}
+                    alt="male-gender"
+                  />
+                  <p className="text-xs not-italic font-semibold leading-5 text-white">
+                    เพศหญิง
+                  </p>
+                </button>
+              </div>
+              <div className="flex flex-col items-center gap-2 w-[316px] h-full mt-12 overflow-y-auto">
+                {showMaleKitten &&
+                  showKitten
+                    .filter((kitten: any) => kitten.sex === "M")
+                    .map((kitten: any, index: number) => (
+                      <div
+                        key={index}
+                        className="flex shrink-0 items-center justify-between w-full h-14 pr-[10px] pl-[10px] bg-white border-b-2"
+                      >
+                        <div className="flex items-center justify-center gap-4">
+                          <img
+                            src={kitten.img_url}
+                            alt={kitten.color}
+                            style={{
+                              width: "40px",
+                              height: "40px",
+                              borderRadius: "50%",
+                              overflow: "hidden",
+                              border: "1px solid #3FA8D0",
+                            }}
+                          />
+                          <span className="text-xs text-black01 not-italic font-normal leading-5">
+                            {kitten.color}
+                          </span>
+                        </div>
+                        <div className="flex justify-center items-center">
+                          <span className="text-xs text-primary not-italic font-semibold leading-5">
+                            เพศชาย
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex justify-center items-center">
-                        <span className="text-xs text-primary not-italic font-semibold leading-5">
-                          เพศชาย
-                        </span>
+                    ))}
+                {showFemaleKitten &&
+                  showKitten
+                    .filter((kitten: any) => kitten.sex === "F")
+                    .map((kitten: any, index: number) => (
+                      <div
+                        key={index}
+                        className="flex shrink-0 items-center justify-between w-full h-14 pr-[10px] pl-[10px] bg-white border-b-2"
+                      >
+                        <div className="flex items-center justify-center gap-4">
+                          <img
+                            src={kitten.img_url}
+                            alt={kitten.color}
+                            style={{
+                              width: "40px",
+                              height: "40px",
+                              borderRadius: "50%",
+                              overflow: "hidden",
+                              border: "1px solid #3FA8D0",
+                            }}
+                          />
+                          <span className="text-xs text-black01 not-italic font-normal leading-5">
+                            {kitten.color}
+                          </span>
+                        </div>
+                        <div className="flex justify-center items-center">
+                          <span className="text-xs text-primary not-italic font-semibold leading-5">
+                            เพศหญิง
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-              {showFemaleKitten &&
-                showKitten
-                  .filter((kitten: any) => kitten.sex === "F")
-                  .map((kitten: any, index: number) => (
-                    <div
-                      key={index}
-                      className="flex shrink-0 items-center justify-between w-full h-14 pr-[10px] pl-[10px] bg-white border-b-2"
-                    >
-                      <div className="flex items-center justify-center gap-4">
-                        <img
-                          src={kitten.img_url}
-                          alt={kitten.color}
-                          style={{
-                            width: "40px",
-                            height: "40px",
-                            borderRadius: "50%",
-                            overflow: "hidden",
-                            border: "1px solid #3FA8D0",
-                          }}
-                        />
-                        <span className="text-xs text-black01 not-italic font-normal leading-5">
-                          {kitten.color}
-                        </span>
-                      </div>
-                      <div className="flex justify-center items-center">
-                        <span className="text-xs text-primary not-italic font-semibold leading-5">
-                          เพศหญิง
-                        </span>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col items-center absolute shrink-0 z-0 top-[115px] w-full h-[550px] rounded-t-2xl bg-white">
+            <div className="flex mt-[320px]">
+              <Homeinterest />
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center absolute shrink-0 z-0 top-[115px] w-full h-[550px] rounded-t-2xl bg-white">
-          {/* <div className="flex mt-[320px]">
-            <Homeinterest />
-          </div> */}
-        </div>
-      </div>
+      )}
     </div>
   );
 }
