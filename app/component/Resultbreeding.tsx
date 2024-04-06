@@ -6,8 +6,12 @@ import Image from "next/image";
 import DataKitten from "@/public/DataKitten.json";
 import Catparent from "@/public/Catparent.json";
 import Homeinterest from "./Homeinterest";
+import { useRouter } from "next/navigation";
 
 export default function Resultbreeding() {
+
+  const router = useRouter();
+
   useEffect(() => {
     getKitten();
   }, []);
@@ -90,7 +94,7 @@ export default function Resultbreeding() {
     );
   };
 
-  const prevQuestion = async () => {
+  const refreshQuestion = async () => {
     if (current === 0) {
       return;
     } else {
@@ -112,12 +116,7 @@ export default function Resultbreeding() {
         zIndex: 0,
       }}
     >
-      <div className="flex flex-col items-start mt-[33px] ml-8">
-        <button onClick={prevQuestion}>
-          <img src="/ArrowLeft.svg" alt="Back" />
-        </button>
-      </div>
-      <div className="inline-flex flex-col items-center">
+      <div className="inline-flex flex-col items-center mt-14">
         <h1 className="text-center text-2xl text-black01 not-italic font-semibold leading-8">
           ความเป็นไปได้
         </h1>
@@ -135,6 +134,15 @@ export default function Resultbreeding() {
             </div>
           </div>
           <Homeinterest />
+          <div className="flex flex-col justify-center items-start gap-4 mt-6">
+            <button onClick={refreshQuestion} type="button" className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border-[1.5px] border-solid border-primary">
+              <Image src="/Refresh-btn.svg" width={24} height={24} alt="Refresh" />
+              <p className="text-primary text-base not-italic font-normal leading-6">ลองใหม่อีกครั้ง</p>
+            </button>
+            <button onClick={() => router.push('/main/home')} type="button" className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border border-solid border-primary bg-primary">
+              <p className="text-white text-base not-italic font-normal leading-6">กลับสูหน้าหลัก</p>
+            </button>
+          </div>
         </div>
       ) : (
         <div className="flex flex-col relative items-center h-full mt-4">
@@ -242,9 +250,18 @@ export default function Resultbreeding() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col items-center absolute shrink-0 z-0 top-[115px] w-full h-[550px] rounded-t-2xl bg-white">
+          <div className="flex flex-col items-center absolute gap-6 top-[115px] w-full h-full rounded-t-2xl bg-white">
             <div className="flex mt-[320px]">
               <Homeinterest />
+            </div>
+            <div className="flex flex-col justify-center items-start gap-4">
+              <button onClick={refreshQuestion} type="button" className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border-[1.5px] border-solid border-primary">
+                <Image src="/Refresh-btn.svg" width={24} height={24} alt="Refresh" />
+                <p className="text-primary text-base not-italic font-normal leading-6">ลองใหม่อีกครั้ง</p>
+              </button>
+              <button onClick={() => router.push('/main/home')} type="button" className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border border-solid border-primary bg-primary">
+                <p className="text-white text-base not-italic font-normal leading-6">กลับสูหน้าหลัก</p>
+              </button>
             </div>
           </div>
         </div>

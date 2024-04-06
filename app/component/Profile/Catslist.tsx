@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 
 function Catslist() {
 
-    const [haveKitten, setHaveKitten] = useState(true)
+    const [haveKitten, setHaveKitten] = useState(false)
 
     const mockupKitten = [
         {
