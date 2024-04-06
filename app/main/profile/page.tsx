@@ -19,7 +19,7 @@ export default function Profile() {
                     <p className="text-error text-base not-italic font-normal leading-6">Logout</p>
                 </Link>
             </div>
-            <div className="flex flex-col w-[364px] justify-center items-center gap-8 mt-2 border border-solid border-blue-800">
+            <div className="flex flex-col w-[364px] justify-center items-center gap-8 mt-2">
                 <Yourprofile />
                 <Catslist />
             </div>
