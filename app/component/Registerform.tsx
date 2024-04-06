@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import React, { MouseEvent, ChangeEvent, useState, FormEvent, useEffect } from "react";
-import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 
 export default function Registerform() {
@@ -26,22 +25,6 @@ export default function Registerform() {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-
-  // const handleDateChange = (selectedDate: string | Date | null) => {
-  //   if (selectedDate instanceof Date) {
-  //     const formattedDate = selectedDate.toLocaleDateString("en-GB");
-  //     setDate(formattedDate);
-  //     setErrorDate(false);
-  //   } else {
-  //     setDate(selectedDate);
-  //     setErrorDate(false);
-  //   }
-  // };
-
-  // const toggleCalendar = (e: MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   setShowCalendar(!showCalendar);
-  // };
 
   useEffect(() => {
     console.log(date);
