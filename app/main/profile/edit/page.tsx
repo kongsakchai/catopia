@@ -13,6 +13,7 @@ import React, {
 function Editprofile() {
   const router = useRouter();
 
+  const [selectedImage, setSelectedImage] = useState<string>("/Pofile-test.svg");
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
   // const [showCalendar, setShowCalendar] = useState(false);
@@ -47,6 +48,11 @@ function Editprofile() {
   const handleGender = (e: ChangeEvent<HTMLInputElement>) => {
     setGender(e.target.value);
   };
+
+  const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setSelectedImage(file ? URL.createObjectURL(file) : "/Pofile-test.svg");
+  }
 
   const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -96,18 +102,22 @@ function Editprofile() {
         </button>
         <div className="relative w-24 h-24">
           <Image
-            src="/Pofile-test.svg"
+            src={selectedImage}
             width={88}
             height={88}
             alt="Your profile"
-            className="rounded-full"
+            className="rounded-full max-w-[88px] max-h-[88px] object-cover"
           />
           <label
             htmlFor="fileInput"
             className="absolute bottom-0 right-0 p-1 bg-white rounded-full cursor-pointer"
           >
             <Image src="/Camera.svg" width={24} height={24} alt="Camera" />
-            <input type="file" id="fileInput" className="hidden" />
+            <input 
+            type="file" 
+            id="fileInput" 
+            onChange={handleFileInput}
+            className="hidden" />
           </label>
         </div>
         <form onSubmit={validateForm} className="flex flex-col justify-center items-start gap-2">
