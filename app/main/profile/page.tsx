@@ -1,8 +1,43 @@
+'use client'
+
 import Catslist from "@/app/component/Profile/Catslist";
 import Yourprofile from "@/app/component/Profile/Yourprofile";
+
+import axios from "axios";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+
+interface UserData {
+    // id: number,
+    name: string,
+    email: string,
+    // img_url: string,
+    // last_update: string,
+    // kittens: {
+    //     id: number,
+    //     name: string,
+    //     img_url: string,
+    //     last_update: string,
+    // }[]
+}
 
 export default function Profile() {
+
+    const [userData, setUserData] = useState<UserData>({} as UserData)
+
+    useEffect(() => {
+        getUserData()
+    }, [])
+
+    const getUserData = async () => {
+        try{
+            const response = await axios.get("http://localhost:3000/api/user/1")
+            setUserData(response.data)
+        }catch(error){
+            console.log("Error: ", error);
+        }
+    }
+
     return (
         <div
             className="flex flex-col items-center w-screen h-screen"
@@ -20,8 +55,8 @@ export default function Profile() {
                 </Link>
             </div>
             <div className="flex flex-col w-[364px] justify-center items-center gap-8 mt-2">
-                <Yourprofile />
-                <Catslist />
+                <Yourprofile userData={userData} />
+                <Catslist userData={userData} />
             </div>
         </div>
     )

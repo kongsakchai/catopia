@@ -3,12 +3,12 @@ import QuestionData from "@/public/QuestionData";
 import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../register/getquestion/page";
 
-export default function Genquestion({ progress, setProgress }) {
+export default function Genquestion({ progress, setProgress }: any) {
   const [current, setCurrent] = useState(0);
   const [selectChoice, setSelectChoice] = useState("");
   const [allSelected, setAllSelected] = useState([]);
   // const [allSelected, setAllSelected] = useState({});
-  const { setQuestionState } = useContext(DataContext);
+  const { setQuestionState }: any = useContext(DataContext);
 
   useEffect(() => {
     console.log(allSelected);
