@@ -25,24 +25,24 @@ export default function Profile() {
 
     const [userData, setUserData] = useState<UserData>({} as UserData)
 
-    useEffect(() => {
-        getUserData()
-    }, [])
+    // useEffect(() => {
+    //     getUserData()
+    // }, [])
 
-    const getUserData = async () => {
-        try{
-            const response = await axios.get("https://catopia-backend-7sgneqnvla-as.a.run.app/api/user/", {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token")
-                }
-            })
-            setUserData(response.data.data)
-        }catch(error){
-            console.log("Error: ", error);
-        }
-    }
+    // const getUserData = async () => {
+    //     try{
+    //         const response = await axios.get("https://catopia-backend-7sgneqnvla-as.a.run.app/api/user/", {
+    //             headers: {
+    //                 "Authorization": "Bearer " + localStorage.getItem("token")
+    //             }
+    //         })
+    //         setUserData(response.data.data)
+    //     }catch(error){
+    //         console.log("Error: ", error);
+    //     }
+    // }
 
-    console.log("userData: ", userData);
+    // console.log("userData: ", userData);
 
     return (
         <div

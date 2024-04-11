@@ -41,19 +41,16 @@ export default function Loginform() {
   async function fetchLoginrDB() {
     console.log(username, password);
     try {
-      const response = await fetch(
-        "https://catopia-backend-7sgneqnvla-as.a.run.app/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: username,
-            password: password,
-          }),
-        }
-      );
+      const response = await fetch(process.env.API_URL + "/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
       if (response.ok) {
         const data = await response.json();
         if (data.message === "success") {

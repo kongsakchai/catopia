@@ -36,18 +36,18 @@ function EditProfile() {
 
   const [useInfo, setUserInfo] = useState({});
 
-  useEffect(() => {
-    getUserInfo();
-  }, []);
+  // useEffect(() => {
+  //   getUserInfo();
+  // }, []);
 
-  const getUserInfo = async () => {
-    try {
-      const response = await axios.get("https://api.example.com/user");
-      setUserInfo(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const getUserInfo = async () => {
+  //   try {
+  //     const response = await axios.get("https://api.example.com/user");
+  //     setUserInfo(response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();

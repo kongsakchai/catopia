@@ -102,7 +102,7 @@ function Catslist({ userData }: YourprofileProps) {
               คุณไม่เคยมีโปรไฟลแมว
             </h2>
           </div>
-          <Link href="/main/profile/add">
+          <Link href="/main/profile/add_kitten">
             <button className="flex justify-center items-center gap-[10px] px-4 py-2 rounded-lg border-[1.5px] border-solid border-primary">
               <Image src="/Plus.svg" width={24} height={24} alt="Add kitten" />
               <p className="text-primary text-base not-italic font-normal leading-6">

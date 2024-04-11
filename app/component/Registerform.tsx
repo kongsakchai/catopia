@@ -1,7 +1,13 @@
-"use client"
+"use client";
 
 import { useRouter } from "next/navigation";
-import React, { MouseEvent, ChangeEvent, useState, FormEvent, useEffect } from "react";
+import React, {
+  MouseEvent,
+  ChangeEvent,
+  useState,
+  FormEvent,
+  useEffect,
+} from "react";
 import "react-datetime/css/react-datetime.css";
 
 export default function Registerform() {
@@ -28,15 +34,16 @@ export default function Registerform() {
 
   useEffect(() => {
     console.log(date);
-    
-  },[date])
+  }, [date]);
 
   const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setPasswordVisible(!passwordVisible);
   };
 
-  const toggleConfirmPasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
+  const toggleConfirmPasswordVisibility = (
+    e: MouseEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
@@ -48,10 +55,14 @@ export default function Registerform() {
   const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+    const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
+      email
+    );
     const isDateValid = date.trim() !== "";
     const isRegisUsernameValid = username.length >= 4;
-    const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password);
+    const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(
+      password
+    );
     const isRegisPasswordMatch = confirmPassword === password;
     const isConfirmPasswordNotEmpty = confirmPassword.trim() !== "";
     const isGenderSelected = !!gender;
@@ -76,7 +87,7 @@ export default function Registerform() {
     ) {
       const res = await fetchRegisterDB();
       //
-      if(res){
+      if (res) {
         router.push("/");
       }
     } else {
@@ -92,9 +103,9 @@ export default function Registerform() {
       password,
       confirmPassword,
       gender,
-    }
+    };
     try {
-      const response = await fetch("https://catopia-backend-7sgneqnvla-as.a.run.app/api/auth/register", {
+      const response = await fetch(process.env.API_URL + "/auth/register", {
         method: "POST",
         body: JSON.stringify(data),
       });
@@ -130,8 +141,9 @@ export default function Registerform() {
         }}
         type="text"
         placeholder="อีเมล"
-        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? "border-error" : "border-textfield"
-          } focus:outline-primary`}
+        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+          errorEmail ? "border-error" : "border-textfield"
+        } focus:outline-primary`}
       />
       <input
         value={date}
@@ -143,8 +155,9 @@ export default function Registerform() {
         placeholder="วัน เดือน ปี เกิด"
         onFocus={(e) => (e.target.type = "date")}
         onBlur={(e) => (e.target.type = "text")}
-        className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-          } focus:outline-primary`}
+        className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
+          errorDate ? "border-error" : "border-textfield"
+        } focus:outline-primary`}
       />
       <input
         value={username}
@@ -154,8 +167,9 @@ export default function Registerform() {
         }}
         type="text"
         placeholder="ชื่อผู้ใช้งาน"
-        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
-          } focus:outline-primary`}
+        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+          errorRegisUsername ? "border-error" : "border-textfield"
+        } focus:outline-primary`}
       />
       <div className="flex items-start relative">
         <input
@@ -166,8 +180,9 @@ export default function Registerform() {
           }}
           type={passwordVisible ? "text" : "password"}
           placeholder="รหัสผ่าน"
-          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisPassword ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
+            errorRegisPassword ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
         />
         <button
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
@@ -188,8 +203,9 @@ export default function Registerform() {
           }}
           type={confirmPasswordVisible ? "text" : "password"}
           placeholder="ยืนยันรหัสผ่าน"
-          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisConfirmPassword ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
+            errorRegisConfirmPassword ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
         />
         <button
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"

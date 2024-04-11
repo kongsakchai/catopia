@@ -29,7 +29,7 @@ function Yourprofile({ userData }: YourprofileProps) {
         <h1 className="text-black01 text-center text-2xl not-italic font-bold leading-10">
           KongKang
         </h1>
-        <button type="button" onClick={() => router.push("/main/profile/edit")}>
+        <button type="button" onClick={() => router.push("/main/profile/editprofile")}>
           <Image src="/Edit.svg" width={24} height={24} alt="Edit" />
         </button>
       </div>
