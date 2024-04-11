@@ -19,7 +19,7 @@ export default function Completeregister() {
         <p className="text-center text-base text-textfield not-italic font-normal leading-6">
           ขอบคุณสำหรับการลงทะเบียนในครั้งนี้
         </p>
-        <Link href="/">
+        <Link href="/main/home">
           <button
             type="submit"
             className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6"

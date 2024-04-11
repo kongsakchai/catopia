@@ -76,7 +76,9 @@ export default function Registerform() {
     ) {
       const res = await fetchRegisterDB();
       //
-      router.push("/");
+      if(res){
+        router.push("/");
+      }
     } else {
       setErrorRegister("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
@@ -92,13 +94,14 @@ export default function Registerform() {
       gender,
     }
     try {
-      const response = await fetch("https://catopia-backend-7sgneqnvla-as.a.run.app/api/auth/sign-up", {
+      const response = await fetch("https://catopia-backend-7sgneqnvla-as.a.run.app/api/auth/register", {
         method: "POST",
         body: JSON.stringify(data),
       });
       if (response.ok) {
         const data = await response.json();
-        if (data.success) {
+        if (data.message === "success") {
+          // router.push("/");
           return true;
         }
         return false;

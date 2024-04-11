@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, MouseEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -14,7 +14,7 @@ export default function Loginform() {
   const [errorLigon, setErrorLogin] = useState("");
 
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const togglePasswordVisibility = (e: MouseEvent) => {
+  const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setPasswordVisible(!passwordVisible);
   };
@@ -30,7 +30,9 @@ export default function Loginform() {
 
     if (isUsernameValid && isPasswordValid) {
       const res = await fetchLoginrDB();
-      router.push("/register/getquestion");
+      if (res) {
+        router.push("/register/getquestion");
+      }
     } else {
       setErrorLogin("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
@@ -39,19 +41,23 @@ export default function Loginform() {
   async function fetchLoginrDB() {
     console.log(username, password);
     try {
-      const response = await fetch("https://catopia-backend-7sgneqnvla-as.a.run.app/api/auth/sign-in", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      });
+      const response = await fetch(
+        "https://catopia-backend-7sgneqnvla-as.a.run.app/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+          }),
+        }
+      );
       if (response.ok) {
         const data = await response.json();
-        if (data.success) {
+        if (data.message === "success") {
+          localStorage.setItem("token", data.data.token);
           return true;
         }
         return false;
@@ -77,8 +83,9 @@ export default function Loginform() {
         }}
         type="text"
         placeholder="ชื่อผู้ใช้งาน"
-        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorUsername ? "border-error" : "border-textfield"
-          } focus:outline-primary`}
+        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+          errorUsername ? "border-error" : "border-textfield"
+        } focus:outline-primary`}
         style={{
           color: errorUsername ? "#e50914" : "",
         }}
@@ -92,16 +99,18 @@ export default function Loginform() {
           }}
           type={passwordVisible ? "text" : "password"}
           placeholder="รหัสผ่าน"
-          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorPassword ? "border-error" : "border-textfield"
-            }
+          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
+            errorPassword ? "border-error" : "border-textfield"
+          }
                      focus:outline-primary`}
           style={{
             color: errorPassword ? "#e50914" : "",
           }}
         />
         <button
+          type="button"
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
-          onClick={(e) => togglePasswordVisibility}
+          onClick={(e) => togglePasswordVisibility(e)}
         >
           <img
             src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"}
