@@ -8,45 +8,40 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 interface UserData {
-    // id: number,
-    name: string,
+    username: string,
     email: string,
-    // img_url: string,
-    // last_update: string,
-    // kittens: {
-    //     id: number,
-    //     name: string,
-    //     img_url: string,
-    //     last_update: string,
-    // }[]
+    id: number,
+    gender: string,
+    date: string,
+    createdAt: string,
 }
 
 export default function Profile() {
 
     const [userData, setUserData] = useState<UserData>({} as UserData)
 
-    // useEffect(() => {
-    //     getUserData()
-    // }, [])
+    useEffect(() => {
+        getUserData()
+    }, [])
 
-    // const getUserData = async () => {
-    //     try{
-    //         const response = await axios.get("https://catopia-backend-7sgneqnvla-as.a.run.app/api/user/", {
-    //             headers: {
-    //                 "Authorization": "Bearer " + localStorage.getItem("token")
-    //             }
-    //         })
-    //         setUserData(response.data.data)
-    //     }catch(error){
-    //         console.log("Error: ", error);
-    //     }
-    // }
+    const getUserData = async () => {
+        try{
+            const response = await axios.get(process.env.NEXT_PUBLIC_API_URL+ "/user", {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
+            setUserData(response.data.data)
+        }catch(error){
+            console.log("Error: ", error);
+        }
+    }
 
     // console.log("userData: ", userData);
 
     return (
         <div
-            className="flex flex-col items-center w-screen h-screen"
+            className="flex flex-col items-center w-screen h-screen "
             style={{
                 backgroundImage: "url('/Moon.svg')",
                 backgroundRepeat: "no-repeat",

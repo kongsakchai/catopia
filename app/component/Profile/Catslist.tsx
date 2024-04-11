@@ -6,15 +6,19 @@ import React, { useState } from "react";
 
 interface YourprofileProps {
   userData: {
-    name: string;
-    email: string;
+    username: string,
+    email: string,
+    id: number,
+    gender: string,
+    date: string,
+    createdAt: string,
   };
 }
 
 function Catslist({ userData }: YourprofileProps) {
-  const { name, email } = userData;
+  const { username, email } = userData;
 
-  const [haveKitten, setHaveKitten] = useState(false);
+  const [haveKitten, setHaveKitten] = useState(true);
 
   const mockupKitten = [
     {
@@ -70,14 +74,14 @@ function Catslist({ userData }: YourprofileProps) {
                     </h3>
                   </div>
                 </div>
-                <button type="button">
+                <Link href="/main/profile/kitten_info">
                   <Image
                     src="/aboutcat-btn.svg"
                     width={24}
                     height={24}
                     alt="About cats"
                   ></Image>
-                </button>
+                </Link>
               </div>
             ))}
           </div>

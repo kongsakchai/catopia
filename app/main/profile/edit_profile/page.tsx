@@ -3,6 +3,7 @@
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { userInfo } from "os";
 import React, {
   useState,
   useEffect,
@@ -10,6 +11,15 @@ import React, {
   ChangeEvent,
   FormEvent,
 } from "react";
+
+interface UserData {
+  username: string;
+  email: string;
+  id: number;
+  gender: string;
+  date: string;
+  createdAt: string;
+}
 
 function EditProfile() {
   const router = useRouter();
@@ -34,20 +44,34 @@ function EditProfile() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-  const [useInfo, setUserInfo] = useState({});
+  const [useInfo, setUserInfo] = useState({} as UserData);
 
-  // useEffect(() => {
-  //   getUserInfo();
-  // }, []);
+  useEffect(() => {
+    getUserData();
+  }, []);
 
-  // const getUserInfo = async () => {
-  //   try {
-  //     const response = await axios.get("https://api.example.com/user");
-  //     setUserInfo(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  const getUserData = async () => {
+    try {
+      const response = await axios.get(
+        process.env.NEXT_PUBLIC_API_URL + "/user",
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      setUserInfo(response.data.data);
+      setEmail(response.data.data.email);
+      setDate(response.data.data.date);
+      setRegisUsername(response.data.data.username);
+      setGender(response.data.data.gender)
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
+  console.log("useInfo: ", useInfo);
+  
 
   const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -121,7 +145,13 @@ function EditProfile() {
       gender,
     };
     try {
-      const response = await axios.post("https://api.example.com/user", data);
+      const response = await axios.put(
+        process.env.NEXT_PUBLIC_API_URL + "/user",
+        data,
+        {
+          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
 
       if (response.status === 200) {
         const result = response.data;
