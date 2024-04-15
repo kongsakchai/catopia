@@ -5,7 +5,7 @@ import Link from "next/link";
 import HeaderInfo from "@/app/component/Kitten_info/HeaderInfo";
 import Treatment from "@/app/component/Kitten_info/Treatment";
 
-function KittenInfo() {
+function KittenInfo({params}: any) {
   return (
     <div
       className=" flex flex-col items-center w-screen h-screen"
@@ -23,8 +23,9 @@ function KittenInfo() {
         </Link>
       </div>
       <div className="flex flex-col items-center mt-2 gap-8 border border-solid border-green-800">
-        <HeaderInfo />
-        <hr className="w-screen border border-solid border-red-500" />
+        <HeaderInfo params={params.slug}/>
+        {/* {params.slug} */}
+        <hr className="w-screen border border-solid border-line" />
         <Treatment />
       </div>
     </div>

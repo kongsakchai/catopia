@@ -50,7 +50,7 @@ export default function Homeheader() {
   }
 
   const selectSearch = (cat: string) => {
-    router.push(`/main/home/learning/${cat}`);
+    router.push(`/main/home/learning/${cat}`);//slug
   };
 
   return (

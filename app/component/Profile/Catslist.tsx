@@ -74,7 +74,7 @@ function Catslist({ userData }: YourprofileProps) {
                     </h3>
                   </div>
                 </div>
-                <Link href="/main/profile/kitten_info">
+                <Link href={`/main/profile/kitten_info/${kitten.name}`}>
                   <Image
                     src="/aboutcat-btn.svg"
                     width={24}

@@ -28,7 +28,7 @@ function Yourprofile({ userData }: YourprofileProps) {
         src="/Pofile-test.svg"
         width={88}
         height={88}
-        alt="Your pro file"
+        alt="Your profile"
         style={{ borderRadius: "88px" }}
       />
       <div className="flex gap-1">
