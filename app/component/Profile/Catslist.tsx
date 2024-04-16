@@ -80,7 +80,7 @@ function Catslist({ userData }: YourprofileProps) {
                     width={24}
                     height={24}
                     alt="About cats"
-                  ></Image>
+                  />
                 </Link>
               </div>
             ))}

@@ -22,7 +22,7 @@ function KittenInfo({params}: any) {
           <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />
         </Link>
       </div>
-      <div className="flex flex-col items-center mt-2 gap-8 border border-solid border-green-800">
+      <div className="flex flex-col items-center mt-2 gap-8">
         <HeaderInfo params={params.slug}/>
         {/* {params.slug} */}
         <hr className="w-screen border border-solid border-line" />
