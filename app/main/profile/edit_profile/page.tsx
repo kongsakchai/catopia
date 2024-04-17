@@ -3,7 +3,6 @@
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { userInfo } from "os";
 import React, {
   useState,
   useEffect,
@@ -12,14 +11,14 @@ import React, {
   FormEvent,
 } from "react";
 
-interface UserData {
-  username: string;
-  email: string;
-  id: number;
-  gender: string;
-  date: string;
-  createdAt: string;
-}
+// interface UserData {
+//   username: string;
+//   email: string;
+//   id: number;
+//   gender: string;
+//   date: string;
+//   createdAt: string;
+// }
 
 function EditProfile() {
   const router = useRouter();
@@ -44,7 +43,7 @@ function EditProfile() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-  const [useInfo, setUserInfo] = useState({} as UserData);
+  // const [useInfo, setUserInfo] = useState({} as UserData);
 
   useEffect(() => {
     getUserData();
@@ -60,7 +59,7 @@ function EditProfile() {
           },
         }
       );
-      setUserInfo(response.data.data);
+      // setUserInfo(response.data.data);
       setEmail(response.data.data.email);
       setDate(response.data.data.date);
       setRegisUsername(response.data.data.username);
@@ -70,7 +69,7 @@ function EditProfile() {
     }
   };
 
-  console.log("useInfo: ", useInfo);
+  // console.log("useInfo: ", useInfo);
   
 
   const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {

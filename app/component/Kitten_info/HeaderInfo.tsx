@@ -23,7 +23,7 @@ function HeaderInfo({ params }: any) {
           </h1>
           <button
             type="button"
-            onClick={() => router.push("/main/profile/edit_profile")}
+            onClick={() => router.push(`/main/profile/edit_kitten_info/${params}`)}
           >
             <Image src="/Edit.svg" width={24} height={24} alt="Edit" />
           </button>

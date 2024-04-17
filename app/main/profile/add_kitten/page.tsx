@@ -44,6 +44,7 @@ function AddKitten() {
     const isWeight = weight !== 0;
     const isBreed = breed.trim() !== "";
     const isGenderSelected = !!gender;
+    const resultPost = await postKitten();
 
     setErrorDate(!isDateValid);
     setErrorRegisUsername(!isRegisUsernameValid);
@@ -51,8 +52,7 @@ function AddKitten() {
     setErrorBreed(!isBreed);
     setErrorGender(!isGenderSelected);
 
-    if (isDateValid && isRegisUsernameValid && isWeight && isBreed && isGenderSelected) {
-      const resultPost = await postKitten();
+    if (isDateValid && isRegisUsernameValid && isWeight && isBreed && isGenderSelected && resultPost) {
       //
       router.push("/main/profile");
     } else {
