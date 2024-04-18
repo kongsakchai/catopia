@@ -3,6 +3,7 @@
 import { FormEvent, MouseEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import axios from "axios";
 
 export default function Loginform() {
   const router = useRouter();
@@ -30,6 +31,7 @@ export default function Loginform() {
 
     if (isUsernameValid && isPasswordValid) {
       const res = await fetchLoginrDB();
+      console.log(res);
       if (res) {
         router.push("/register/getquestion");
       }
@@ -66,6 +68,28 @@ export default function Loginform() {
       return false;
     }
   }
+
+//   async function fetchLoginrDB() {
+//     console.log(username, password);
+//     try {
+//         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+//             username: username,
+//             password: password
+//         }, {
+//             headers: {
+//                 "Content-Type": "application/json"
+//             }
+//         });
+//         if (response.status === 200 && response.data.message === "success") {
+//             localStorage.setItem("token", response.data.data.token);
+//             return true;
+//         }
+//         return false;
+//     } catch (error) {
+//         console.error(error);
+//         return false;
+//     }
+// }
 
   return (
     <form

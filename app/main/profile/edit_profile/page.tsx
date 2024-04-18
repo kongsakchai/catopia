@@ -25,6 +25,7 @@ function EditProfile() {
 
   const [selectedImage, setSelectedImage] =
     useState<string>("/Pofile-test.svg");
+  const [file, setFile] = useState<File | undefined>(undefined);
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
   const [username, setRegisUsername] = useState("");
@@ -64,13 +65,13 @@ function EditProfile() {
       setDate(response.data.data.date);
       setRegisUsername(response.data.data.username);
       setGender(response.data.data.gender)
+      setSelectedImage(process.env.NEXT_PUBLIC_API_IMAGES+response.data.data.profile);
     } catch (error) {
       console.log("Error: ", error);
     }
   };
 
   // console.log("useInfo: ", useInfo);
-  
 
   const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -90,6 +91,7 @@ function EditProfile() {
 
   const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    setFile(file)
     setSelectedImage(file ? URL.createObjectURL(file) : "/Pofile-test.svg");
   };
 
@@ -103,18 +105,24 @@ function EditProfile() {
     const isRegisUsernameValid = username.length >= 4;
     const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(
       password
-    );
+    ) || password === "";
+
     const isRegisPasswordMatch = confirmPassword === password;
-    const isConfirmPasswordNotEmpty = confirmPassword.trim() !== "";
+    // const isConfirmPasswordNotEmpty = confirmPassword.trim() !== "";
     const isGenderSelected = !!gender;
 
     setErrorEmail(!isEmailValid);
     setErrorDate(!isDateValid);
     setErrorRegisUsername(!isRegisUsernameValid);
+    // setErrorRegisPassword(!isRegisPasswordValid);
+    
     setErrorRegisPassword(!isRegisPasswordValid);
-    setErrorConfirmPassword(
-      !isConfirmPasswordNotEmpty || !isRegisPasswordMatch
-    ); //if confirmPassword is empty or if it doesn't match regisPassword
+    
+    // setErrorConfirmPassword(
+    //   !isConfirmPasswordNotEmpty || !isRegisPasswordMatch
+    // ); //if confirmPassword is empty or if it doesn't match regisPassword
+
+    setErrorConfirmPassword(!isRegisPasswordMatch);
     setErrorGender(!isGenderSelected);
 
     if (
@@ -123,19 +131,55 @@ function EditProfile() {
       isRegisUsernameValid &&
       isRegisPasswordValid &&
       isRegisPasswordMatch &&
-      isConfirmPasswordNotEmpty &&
+      // isConfirmPasswordNotEmpty &&
       isGenderSelected
     ) {
-      const resultPost = await postUserInfo();
+      const profile = await postFile();
       //
-      router.push("/main/profile");
+      const resultPostUserInfo = await postUserInfo(profile);
+      //
+      if (resultPostUserInfo) {
+        router.push("/main/profile");
+      }
     } else {
+      console.log({isDateValid, isRegisUsernameValid, isRegisPasswordValid, isRegisPasswordMatch, isGenderSelected});
+      
       setErrorRegister("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
 
-  const postUserInfo = async () => {
+  const postFile = async () => {
+    if (file === undefined) return false;
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + "/file/upload",
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      if (response.status === 200) {
+        const result = response.data;
+        if (result.message === "success") {
+          return response.data.data.file_name;
+        }
+        return "";
+      }
+      throw new Error("Something went wrong");
+    }
+    catch (error) {
+      console.error(error)
+      return "";
+    }
+  }
+
+  const postUserInfo = async (profile: string) => {
     const data = {
+      profile,
       email,
       date,
       username,
@@ -143,6 +187,8 @@ function EditProfile() {
       confirmPassword,
       gender,
     };
+    console.log(profile);
+    
     try {
       const response = await axios.put(
         process.env.NEXT_PUBLIC_API_URL + "/user",
@@ -177,6 +223,7 @@ function EditProfile() {
         <div className="relative w-24 h-24">
           <Image
             src={selectedImage}
+            onError={() => setSelectedImage("/Pofile-test.svg")}
             width={88}
             height={88}
             alt="Your profile"
@@ -207,9 +254,8 @@ function EditProfile() {
             }}
             type="text"
             placeholder={`อีเมล`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorEmail ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={date}
@@ -221,9 +267,8 @@ function EditProfile() {
             placeholder={`วัน เดือน ปี เกิด`}
             onFocus={(e) => (e.target.type = "date")}
             onBlur={(e) => (e.target.type = "text")}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
-              errorDate ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={username}
@@ -233,9 +278,8 @@ function EditProfile() {
             }}
             type="text"
             placeholder={`ชื่อผู้ใช้งาน`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorRegisUsername ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <div className="flex items-start relative">
             <input
@@ -246,9 +290,8 @@ function EditProfile() {
               }}
               type={passwordVisible ? "text" : "password"}
               placeholder={`รหัสผ่าน`}
-              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-                errorRegisPassword ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisPassword ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
             />
             <button
               className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
@@ -269,9 +312,8 @@ function EditProfile() {
               }}
               type={confirmPasswordVisible ? "text" : "password"}
               placeholder={`ยืนยันรหัสผ่าน`}
-              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-                errorRegisConfirmPassword ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisConfirmPassword ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
             />
             <button
               className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"

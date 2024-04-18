@@ -25,7 +25,7 @@ function KittenInfo({params}: any) {
       <div className="flex flex-col items-center mt-2 gap-8">
         <HeaderInfo params={params.slug}/>
         <hr className="w-screen border border-solid border-line" />
-        <Treatment />
+        <Treatment params={params.slug}/>
       </div>
     </div>
   );
