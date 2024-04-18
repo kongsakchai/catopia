@@ -4,9 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 
-function Treatment() {
+function Treatment({ params }: any) {
 
-  const [haveTreatment, setHaveTreatment] = useState(true)
+  const [haveTreatment, setHaveTreatment] = useState(false)
 
   const mockupTreatment = [
     {
