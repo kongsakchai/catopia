@@ -106,19 +106,13 @@ function EditProfile() {
     const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password) || password === "";
 
     const isRegisPasswordMatch = confirmPassword === password;
-    // const isConfirmPasswordNotEmpty = confirmPassword.trim() !== "";
     const isGenderSelected = !!gender;
 
     setErrorEmail(!isEmailValid);
     setErrorDate(!isDateValid);
     setErrorRegisUsername(!isRegisUsernameValid);
-    // setErrorRegisPassword(!isRegisPasswordValid);
     
     setErrorRegisPassword(!isRegisPasswordValid);
-    
-    // setErrorConfirmPassword(
-    //   !isConfirmPasswordNotEmpty || !isRegisPasswordMatch
-    // ); //if confirmPassword is empty or if it doesn't match regisPassword
 
     setErrorConfirmPassword(!isRegisPasswordMatch);
     setErrorGender(!isGenderSelected);

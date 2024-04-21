@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 interface YourprofileProps {
   userData: {
@@ -12,20 +12,31 @@ interface YourprofileProps {
     gender: string,
     date: string,
     createdAt: string,
+    profile: string,
   };
 }
 
 function Yourprofile({ userData }: YourprofileProps) {
+  console.log("userData: ", userData.profile);
   const router = useRouter();
 
   const { username, email } = userData;
+  const [selectedImage, setSelectedImage] =
+    useState<string>("/Pofile-test.svg");
 
-  console.log("userData: ", userData);
+  useEffect(() => {
+    showImage();
+  }, []);
+
+  const showImage = () => {
+    setSelectedImage(process.env.NEXT_PUBLIC_API_IMAGES + userData.profile);
+  }
 
   return (
     <div className="flex flex-col items-center gap-2">
       <Image
-        src="/Pofile-test.svg"
+        src={selectedImage}
+        onError={() => setSelectedImage("/Pofile-test.svg")}
         width={88}
         height={88}
         alt="Your profile"

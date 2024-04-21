@@ -4,19 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 
-interface YourprofileProps {
-  userData: {
-    username: string,
-    email: string,
-    id: number,
-    gender: string,
-    date: string,
-    createdAt: string,
-  };
-}
+function Catslist({ kittensData }: any) {
 
-function Catslist({ userData }: YourprofileProps) {
-  const { username, email } = userData;
+  console.log("kittensData: ", kittensData);
 
   const [haveKitten, setHaveKitten] = useState(true);
 
@@ -49,14 +39,14 @@ function Catslist({ userData }: YourprofileProps) {
       {haveKitten && (
         <div className="container flex flex-col items-center justify-center gap-8">
           <div className="container flex flex-col">
-            {mockupKitten.map((kitten) => (
+            {kittensData.data?.map((kitten:any) => (
               <div
                 key={kitten.id}
                 className="flex p-4 justify-between items-start"
               >
                 <div className="flex items-start gap-4">
                   <Image
-                    src={kitten.img_url}
+                    src={process.env.NEXT_PUBLIC_API_IMAGES + kitten.profile}
                     width={50}
                     height={50}
                     alt="Your kitten img"
@@ -70,11 +60,11 @@ function Catslist({ userData }: YourprofileProps) {
                       {kitten.name}
                     </h2>
                     <h3 className="text-textfield text-xs not-italic font-normal leading-5">
-                      อัพเดทล่าสุด : {kitten.last_update}
+                      อัพเดทล่าสุด : 00000
                     </h3>
                   </div>
                 </div>
-                <Link href={`/main/profile/kitten_info/${kitten.name}`}>
+                <Link href={`/main/profile/kitten_info/${kitten.id}`}>
                   <Image
                     src="/aboutcat-btn.svg"
                     width={24}

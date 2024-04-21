@@ -8,10 +8,14 @@ import React, {
 } from "react";
 
 function EditKittenInfo({ params }: any) {
+
+    // console.log("params: ", params);
+
     const router = useRouter();
 
     const [selectedImage, setSelectedImage] =
         useState<string>("/Pofile-test.svg");
+    const [file, setFile] = useState<File | undefined>(undefined);
     const [date, setDate] = useState("");
     const [username, setRegisUsername] = useState("");
     const [weight, setWeight] = useState<number>();
@@ -32,18 +36,20 @@ function EditKittenInfo({ params }: any) {
     const getKittenInfo = async () => {
         try {
             const response = await axios.get(
-                process.env.NEXT_PUBLIC_API_URL + "kitten",
+                process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`,
                 {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("token"),
                     },
                 }
             );
-            setRegisUsername(response.data.data.username);
-            setDate(response.data.data.date);
-            setWeight(response.data.data.weight);
-            setBreed(response.data.data.breed);
-            setGender(response.data.data.gender);
+            console.log("response: ", response.data.data);
+
+            // setRegisUsername(response.data.data.username);
+            // setDate(response.data.data.date);
+            // setWeight(response.data.data.weight);
+            // setBreed(response.data.data.breed);
+            // setGender(response.data.data.gender);
         } catch (error) {
             console.log("Error: ", error);
 
@@ -56,6 +62,7 @@ function EditKittenInfo({ params }: any) {
 
     const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
+        setFile(file);
         setSelectedImage(file ? URL.createObjectURL(file) : "/Pofile-test.svg");
     };
 
@@ -67,7 +74,8 @@ function EditKittenInfo({ params }: any) {
         const isWeight = weight !== 0;
         const isBreed = breed.trim() !== "";
         const isGenderSelected = !!gender;
-        const resultPost = await postKitten();
+        const resultFile = await postFile();
+        const resultPost = await putKitten(resultFile);
 
         setErrorDate(!isDateValid);
         setErrorRegisUsername(!isRegisUsernameValid);
@@ -83,21 +91,56 @@ function EditKittenInfo({ params }: any) {
         }
     };
 
-    const postKitten = async () => {
+    const postFile = async () => {
+        if (file === undefined) return false;
+        try {
+            const formData = new FormData();
+            formData.append("file", file);
+            const response = await axios.post(
+                process.env.NEXT_PUBLIC_API_URL + "/file/upload",
+                formData,
+                {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("token"),
+                    },
+                }
+            );
+            if (response.status === 200) {
+                const result = response.data;
+                if (result.message === "success") {
+                    return response.data.data.file_name;
+                }
+                return "";
+            }
+            throw new Error("Something went wrong");
+        }
+        catch (error) {
+            console.error(error)
+            return "";
+        }
+    }
+
+    const putKitten = async (profile: string) => {
         const data = {
-            username,
+            profile,
+            name: username,
             date,
             weight,
             breed,
             gender,
         };
         try {
-            const response = await axios.post("https://api.example.com/user", data);
+            const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`, data,
+                {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("token"),
+                    },
+                });
 
             if (response.status === 200) {
                 const result = response.data;
 
-                if (result.success) {
+                if (result.message === "success") {
                     return true;
                 }
                 return false;
@@ -113,7 +156,7 @@ function EditKittenInfo({ params }: any) {
     return (
         <div className="container flex justify-center">
             <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
-                <button type="button" onClick={() => router.push(`/main/profile/kitten_info/${params}`)}>
+                <button type="button" onClick={() => router.push(`/main/profile/kitten_info/${params.id}`)}>
                     <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />
                 </button>
                 <div className="relative w-24 h-24">

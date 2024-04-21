@@ -1,11 +1,47 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { useEffect,useState } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios"; 
 
 function HeaderInfo({ params }: any) {
+  // console.log("params: ", params);
+  
   const router = useRouter();
+
+  const [kittenInfo, setKittenInfo] = useState<any>({})
+  const [treatmentInfo, setTreatmentInfo] = useState<any>([])
+
+  useEffect(() => {
+    getUserData()
+}, [])
+
+const getUserData = async () => {
+    try {
+        const [responseInfo, responseTreatment] = await Promise.all([
+            axios.get(process.env.NEXT_PUBLIC_API_URL + `/cat/${params}`, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            }),
+            axios.get(process.env.NEXT_PUBLIC_API_URL + `/treatment/${params}`, {
+                headers:{
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            })
+        ])
+
+        setKittenInfo(responseInfo.data)
+        setTreatmentInfo(responseTreatment.data)
+    } catch (error) {
+        console.log("Error: ", error);
+    }
+}
+
+console.log("kittenInfo: ", kittenInfo);
+console.log("treatmentInfo: ", treatmentInfo);
+
 
   return (
     <div className="flex flex-col items-center gap-8">

@@ -14,48 +14,40 @@ interface UserData {
     gender: string,
     date: string,
     createdAt: string,
+    profile: string,
 }
 
 export default function Profile() {
 
     const [userData, setUserData] = useState<UserData>({} as UserData)
+    const [kittensData, setKittensData] = useState<any[]>([])
 
     useEffect(() => {
         getUserData()
     }, [])
 
     const getUserData = async () => {
-        try{
-            const response = await axios.get(process.env.NEXT_PUBLIC_API_URL+ "/user", {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem("token")
-                }
-            })
-            setUserData(response.data.data)
-        }catch(error){
+        try {
+            const [responseUser, responseKittens] = await Promise.all([
+                axios.get(process.env.NEXT_PUBLIC_API_URL + "/user", {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("token")
+                    }
+                }),
+                axios.get(process.env.NEXT_PUBLIC_API_URL + "/cat", {
+                    headers:{
+                        Authorization: "Bearer " + localStorage.getItem("token")
+                    }
+                })
+            ])
+
+            setUserData(responseUser.data.data)
+            setKittensData(responseKittens.data)
+        } catch (error) {
             console.log("Error: ", error);
         }
     }
 
-    // const getUserData = async () => {
-    //     try {
-    //         const token = localStorage.getItem("token");
-    //         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
-    //             method: "GET",
-    //             headers: {
-    //                 "Authorization": `Bearer ${token}`
-    //             }
-    //         });
-    //         if (!response.ok) {
-    //             throw new Error("Network response was not ok");
-    //         }
-    //         const data = await response.json();
-    //         setUserData(data.data);
-    //     } catch (error) {
-    //         console.error("Error:", error);
-    //     }
-    // }
-    
     // console.log("userData: ", userData);
 
     return (
@@ -76,7 +68,7 @@ export default function Profile() {
             </div>
             <div className="flex flex-col w-[364px] justify-center items-center gap-8 mt-2">
                 <Yourprofile userData={userData} />
-                <Catslist userData={userData} />
+                <Catslist kittensData={kittensData} />
             </div>
         </div>
     )

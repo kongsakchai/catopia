@@ -14,6 +14,7 @@ function AddKitten() {
 
   const [selectedImage, setSelectedImage] =
     useState<string>("/Pofile-test.svg");
+  const [file, setFile] = useState<File | undefined>(undefined);
   const [date, setDate] = useState("");
   const [username, setRegisUsername] = useState("");
   const [weight, setWeight] = useState<number>();
@@ -33,6 +34,7 @@ function AddKitten() {
 
   const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
+    setFile(file);
     setSelectedImage(file ? URL.createObjectURL(file) : "/Pofile-test.svg");
   };
 
@@ -44,7 +46,9 @@ function AddKitten() {
     const isWeight = weight !== 0;
     const isBreed = breed.trim() !== "";
     const isGenderSelected = !!gender;
-    const resultPost = await postKitten();
+
+    const resultFile = await postFile();
+    const resultPost = await postKitten(resultFile);
 
     setErrorDate(!isDateValid);
     setErrorRegisUsername(!isRegisUsernameValid);
@@ -60,21 +64,55 @@ function AddKitten() {
     }
   };
 
-  const postKitten = async () => {
+  const postFile = async () => {
+    if (file === undefined) return false;
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + "/file/upload",
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      if (response.status === 200) {
+        const result = response.data;
+        if (result.message === "success") {
+          return response.data.data.file_name;
+        }
+        return "";
+      }
+      throw new Error("Something went wrong");
+    }
+    catch (error) {
+      console.error(error)
+      return "";
+    }
+  }
+
+  const postKitten = async (profile: string) => {
     const data = {
-      username,
+      profile,
+      name: username,
       date,
       weight,
       breed,
       gender,
     };
     try {
-      const response = await axios.post("https://api.example.com/user", data);
+      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/cat", data, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         const result = response.data;
 
-        if (result.success) {
+        if (result.message === "success") {
           return true;
         }
         return false;
@@ -126,9 +164,8 @@ function AddKitten() {
             }}
             type="text"
             placeholder={`ชื่อ`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorRegisUsername ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={date}
@@ -140,9 +177,8 @@ function AddKitten() {
             placeholder={`วัน เดือน ปี เกิด`}
             onFocus={(e) => (e.target.type = "date")}
             onBlur={(e) => (e.target.type = "text")}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
-              errorDate ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={weight}
@@ -153,9 +189,8 @@ function AddKitten() {
             }}
             type="number"
             placeholder={`น้ำหนัก (กก.)`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorWeight ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorWeight ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={breed}
@@ -165,9 +200,8 @@ function AddKitten() {
             }}
             type="text"
             placeholder={`พันธุ์แมว`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorBreed ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorBreed ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <div className="text-left mt-2 mb-4">
             <span className={`${errorGender ? "text-error" : "text-black01"}`}>
