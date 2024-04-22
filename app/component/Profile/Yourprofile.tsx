@@ -20,18 +20,18 @@ function Yourprofile({ userData }: YourprofileProps) {
   const router = useRouter();
 
   const { username, email, profile } = userData;
-  console.log("profile: ", profile);
-  
+  // console.log("profile: ", profile);
+
   const [selectedImage, setSelectedImage] =
     useState<string>("/Pofile-test.svg");
-    console.log("selectedImage: ", selectedImage);
+  // console.log("selectedImage: ", selectedImage);
 
-    useEffect(() => {
-        showImage();
-    }, [profile]);
+  useEffect(() => {
+    if (profile) {
+      setSelectedImage(process.env.NEXT_PUBLIC_API_IMAGES + profile)
+    }
+  }, [profile]);
 
-    const showImage = () => setSelectedImage(process.env.NEXT_PUBLIC_API_IMAGES + profile);
-    
   return (
     <div className="flex flex-col items-center gap-2">
       <Image

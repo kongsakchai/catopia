@@ -1,53 +1,67 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios"; 
+import axios from "axios";
+import { format } from "date-fns";
+import { th } from "date-fns/locale";
+
+function formatDateThai(date: string) {
+  const newDate = new Date(date)
+  return format(newDate, "dd MMMM yyyy", { locale: th })
+}
 
 function HeaderInfo({ params }: any) {
   // console.log("params: ", params);
-  
+
   const router = useRouter();
 
   const [kittenInfo, setKittenInfo] = useState<any>({})
   const [treatmentInfo, setTreatmentInfo] = useState<any>([])
+  const [convertDate, setConvertDate] = useState<string>("")
 
   useEffect(() => {
     getUserData()
-}, [])
+  }, [])
 
-const getUserData = async () => {
+  const getUserData = async () => {
     try {
-        const [responseInfo, responseTreatment] = await Promise.all([
-            axios.get(process.env.NEXT_PUBLIC_API_URL + `/cat/${params}`, {
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem("token")
-                }
-            }),
-            axios.get(process.env.NEXT_PUBLIC_API_URL + `/treatment/${params}`, {
-                headers:{
-                    Authorization: "Bearer " + localStorage.getItem("token")
-                }
-            })
-        ])
+      const [responseInfo, responseTreatment] = await Promise.all([
+        axios.get(process.env.NEXT_PUBLIC_API_URL + `/cat/${params}`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        }),
+        axios.get(process.env.NEXT_PUBLIC_API_URL + `/treatment/${params}`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        })
+      ])
 
-        setKittenInfo(responseInfo.data)
-        setTreatmentInfo(responseTreatment.data)
+      setKittenInfo(responseInfo.data.data)
+      setTreatmentInfo(responseTreatment.data.data)
     } catch (error) {
-        console.log("Error: ", error);
+      console.log("Error: ", error);
     }
-}
+  }
 
-console.log("kittenInfo: ", kittenInfo);
-console.log("treatmentInfo: ", treatmentInfo);
+  console.log("kittenInfo: ", kittenInfo);
+  console.log("treatmentInfo: ", treatmentInfo);
 
+  useEffect(() => {
+    if (kittenInfo.date) {
+      setConvertDate(formatDateThai(kittenInfo.date))
+    }
+  }, [kittenInfo.date])
 
   return (
     <div className="flex flex-col items-center gap-8">
       <div className="flex flex-col items-center gap-2">
         <Image
-          src="/Pofile-test.svg"
+          src={process.env.NEXT_PUBLIC_API_IMAGES + kittenInfo.profile}
+          onError={() => "/Pofile-test.svg"}
           width={88}
           height={88}
           alt="Cat profile"
@@ -55,7 +69,7 @@ console.log("treatmentInfo: ", treatmentInfo);
         />
         <div className="flex gap-1">
           <h1 className="text-black01 text-center text-2xl not-italic font-bold leading-10">
-            {params}
+            {kittenInfo.name}
           </h1>
           <button
             type="button"
@@ -65,7 +79,7 @@ console.log("treatmentInfo: ", treatmentInfo);
           </button>
         </div>
         <span className="text-textfield text-center text-base not-italic font-normal leading-6">
-          วันเกิด : 21 กันยายน 2566
+          วันเกิด : {convertDate}
         </span>
       </div>
       <div className="flex w-full ">
@@ -74,7 +88,7 @@ console.log("treatmentInfo: ", treatmentInfo);
             นำหนัก (กก.)
           </p>
           <h3 className="text-black01 text-center text-base not-italic font-bold leading-6">
-            3.2
+            {kittenInfo.weight}
           </h3>
         </div>
         <div className="flex flex-col justify-center items-center w-[91px] border-r-2">
@@ -82,7 +96,7 @@ console.log("treatmentInfo: ", treatmentInfo);
             เพศ
           </p>
           <h3 className="text-black01 text-center text-base not-italic font-bold leading-6">
-            หญิง
+            {kittenInfo.gender === "female" ? "หญิง" : "ชาย"}
           </h3>
         </div>
         <div className="flex flex-col justify-center items-center w-[91px] border-r-2">

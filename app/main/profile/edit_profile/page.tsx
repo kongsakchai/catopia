@@ -71,8 +71,6 @@ function EditProfile() {
     }
   };
 
-  // console.log("useInfo: ", useInfo);
-
   const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setPasswordVisible(!passwordVisible);
@@ -127,15 +125,17 @@ function EditProfile() {
       isGenderSelected
     ) {
       const profile = await postFile();
+      // console.log("postFile: ", profile);
       //
       const resultPostUserInfo = await postUserInfo(profile);
       //
+      // console.log("resultPostUserInfo: ", resultPostUserInfo);
+      
       if (resultPostUserInfo) {
         router.push("/main/profile");
       }
     } else {
-      console.log({isDateValid, isRegisUsernameValid, isRegisPasswordValid, isRegisPasswordMatch, isGenderSelected});
-      
+      // console.log({isDateValid, isRegisUsernameValid, isRegisPasswordValid, isRegisPasswordMatch, isGenderSelected});
       setErrorRegister("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
@@ -179,7 +179,7 @@ function EditProfile() {
       confirmPassword,
       gender,
     };
-    console.log(profile);
+    // console.log(profile);
     
     try {
       const response = await axios.put(
@@ -193,7 +193,7 @@ function EditProfile() {
       if (response.status === 200) {
         const result = response.data;
 
-        if (result.success) {
+        if (result.message === "success") {
           return true;
         }
         return false;

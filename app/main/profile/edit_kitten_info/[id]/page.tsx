@@ -45,11 +45,12 @@ function EditKittenInfo({ params }: any) {
             );
             console.log("response: ", response.data.data);
 
-            // setRegisUsername(response.data.data.username);
-            // setDate(response.data.data.date);
-            // setWeight(response.data.data.weight);
+            setRegisUsername(response.data.data.name);
+            setDate(response.data.data.date);
+            setWeight(response.data.data.weight);
             // setBreed(response.data.data.breed);
-            // setGender(response.data.data.gender);
+            setGender(response.data.data.gender);
+            setSelectedImage(process.env.NEXT_PUBLIC_API_IMAGES + response.data.data.profile);
         } catch (error) {
             console.log("Error: ", error);
 

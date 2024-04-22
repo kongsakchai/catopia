@@ -2,37 +2,24 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 function Catslist({ kittensData }: any) {
 
-  console.log("kittensData: ", kittensData);
+  // console.log("kittensData: ", kittensData);
 
-  const [haveKitten, setHaveKitten] = useState(true);
+  const [haveKitten, setHaveKitten] = useState(false);
 
-  const mockupKitten = [
-    {
-      id: 1,
-      name: "Kitten 1",
-      img_url:
-        "https://cdn.pixabay.com/photo/2023/06/05/01/53/kitten-8041226_1280.jpg",
-      last_update: "24 มกราคม 2567",
-    },
-    {
-      id: 2,
-      name: "Kitten 2",
-      img_url:
-        "https://cdn.pixabay.com/photo/2023/06/05/01/53/kitten-8041226_1280.jpg",
-      last_update: "20 มกราคม 2567",
-    },
-    {
-      id: 3,
-      name: "Kitten 3",
-      img_url:
-        "https://cdn.pixabay.com/photo/2023/06/05/01/53/kitten-8041226_1280.jpg",
-      last_update: "22 มกราคม 2567",
-    },
-  ];
+  useEffect(() => {
+    checkHaveKitten();
+  }, [kittensData]);
+
+  function checkHaveKitten() {
+    if (kittensData.data === null) {
+      return setHaveKitten(false);
+    }
+    return setHaveKitten(true);
+  }
 
   return (
     <>
