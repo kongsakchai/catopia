@@ -17,21 +17,21 @@ interface YourprofileProps {
 }
 
 function Yourprofile({ userData }: YourprofileProps) {
-  console.log("userData: ", userData.profile);
   const router = useRouter();
 
-  const { username, email } = userData;
+  const { username, email, profile } = userData;
+  console.log("profile: ", profile);
+  
   const [selectedImage, setSelectedImage] =
     useState<string>("/Pofile-test.svg");
+    console.log("selectedImage: ", selectedImage);
 
-  useEffect(() => {
-    showImage();
-  }, []);
+    useEffect(() => {
+        showImage();
+    }, [profile]);
 
-  const showImage = () => {
-    setSelectedImage(process.env.NEXT_PUBLIC_API_IMAGES + userData.profile);
-  }
-
+    const showImage = () => setSelectedImage(process.env.NEXT_PUBLIC_API_IMAGES + profile);
+    
   return (
     <div className="flex flex-col items-center gap-2">
       <Image
