@@ -2,21 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { th } from "date-fns/locale";
 
 function formatDateThai(date: string) {
-  const newDate = new Date(date)
-  return format(newDate, "dd MMMM yyyy", { locale: th })
+  const newDate = new Date(date);
+  return format(newDate, "dd MMMM yyyy", { locale: th });
 }
 
 function Catslist({ kittensData }: any) {
-
-  // console.log("kittensData: ", kittensData);
+  console.log("kittensData: ", kittensData);
 
   const [haveKitten, setHaveKitten] = useState(false);
-  const [convertDate, setConvertDate] = useState<string>("")
 
   useEffect(() => {
     checkHaveKitten();
@@ -34,14 +32,15 @@ function Catslist({ kittensData }: any) {
       {haveKitten && (
         <div className="container flex flex-col items-center justify-center gap-8">
           <div className="container flex flex-col">
-            {kittensData.data?.map((kitten:any) => (
+            {kittensData.data?.map((kitten: any) => (
               <div
                 key={kitten.id}
                 className="flex p-4 justify-between items-start"
               >
                 <div className="flex items-start gap-4">
                   <Image
-                    src={process.env.NEXT_PUBLIC_API_IMAGES + kitten.profile}
+                    src={process.env.NEXT_PUBLIC_API_IMAGES + kitten?.profile}
+                    onError={() => "/Pofile-test.svg"}
                     width={50}
                     height={50}
                     alt="Your kitten img"

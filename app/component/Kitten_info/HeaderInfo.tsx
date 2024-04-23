@@ -38,7 +38,7 @@ function HeaderInfo({ params }: any) {
     }
   }
 
-  console.log("kittenInfo: ", kittenInfo);
+  // console.log("kittenInfo: ", kittenInfo);
   // console.log("treatmentInfo: ", treatmentInfo);
 
   useEffect(() => {

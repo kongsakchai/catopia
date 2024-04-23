@@ -52,12 +52,18 @@ function Treatment({ params }: any) {
         }
       })
 
-      setTreatmentInfo(response.data.data)
+      if (response.data.data !== null) {
+        setHaveTreatment(true)
+        setTreatmentInfo(response.data.data)
+      }
     } catch (error) {
       console.log("Error: ", error);
       
     }
   }
+  
+  // console.log("treatmentInfo: ", treatmentInfo);
+  
 
   return (
     <>

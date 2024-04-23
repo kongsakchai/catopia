@@ -1,10 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
-
+//mt-60
 export default function Completeregister() {
   return (
-    <div className="flex flex-col items-center justify-center mt-60 gap-[30px]">
-      <div className="animate-bounce">
+    <div
+      className="flex flex-col items-center h-screen gap-[30px]"
+      style={{
+        backgroundImage: "url(/Question-BG.svg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center buttom",
+        height: "full",
+        zIndex: 0,
+      }}
+    >
+      <div className="animate-bounce mt-60">
         <Image
           src={"/success.svg"}
           height={123}
