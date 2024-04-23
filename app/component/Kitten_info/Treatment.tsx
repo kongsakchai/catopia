@@ -9,7 +9,7 @@ import React, { useState, useEffect, use } from 'react'
 function Treatment({ params }: any) {
   const router = useRouter()
 
-  const [haveTreatment, setHaveTreatment] = useState(false)
+  const [haveTreatment, setHaveTreatment] = useState(true)
   const [treatmentInfo, setTreatmentInfo] = useState<any>([])
 
   const mockupTreatment = [
@@ -52,10 +52,10 @@ function Treatment({ params }: any) {
         }
       })
 
-      if (response.data.data !== null) {
-        setHaveTreatment(true)
-        setTreatmentInfo(response.data.data)
-      }
+      // if (response.data.data !== null) {
+      //   setHaveTreatment(true)
+      //   setTreatmentInfo(response.data.data)
+      // }
     } catch (error) {
       console.log("Error: ", error);
       
@@ -107,7 +107,7 @@ function Treatment({ params }: any) {
                     <span className='text-black01 text-center text-base not-italic font-normal leading-6'>{treatment.name}</span>
                     <p className='text-textfield text-center text-xs not-italic font-normal leading-5'>วันที่รักษา : {treatment.last_update}</p>
                   </div>
-                  <Link href={`/main/profile`}>
+                  <Link href={`/main/profile/detail_treatment/${treatment.id}`}>
                     <Image
                       src="/aboutcat-btn.svg"
                       width={24}
