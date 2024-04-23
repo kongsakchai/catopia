@@ -13,42 +13,33 @@ function formatDateThai(date: string) {
 }
 
 function HeaderInfo({ params }: any) {
-  // console.log("params: ", params);
 
   const router = useRouter();
 
   const [kittenInfo, setKittenInfo] = useState<any>({})
-  const [treatmentInfo, setTreatmentInfo] = useState<any>([])
   const [convertDate, setConvertDate] = useState<string>("")
 
   useEffect(() => {
-    getUserData()
+    getKittenData()
   }, [])
 
-  const getUserData = async () => {
+  const getKittenData = async () => {
     try {
-      const [responseInfo, responseTreatment] = await Promise.all([
-        axios.get(process.env.NEXT_PUBLIC_API_URL + `/cat/${params}`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
-        }),
-        axios.get(process.env.NEXT_PUBLIC_API_URL + `/treatment/${params}`, {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
-        })
-      ])
-
-      setKittenInfo(responseInfo.data.data)
-      setTreatmentInfo(responseTreatment.data.data)
+      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/cat/${params}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      
+      setKittenInfo(response.data.data)
     } catch (error) {
       console.log("Error: ", error);
+
     }
   }
 
   console.log("kittenInfo: ", kittenInfo);
-  console.log("treatmentInfo: ", treatmentInfo);
+  // console.log("treatmentInfo: ", treatmentInfo);
 
   useEffect(() => {
     if (kittenInfo.date) {

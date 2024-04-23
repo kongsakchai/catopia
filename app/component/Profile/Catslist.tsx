@@ -3,12 +3,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState,useEffect } from "react";
+import { format } from "date-fns";
+import { th } from "date-fns/locale";
+
+function formatDateThai(date: string) {
+  const newDate = new Date(date)
+  return format(newDate, "dd MMMM yyyy", { locale: th })
+}
 
 function Catslist({ kittensData }: any) {
 
   // console.log("kittensData: ", kittensData);
 
   const [haveKitten, setHaveKitten] = useState(false);
+  const [convertDate, setConvertDate] = useState<string>("")
 
   useEffect(() => {
     checkHaveKitten();
@@ -47,7 +55,7 @@ function Catslist({ kittensData }: any) {
                       {kitten.name}
                     </h2>
                     <h3 className="text-textfield text-xs not-italic font-normal leading-5">
-                      อัพเดทล่าสุด : 00000
+                      อัพเดทล่าสุด : {formatDateThai(kitten.last_update)}
                     </h3>
                   </div>
                 </div>
