@@ -4,12 +4,7 @@ import learningcats from "@/public/learningcats.json";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, {
-  useState,
-  useEffect,
-  ChangeEvent,
-  FormEvent,
-} from "react";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 
 function AddKitten() {
   const router = useRouter();
@@ -34,8 +29,11 @@ function AddKitten() {
   const [activeSearch, setActiveSearch] = useState<any[]>([]);
 
   useEffect(() => {
-    listCatBreed();
-  }, []);
+    if (learningcats.length > 0) {
+      listCatBreed();
+    }
+  }, [learningcats]);
+  
 
   function listCatBreed() {
     setNewListCats(learningcats.map((cat: any) => cat.name));
@@ -52,6 +50,11 @@ function AddKitten() {
         .slice(0, 5)
     );
   }
+
+  const selectSearch = (cat: string) => {
+    setBreed(cat);
+    setActiveSearch([]);
+  };
 
   const handleGender = (e: ChangeEvent<HTMLInputElement>) => {
     setGender(e.target.value);
@@ -77,11 +80,18 @@ function AddKitten() {
 
     setErrorDate(!isDateValid);
     setErrorRegisUsername(!isRegisUsernameValid);
-    setErrorWeight(!isWeight)
+    setErrorWeight(!isWeight);
     setErrorBreed(!isBreed);
     setErrorGender(!isGenderSelected);
 
-    if (isDateValid && isRegisUsernameValid && isWeight && isBreed && isGenderSelected && resultPost) {
+    if (
+      isDateValid &&
+      isRegisUsernameValid &&
+      isWeight &&
+      isBreed &&
+      isGenderSelected &&
+      resultPost
+    ) {
       //
       router.push("/main/profile");
     } else {
@@ -111,12 +121,11 @@ function AddKitten() {
         return "";
       }
       throw new Error("Something went wrong");
-    }
-    catch (error) {
-      console.error(error)
+    } catch (error) {
+      console.error(error);
       return "";
     }
-  }
+  };
 
   const postKitten = async (profile: string) => {
     const data = {
@@ -128,11 +137,15 @@ function AddKitten() {
       gender,
     };
     try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/cat", data, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      });
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + "/cat",
+        data,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
 
       if (response.status === 201) {
         const result = response.data;
@@ -189,8 +202,9 @@ function AddKitten() {
             }}
             type="text"
             placeholder={`ชื่อ`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorRegisUsername ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={date}
@@ -202,8 +216,9 @@ function AddKitten() {
             placeholder={`วัน เดือน ปี เกิด`}
             onFocus={(e) => (e.target.type = "date")}
             onBlur={(e) => (e.target.type = "text")}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
+              errorDate ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={weight}
@@ -214,20 +229,40 @@ function AddKitten() {
             }}
             type="number"
             placeholder={`น้ำหนัก (กก.)`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorWeight ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorWeight ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
-          <input
-            value={breed}
-            onChange={(e) => {
-              setBreed(e.target.value);
-              setErrorBreed(false);
-            }}
-            type="text"
-            placeholder={`พันธุ์แมว`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorBreed ? "border-error" : "border-textfield"
+          <div className="flex items-start relative w-full">
+            <input
+              value={breed}
+              onChange={(e) => {
+                setBreed(e.target.value);
+                handleSearch(e);
+                setErrorBreed(false);
+              }}
+              type="text"
+              placeholder={`พันธุ์แมว`}
+              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+                errorBreed ? "border-error" : "border-textfield"
               } focus:outline-primary`}
-          />
+            />
+            {activeSearch.length > 0 && (
+              <div className="flex flex-col gap-4 absolute top-12 p-4 bg-white text-black01 border-b-2 border-l-2 border-r-2 w-full rounded left-1/2 -translate-x-1/2 ">
+                {activeSearch.map((cat: string, index: number) => (
+                  <button
+                    type="button"
+                    value={cat}
+                    key={index}
+                    onClick={() => selectSearch(cat)}
+                    className="flex items-center gap-2"
+                  >
+                    <span>{cat}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
           <div className="text-left mt-2 mb-4">
             <span className={`${errorGender ? "text-error" : "text-black01"}`}>
               เพศ
