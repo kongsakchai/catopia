@@ -65,7 +65,6 @@ function DetailTreatment({ params }: any) {
           </p>
           <span className="text-center text-black01 text-base not-italic font-normal leading-6">
             {formatDateThai(treatmentInfo.date)}
-            {/* {treatmentInfo.date} */}
           </span>
         </div>
         <div className="flex flex-col items-start">
@@ -95,7 +94,7 @@ function DetailTreatment({ params }: any) {
       </div>
       <button
         type="button"
-        onClick={() => router.push(`/main/profile/`)}
+        onClick={() => router.push(`/main/profile/edit_treatment/${params.catID}/${params.id}`)}
         className="flex w-full px-6 py-2 justify-center items-center rounded-lg border-[1.5px] border-solid border-primary"
       >
         <p className="text-center text-primary text-base not-italic font-normal leading-6">
