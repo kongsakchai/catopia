@@ -63,7 +63,7 @@ function EditTreatment({ params }: any) {
     };
     try {
       const res = await axios.put(
-        process.env.NEXT_PUBLIC_API_URL + `/treatment/${params.id}`,
+        process.env.NEXT_PUBLIC_API_URL + `/treatment/${params.catID}/${params.id}`,
         data,
         {
           headers: {

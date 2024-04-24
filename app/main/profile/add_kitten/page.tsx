@@ -223,8 +223,7 @@ function AddKitten() {
           <input
             value={weight}
             onChange={(e) => {
-              const value = parseFloat(e.target.value);
-              setWeight(isNaN(value) ? 0 : value);
+              setWeight(e.target.valueAsNumber);
               setErrorWeight(false);
             }}
             type="number"
