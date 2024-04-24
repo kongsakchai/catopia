@@ -1,15 +1,50 @@
 "use client";
 
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { format } from "date-fns";
+import { th } from "date-fns/locale";
+
+function formatDateThai(date: string) {
+  if (!date) return ""
+  const newDate = new Date(date)
+  return format(newDate, "dd MMMM yyyy", { locale: th })
+}
 
 function DetailTreatment({ params }: any) {
+  console.log("params: ", params);
+  
   const router = useRouter();
 
+  const [treatmentInfo, setTreatmentInfo] = useState<any>([]);
+
+  useEffect(() => {
+    getTreatment()
+  }, [])
+
+  const getTreatment = async () => {
+    try {
+      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/treatment/${params.catID}/${params.id}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+
+      if (response.data.data !== null) {
+        setTreatmentInfo(response.data.data)
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  }
+
+  console.log("treatmentInfo: ", treatmentInfo);
+  
   return (
     <div className="container mx-auto flex flex-col items-start gap-6 mt-12 pl-8 pr-8">
-      <button type="button" onClick={() => router.push(`/main/profile/`)}>
+      <button type="button" onClick={() => router.push(`/main/profile/kitten_info/${params.catID}`)}>
         <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />
       </button>
       <h1 className="text-center text-black01 text-2xl not-italic font-bold leading-10">
@@ -21,7 +56,7 @@ function DetailTreatment({ params }: any) {
             ประเภทการรักษา
           </p>
           <span className="text-center text-black01 text-base not-italic font-normal leading-6">
-            ฉีดวัคซีนป้องกันโรคระบาด
+            {treatmentInfo.name}
           </span>
         </div>
         <div className="flex flex-col items-start">
@@ -29,7 +64,8 @@ function DetailTreatment({ params }: any) {
             วันที่ทำการรักษา
           </p>
           <span className="text-center text-black01 text-base not-italic font-normal leading-6">
-            24 กันยายน 2567
+            {formatDateThai(treatmentInfo.date)}
+            {/* {treatmentInfo.date} */}
           </span>
         </div>
         <div className="flex flex-col items-start">
@@ -37,7 +73,7 @@ function DetailTreatment({ params }: any) {
             สัตวแพทย์ / เลขที่ใบอนุญาต
           </p>
           <span className="text-center text-black01 text-base not-italic font-normal leading-6">
-            นายศักดิ์ชัย เปาอินทร์
+            {treatmentInfo.vet}
           </span>
         </div>
         <div className="flex flex-col items-start">
@@ -45,7 +81,7 @@ function DetailTreatment({ params }: any) {
             สถานที่รักษา
           </p>
           <span className="text-center text-black01 text-base not-italic font-normal leading-6">
-            โรงพยาบาลกรุงเทพ
+            {treatmentInfo.location}
           </span>
         </div>
         <div className="flex flex-col items-start">
@@ -53,7 +89,7 @@ function DetailTreatment({ params }: any) {
             รายละเอียดเพิ่มเติม
           </p>
           <span className="text-center text-black01 text-base not-italic font-normal leading-6">
-            เป็นการฉีดยากันโรคระบาด ที่ไม่แพง เพราะไม่ใช่สองบาท
+            {treatmentInfo.detail}
           </span>
         </div>
       </div>

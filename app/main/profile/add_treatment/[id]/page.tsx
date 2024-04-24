@@ -3,17 +3,16 @@
 import axios from 'axios';
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function AddTreatment({ params }: any) {
     // console.log("AddTreatment : ", params.id);
 
     const router = useRouter();
 
-    const [selectedImage, setSelectedImage] = React.useState<string>("/Pofile-test.svg");
     const [kittenInfo, setKittenInfo] = useState<any>({})
 
-    const [medicalRecord, setMedicalRecord] = useState("");
+    const [medicalRecord, setMedicalRecord] = useState<number>();
     const [date, setDate] = useState("");
     const [veterinarian, setVeterinarian] = useState("");
     const [hospital, setHospital] = useState("");
@@ -27,45 +26,77 @@ function AddTreatment({ params }: any) {
     const [errorSave, setErrorSave] = useState("");
 
     useEffect(() => {
-        getKittenData()
+        getKittenInfo()
     }, [])
 
-    const getKittenData = async () => {
+    const getKittenInfo = async () => {
         try {
-          const res = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`, {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("token")
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            })
+            if (res.status === 200) {
+                if (res.data.message === "success") {
+                    setKittenInfo(res.data.data)
+                }
             }
-          })
-          
-          setKittenInfo(res.data.data)
         } catch (error) {
-          console.log("Error: ", error);
-    
+            console.log("Error: ", error);
         }
-      }
+    }
 
-    //   console.log("kittenInfo: ", kittenInfo);
-      
+    const postTreatment = async () => {
+        const data = {
+            treatmentTypeID: medicalRecord,
+            date: date,
+            vet: veterinarian,
+            location: hospital,
+            detail: detail
+        }
+        try {
+            const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + `/treatment/${params.id}`, data, {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            })
 
-    const validateForm = (e: React.FormEvent<HTMLFormElement>) => {
+            if (res.status === 201) {
+                const reslt = res.data
+                if (reslt.message === "success") {
+                    return true
+                }
+                return false
+            }
+
+        } catch (error) {
+            console.log("Error: ", error);
+            return false
+        }
+    }
+
+    console.log("kittenInfo: ", kittenInfo);
+
+
+    const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const isMedicalRecordValid = medicalRecord.trim() !== "";
+        const isMedicalRecordValid = medicalRecord !== undefined;
         const isDateValid = date.trim() !== "";
         const isVeterinarianValid = veterinarian.trim() !== "";
         const isHospitalValid = hospital.trim() !== "";
         const isDetailValid = detail.trim() !== "";
+        const resultPostTreatment = await postTreatment()
 
         setErrorMedicalRecord(!isMedicalRecordValid);
         setErrorDate(!isDateValid);
         setErrorVeterinarian(!isVeterinarianValid);
         setErrorHospital(!isHospitalValid);
         setErrorDetail(!isDetailValid);
-        
-        if(isMedicalRecordValid && isDateValid && isVeterinarianValid && isHospitalValid && isDetailValid){
+
+        if (isMedicalRecordValid && isDateValid && isVeterinarianValid && isHospitalValid && isDetailValid && resultPostTreatment) {
             router.push(`/main/profile/kitten_info/${params.id}`);
-        }else{
+        } else {
             setErrorSave("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
         }
     }
@@ -93,10 +124,10 @@ function AddTreatment({ params }: any) {
                     <input
                         value={medicalRecord}
                         onChange={(e) => {
-                            setMedicalRecord(e.target.value);
+                            setMedicalRecord(e.target.valueAsNumber);
                             setErrorMedicalRecord(false);
                         }}
-                        type="text"
+                        type="number"
                         placeholder={`ประวัติการรักษา`}
                         className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorMedicalRecord ? "border-error" : "border-textfield"
                             } focus:outline-primary`}

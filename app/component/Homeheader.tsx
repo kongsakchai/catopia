@@ -5,22 +5,22 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import learningcats from "@/public/learningcats.json";
 
-interface learningcats {
-  name: string;
-  description: string;
-  characteristics: string;
-  grooming: string;
-  health: string;
-  playing_with_cats: string;
-  overall: Array<string>;
-}
+// interface learningcats {
+//   name: string;
+//   description: string;
+//   characteristics: string;
+//   grooming: string;
+//   health: string;
+//   playing_with_cats: string;
+//   overall: Array<string>;
+// }
 
 export default function Homeheader() {
   const router = useRouter();
 
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [newListCats, setNewListCats] = useState([]);
-  const [activeSearch, setActiveSearch] = useState([]);
+  const [newListCats, setNewListCats] = useState<any[]>([]);
+  const [activeSearch, setActiveSearch] = useState<any[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {

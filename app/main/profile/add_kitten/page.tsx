@@ -1,10 +1,12 @@
 "use client";
 
+import learningcats from "@/public/learningcats.json";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, {
   useState,
+  useEffect,
   ChangeEvent,
   FormEvent,
 } from "react";
@@ -27,6 +29,29 @@ function AddKitten() {
   const [errorBreed, setErrorBreed] = useState(false);
   const [errorGender, setErrorGender] = useState(false);
   const [errorRegister, setErrorRegister] = useState("");
+
+  const [newListCats, setNewListCats] = useState<any[]>([]);
+  const [activeSearch, setActiveSearch] = useState<any[]>([]);
+
+  useEffect(() => {
+    listCatBreed();
+  }, []);
+
+  function listCatBreed() {
+    setNewListCats(learningcats.map((cat: any) => cat.name));
+  }
+
+  function handleSearch(e: any) {
+    if (e.target.value === "") {
+      setActiveSearch([]);
+      return false;
+    }
+    setActiveSearch(
+      newListCats
+        .filter((words: any) => words.includes(e.target.value))
+        .slice(0, 5)
+    );
+  }
 
   const handleGender = (e: ChangeEvent<HTMLInputElement>) => {
     setGender(e.target.value);
