@@ -1,12 +1,19 @@
-import { SuggestContext } from '@/app/main/suggest/page'
-import React, { useContext } from 'react'
+'use client';
+
+import React, { useState } from 'react'
+import GenQuesSugest from './GenQuesSugest';
+import HeaderQuesSuggest from './HeaderQuesSuggest';
 
 function AnsQuesForProple() {
 
-    const { setQuestionState }: any = useContext(SuggestContext)
+    const [progress, setProgress] = useState<number>(0);
 
     return (
-        <div>AnsQuesForProple Component</div>
+        <div className='flex flex-col items-center'>
+            <HeaderQuesSuggest progress={progress} />
+            <div className='w-full mt-0 h-[0.001px] shrink-0 border border-line' />
+            <GenQuesSugest progress={progress} setProgress={setProgress} />
+        </div>
     )
 }
 

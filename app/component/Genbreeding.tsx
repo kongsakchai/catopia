@@ -92,7 +92,7 @@ export default function Genbreeding() {
       </div>
       <div className="flex flex-col items-start gap-4 max-h-[450px] min-h-[410px] overflow-auto">
         {current === 0
-          ? typecolorMaleList.map((choice, index) => (
+          ? typecolorMaleList.map((choice : any, index : number) => (
               <button
                 key={index}
                 value={choice}
@@ -149,7 +149,7 @@ export default function Genbreeding() {
                 </button>
               ))
           : current === 2
-          ? typecolorFemaleList.map((choice, index) => (
+          ? typecolorFemaleList.map((choice : any, index : number) => (
               <button
                 key={index}
                 value={choice}
