@@ -3,7 +3,7 @@ import Ansquestion from "@/app/component/Ansquestion";
 import { createContext, useState } from "react";
 import Completeregister from "../completeregister/page";
 
-export const DataContext = createContext();
+export const DataContext = createContext<unknown>(null);
 
 export default function Getquestion() {
   const [questionState, setQuestionState] = useState<string>("questions");

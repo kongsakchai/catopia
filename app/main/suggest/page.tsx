@@ -1,7 +1,25 @@
+'use client';
+
+import AnsQuesForProple from "@/app/component/Suggest/AnsQuesForProple";
+import ResultForPeople from "@/app/component/Suggest/ResultForPeople";
+import SelectionPattern from "@/app/component/Suggest/SelectionPattern";
+import Begin from "@/app/component/Suggest/begin";
+import { createContext, useState } from "react";
+
+export const SuggestContext = createContext<unknown>(null);
+
 export default function Suggest() {
+
+    const [questionState, setQuestionState] = useState<string>("begin");
+
     return (
-        <div>
-            <h1>Suggest component</h1>
-        </div>
+        <SuggestContext.Provider value={{ questionState, setQuestionState }}>
+            <div>
+                {questionState === "begin" && <Begin />}
+                {questionState === "selectionPattern" && <SelectionPattern />}
+                {questionState === "ansQuesForProple" && <AnsQuesForProple />}
+                {questionState === "resultForPeople" && <ResultForPeople />}
+            </div>
+        </SuggestContext.Provider>
     )
 }

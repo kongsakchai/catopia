@@ -4,11 +4,12 @@ import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../register/getquestion/page";
 
 export default function Genquestion({ progress, setProgress }: any) {
+
+  const { setQuestionState }: any = useContext(DataContext);
+
   const [current, setCurrent] = useState(0);
   const [selectChoice, setSelectChoice] = useState("");
   const [allSelected, setAllSelected] = useState([]);
-  // const [allSelected, setAllSelected] = useState({});
-  const { setQuestionState }: any = useContext(DataContext);
 
   useEffect(() => {
     console.log(allSelected);
@@ -37,7 +38,7 @@ export default function Genquestion({ progress, setProgress }: any) {
   };
 
   const handleSelectChoice = async () => {
-    await setAllSelected((prevAllSelected):any => [...prevAllSelected, selectChoice]);
+    await setAllSelected((prevAllSelected): any => [...prevAllSelected, selectChoice]);
     setProgress(progress + 100 / 7);
     nextQuestion();
   };
@@ -61,11 +62,10 @@ export default function Genquestion({ progress, setProgress }: any) {
         <button
           key={index}
           onClick={() => setSelectChoice(choice)}
-          className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${
-            choice !== selectChoice
+          className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice !== selectChoice
               ? "rounded-lg border-2 border-solid"
               : "border-primary rounded-lg border-2 border-solid"
-          } hover:bg-primary hover:text-white`}
+            } hover:bg-primary hover:text-white`}
         >
           <span>{choice}</span>
           {choice === selectChoice && (
