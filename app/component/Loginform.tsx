@@ -30,18 +30,20 @@ export default function Loginform() {
     setErrorPassword(!isPasswordValid);
 
     if (isUsernameValid && isPasswordValid) {
-      const res = await fetchLoginrDB();
-      console.log(res);
-      if (res) {
+      const resPost = await fetchLoginrDB();
+      console.log("resPost : ", resPost);
+      if (resPost) {
         router.push("/register/getquestion");
-      }
+      } else setErrorLogin("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     } else {
       setErrorLogin("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
 
   async function fetchLoginrDB() {
-    console.log(username, password);
+    console.log("username : ", username);
+    console.log("password : ", password);
+    
     try {
       const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/auth/login", {
         method: "POST",
@@ -69,28 +71,6 @@ export default function Loginform() {
     }
   }
 
-//   async function fetchLoginrDB() {
-//     console.log(username, password);
-//     try {
-//         const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-//             username: username,
-//             password: password
-//         }, {
-//             headers: {
-//                 "Content-Type": "application/json"
-//             }
-//         });
-//         if (response.status === 200 && response.data.message === "success") {
-//             localStorage.setItem("token", response.data.data.token);
-//             return true;
-//         }
-//         return false;
-//     } catch (error) {
-//         console.error(error);
-//         return false;
-//     }
-// }
-
   return (
     <form
       onSubmit={validateForm}
@@ -104,9 +84,8 @@ export default function Loginform() {
         }}
         type="text"
         placeholder="ชื่อผู้ใช้งาน"
-        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-          errorUsername ? "border-error" : "border-textfield"
-        } focus:outline-primary`}
+        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorUsername ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
         style={{
           color: errorUsername ? "#e50914" : "",
         }}
@@ -120,9 +99,8 @@ export default function Loginform() {
           }}
           type={passwordVisible ? "text" : "password"}
           placeholder="รหัสผ่าน"
-          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-            errorPassword ? "border-error" : "border-textfield"
-          }
+          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorPassword ? "border-error" : "border-textfield"
+            }
                      focus:outline-primary`}
           style={{
             color: errorPassword ? "#e50914" : "",
