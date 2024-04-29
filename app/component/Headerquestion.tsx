@@ -1,6 +1,6 @@
 "use client";
 
-export default function ProgressBar(progress: any) {
+export default function ProgressBar({progress}: any) {
   return (
     <div className="flex justify-center container mx-auto mt-12 mb-10">
       <div className="progress w-[364px] bg-line h-2 rounded-full">

@@ -4,7 +4,7 @@ import Catslist from "@/app/component/Profile/Catslist";
 import Yourprofile from "@/app/component/Profile/Yourprofile";
 
 import axios from "axios";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 interface UserData {
@@ -18,6 +18,7 @@ interface UserData {
 }
 
 export default function Profile() {
+    const router = useRouter()
 
     const [userData, setUserData] = useState<UserData>({} as UserData)
     const [kittensData, setKittensData] = useState<any[]>([])
@@ -35,7 +36,7 @@ export default function Profile() {
                     }
                 }),
                 axios.get(process.env.NEXT_PUBLIC_API_URL + "/cat", {
-                    headers:{
+                    headers: {
                         Authorization: "Bearer " + localStorage.getItem("token")
                     }
                 })
@@ -46,6 +47,11 @@ export default function Profile() {
         } catch (error) {
             console.log("Error: ", error);
         }
+    }
+
+    const logout = () => {
+        localStorage.removeItem("token")
+        router.push("/")
     }
 
     // console.log("userData: ", userData);
@@ -61,11 +67,12 @@ export default function Profile() {
                 zIndex: 0,
             }}
         >
-            <div className="flex justify-end w-[364px] right-0 mt-12">
-                <Link href="/">
-                    <p className="text-error text-base not-italic font-normal leading-6">Logout</p>
-                </Link>
-            </div>
+            <button 
+            type="button" 
+            onClick={logout}
+            className="flex justify-end w-[364px] right-0 mt-12">
+                <p className="text-error text-base not-italic font-normal leading-6">Logout</p>
+            </button>
             <div className="flex flex-col w-[364px] justify-center items-center gap-8 mt-2">
                 <Yourprofile userData={userData} />
                 <Catslist kittensData={kittensData} />

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import axios from "axios";
 
 export default function Forgotpassword() {
   const router = useRouter();
@@ -12,18 +13,38 @@ export default function Forgotpassword() {
   const [errorUsername, setErrorUsername] = useState(false);
   const [errorSentConfirm, setErrorSentConfirm] = useState("");
 
-  const validateForm = (e) => {
+  const validateForm = async (e: any) => {
     e.preventDefault();
 
     const isUsernameValid = username.length >= 4;
+    const isUsernameExist = await sendUsernameForOTP();
     setErrorUsername(!isUsernameValid);
 
-    if (isUsernameValid) {
+    if (isUsernameValid && isUsernameExist) {
       router.push("/repassword/checkOTP");
     } else {
       setErrorSentConfirm("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
+
+  const sendUsernameForOTP = async () => {
+    const data = { username }
+    try {
+      const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/user/otp", data);
+
+      if (res.status === 200) {
+        if (res.data.message === "success") {
+          localStorage.setItem("keyotp", res.data.data.code);
+          return true
+        }
+        return false
+      }
+
+    } catch (error) {
+      console.log("Error: ", error);
+      return false
+    }
+  }
 
   return (
     <div className="flex flex-col items-center mt-40  ">
@@ -48,14 +69,13 @@ export default function Forgotpassword() {
           }}
           type="text"
           placeholder="ชื่อผู้ใช้งาน"
-          className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-            errorUsername ? "border-error" : "border-textfield"
-          } focus:outline-primary`}
+          className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorUsername ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           style={{
             color: errorUsername ? "#e50914" : "",
           }}
         />
-        <button className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
+        <button type="submit" className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
           ส่งรหัสยืนยัน
         </button>
         <span

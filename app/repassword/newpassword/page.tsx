@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import axios from "axios";
 
 export default function Newpassword() {
   const router = useRouter();
@@ -16,17 +17,17 @@ export default function Newpassword() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-  const togglePasswordVisibility = (e) => {
+  const togglePasswordVisibility = (e: any) => {
     e.preventDefault();
     setPasswordVisible(!passwordVisible);
   };
 
-  const toggleConfirmPasswordVisibility = (e) => {
+  const toggleConfirmPasswordVisibility = (e: any) => {
     e.preventDefault();
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
 
-  const validateForm = (e) => {
+  const validateForm = async (e: any) => {
     e.preventDefault();
 
     const isNewPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(
@@ -34,6 +35,7 @@ export default function Newpassword() {
     );
     const isNewPasswordValidMatch = confirmNewPassword === newPassword;
     const isConfirmNewPasswordNotEmpty = confirmNewPassword.trim() !== "";
+    const isPostNewPassword = await postNewPassword();
 
     setErrorNewPassword(!isNewPasswordValid);
     setErrorConfirmNewPassword(
@@ -43,13 +45,36 @@ export default function Newpassword() {
     if (
       isNewPasswordValid &&
       isNewPasswordValidMatch &&
-      isConfirmNewPasswordNotEmpty
+      isConfirmNewPasswordNotEmpty &&
+      isPostNewPassword
     ) {
+      localStorage.removeItem("keyotp");
       router.push("/");
     } else {
       setErrorPassword("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
+
+  const postNewPassword = async () => {
+    const data ={
+      code: localStorage.getItem("keyotp"),
+      password: newPassword
+    }
+    try {
+      const res = await axios.put(process.env.NEXT_PUBLIC_API_URL + "/user/password", data);
+
+      if (res.status === 201) {
+        if (res.data.message === 'success') {
+          return true
+        }
+        return false
+      }
+
+    } catch (error) {
+      console.log("Error: ", error);
+      return false
+    }
+  }
 
   return (
     <div className="flex flex-col items-center mt-40">
@@ -75,9 +100,8 @@ export default function Newpassword() {
             }}
             type={passwordVisible ? "text" : "password"}
             placeholder="รหัสผ่าน"
-            className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorNewPassword ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorNewPassword ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <button
             className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
@@ -98,9 +122,8 @@ export default function Newpassword() {
             }}
             type={confirmPasswordVisible ? "text" : "password"}
             placeholder="ยืนยันรหัสผ่าน"
-            className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorConfirmNewPassword ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorConfirmNewPassword ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <button
             className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
