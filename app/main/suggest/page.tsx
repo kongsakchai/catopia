@@ -3,6 +3,7 @@
 import AnsQuesForProple from "@/app/component/Suggest/AnsQuesForProple";
 import Begin from "@/app/component/Suggest/Begin";
 import ResultForPeople from "@/app/component/Suggest/ResultForPeople";
+import SelectYourKitten from "@/app/component/Suggest/SelectYourKitten";
 import SelectionPattern from "@/app/component/Suggest/SelectionPattern";
 import { createContext, useState } from "react";
 
@@ -17,6 +18,7 @@ export default function Suggest() {
             <div>
                 {questionState === "begin" && <Begin />}
                 {questionState === "selectionPattern" && <SelectionPattern />}
+                {questionState === "selectYourKitten" && <SelectYourKitten />}
                 {questionState === "ansQuesForProple" && <AnsQuesForProple />}
                 {questionState === "resultForPeople" && <ResultForPeople />}
             </div>

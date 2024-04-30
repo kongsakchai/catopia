@@ -5,8 +5,9 @@ import React, { useContext } from 'react'
 function SelectionPattern() {
 
     const { setQuestionState }: any = useContext(SuggestContext)
+
     return (
-        <div className='container flex flex-col items-start gap-4 pl-8 pr-8 mt-[110px]'>
+        <div className='container flex flex-col items-start gap-4 pl-8 pr-8 mt-12'>
             <button onClick={() => setQuestionState("begin")}>
                 <Image
                     src="/ArrowLeft.svg"
@@ -19,7 +20,7 @@ function SelectionPattern() {
             <h3 className='text-textfield text-xs not-italic font-normal leading-5'>ข้อมูลที่แสดงผลเป็นเป็นเพียงการคาดคะเนจากข้อมูลเท่านั้น</h3>
             <button
                 type='button'
-                onClick={() => setQuestionState("begin")}
+                onClick={() => setQuestionState("selectYourKitten")}
                 className='flex w-full p-4 items-start justify-between rounded-lg border-[2px] border-solid border-black01'>
                 <p className='text-center text-black01 text-base not-italic font-normal leading-6'>รูปแบบที่ 1 (อ้างอิงจากข้อมูลของแมวผู้ใช้)</p>
                 <Image

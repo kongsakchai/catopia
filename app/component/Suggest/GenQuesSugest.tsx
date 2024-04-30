@@ -19,7 +19,7 @@ function GenQuesSugest({ progress, setProgress }: any) {
 
     const prevQuestion = () => {
         if (current === 0) {
-            return;
+            setQuestionState("selectionPattern");
         } else {
             clearLastAnswer();
             setCurrent(current - 1);
@@ -55,25 +55,27 @@ function GenQuesSugest({ progress, setProgress }: any) {
                     {QuestionData[current].question}
                 </span>
             </div>
-            {QuestionData[current].choices.map((choice, index) => (
-                <button
-                    key={index}
-                    onClick={() => setSelectChoice(choice)}
-                    className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice !== selectChoice
-                        ? "rounded-lg border-2 border-solid"
-                        : "border-primary rounded-lg border-2 border-solid"
-                        } hover:bg-primary hover:text-white`}
-                >
-                    <span>{choice}</span>
-                    {choice === selectChoice && (
-                        <img
-                            src="/Check.svg"
-                            alt="Check"
-                            style={{ marginRight: "5px", alignSelf: "center" }}
-                        />
-                    )}
-                </button>
-            ))}
+            <div className='flex flex-col items-start gap-4 max-h-[450px] overflow-auto'>
+                {QuestionData[current].choices.map((choice, index) => (
+                    <button
+                        key={index}
+                        onClick={() => setSelectChoice(choice)}
+                        className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice !== selectChoice
+                            ? "rounded-lg border-2 border-solid"
+                            : "border-primary rounded-lg border-2 border-solid"
+                            } hover:bg-primary hover:text-white`}
+                    >
+                        <span>{choice}</span>
+                        {choice === selectChoice && (
+                            <img
+                                src="/Check.svg"
+                                alt="Check"
+                                style={{ marginRight: "5px", alignSelf: "center" }}
+                            />
+                        )}
+                    </button>
+                ))}
+            </div>
             <button
                 type="submit"
                 onClick={handleSelectChoice}
