@@ -2,12 +2,15 @@
 
 import { SuggestContext } from "@/app/main/suggest/page";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 
 function SelectYourKitten() {
   const { setQuestionState, kittenData }: any = useContext(SuggestContext);
 
-  //   console.log("kittenData: ", kittenData);
+  const router = useRouter();
+
+  console.log("kittenData: ", kittenData);
 
   return (
     <div className=" container mx-auto flex flex-col items-start gap-4 pl-8 pr-8 mt-12">
@@ -26,6 +29,7 @@ function SelectYourKitten() {
         {kittenData?.map((kitten: any, index: number) => (
           <button
             key={index}
+            onClick={() => router.push(`/main/suggest/result/${kitten.id}`)}
             className="flex flex-col w-[350px] p-4 items-start gap-[10px] rounded-2xl border-[2px] border-solid border-black01"
           >
             <p className="text-center text-black01 text-base not-italic font-normal leading-6">
