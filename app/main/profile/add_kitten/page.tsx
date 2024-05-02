@@ -17,6 +17,9 @@ function AddKitten() {
   const [weight, setWeight] = useState<number>();
   const [breed, setBreed] = useState("");
   const [gender, setGender] = useState("");
+  const [aggresive, setAggresive] = useState<number>(0);
+  const [shyness, setShyness] = useState<number>(0);
+  const [openness, setOpenness] = useState<number>(0);
 
   const [errorDate, setErrorDate] = useState(false);
   const [errorRegisUsername, setErrorRegisUsername] = useState(false);
@@ -33,7 +36,6 @@ function AddKitten() {
       listCatBreed();
     }
   }, [learningcats]);
-  
 
   function listCatBreed() {
     setNewListCats(learningcats.map((cat: any) => cat.name));
@@ -295,6 +297,62 @@ function AddKitten() {
               <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">
                 หญิง
               </span>
+            </div>
+          </div>
+          <div className="flex flex-col items-start gap-8 w-full">
+            <div className="flex flex-col w-full border border-solid border-red-800">
+              <div className="flex items-start gap-2">
+                <span className=" text-black01 text-base not-italic font-normal leading-6">
+                  ความก้าวร้าว
+                </span>
+                <span className=" text-primary text-base not-italic font-bold leading-6">
+                  (0-10)
+                </span>
+              </div>
+              <input
+                type="range"
+                min={0}
+                max={10}
+                step={1}
+                value={aggresive}
+                onChange={(e) => setAggresive(e.target.valueAsNumber)}
+                list="tickmarks"
+                className="h-2 rounded-xl appearance-none outline-none bg-line accent-slate-900"
+                
+              />
+              {/* <datalist id="tickmarks">
+                <option value="0" />
+                <option value="1" />
+                <option value="2" />
+                <option value="3" />
+                <option value="4" />
+                <option value="5" />
+                <option value="6" />
+                <option value="7" />
+                <option value="8" />
+                <option value="9" />
+                <option value="10" />
+              </datalist> */}
+            </div>
+            <div className="flex flex-col w-full border border-solid border-red-800">
+              <div className="flex items-start gap-2">
+                <span className=" text-black01 text-base not-italic font-normal leading-6">
+                  ความเขินอาย
+                </span>
+                <span className=" text-primary text-base not-italic font-bold leading-6">
+                  (0-10)
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-col w-full border border-solid border-red-800">
+              <div className="flex items-start gap-2">
+                <span className=" text-black01 text-base not-italic font-normal leading-6">
+                  ความสนใจต่อสิ่งภายนอก
+                </span>
+                <span className=" text-primary text-base not-italic font-bold leading-6">
+                  (0-10)
+                </span>
+              </div>
             </div>
           </div>
           <button
