@@ -3,6 +3,7 @@
 import learningcats from "@/public/learningcats.json";
 import axios from "axios";
 import Image from "next/image";
+
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 
@@ -17,7 +18,7 @@ function AddKitten() {
   const [weight, setWeight] = useState<number>();
   const [breed, setBreed] = useState("");
   const [gender, setGender] = useState("");
-  const [aggresive, setAggresive] = useState<number>(0);
+  const [aggressive, setAggressive] = useState<number>(0);
   const [shyness, setShyness] = useState<number>(0);
   const [openness, setOpenness] = useState<number>(0);
 
@@ -300,7 +301,7 @@ function AddKitten() {
             </div>
           </div>
           <div className="flex flex-col items-start gap-8 w-full">
-            <div className="flex flex-col w-full border border-solid border-red-800">
+            <div className="flex flex-col gap-2 w-full">
               <div className="flex items-start gap-2">
                 <span className=" text-black01 text-base not-italic font-normal leading-6">
                   ความก้าวร้าว
@@ -309,32 +310,27 @@ function AddKitten() {
                   (0-10)
                 </span>
               </div>
-              <input
-                type="range"
-                min={0}
-                max={10}
-                step={1}
-                value={aggresive}
-                onChange={(e) => setAggresive(e.target.valueAsNumber)}
-                list="tickmarks"
-                className="h-2 rounded-xl appearance-none outline-none bg-line accent-slate-900"
-                
-              />
-              {/* <datalist id="tickmarks">
-                <option value="0" />
-                <option value="1" />
-                <option value="2" />
-                <option value="3" />
-                <option value="4" />
-                <option value="5" />
-                <option value="6" />
-                <option value="7" />
-                <option value="8" />
-                <option value="9" />
-                <option value="10" />
-              </datalist> */}
+              <div className="relative">
+                <div
+                  className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
+                  style={{ width: `calc(${aggressive * 10}% )` }}
+                />
+                <input
+                  type="range"
+                  min={0}
+                  max={10}
+                  step={1}
+                  value={aggressive}
+                  onChange={(e) => setAggressive(e.target.valueAsNumber)}
+                  list="tickmarks"
+                  className="absolute h-2 rounded-xl appearance-none outline-none bg-line w-full"
+                  style={{
+                    backgroundRepeat: "no-repeat",
+                  }}
+                />
+              </div>
             </div>
-            <div className="flex flex-col w-full border border-solid border-red-800">
+            <div className="flex flex-col gap-2 w-full">
               <div className="flex items-start gap-2">
                 <span className=" text-black01 text-base not-italic font-normal leading-6">
                   ความเขินอาย
@@ -343,8 +339,27 @@ function AddKitten() {
                   (0-10)
                 </span>
               </div>
+              <div className="relative">
+                <div
+                  className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
+                  style={{ width: `calc(${shyness * 10}% )` }}
+                />
+                <input
+                  type="range"
+                  min={0}
+                  max={10}
+                  step={1}
+                  value={shyness}
+                  onChange={(e) => setShyness(e.target.valueAsNumber)}
+                  list="tickmarks"
+                  className="absolute h-2 rounded-xl appearance-none outline-none bg-line w-full"
+                  style={{
+                    backgroundRepeat: "no-repeat",
+                  }}
+                />
+              </div>
             </div>
-            <div className="flex flex-col w-full border border-solid border-red-800">
+            <div className="flex flex-col w-full gap-2">
               <div className="flex items-start gap-2">
                 <span className=" text-black01 text-base not-italic font-normal leading-6">
                   ความสนใจต่อสิ่งภายนอก
@@ -353,11 +368,30 @@ function AddKitten() {
                   (0-10)
                 </span>
               </div>
+              <div className="relative">
+                <div
+                  className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
+                  style={{ width: `calc(${openness * 10}% )` }}
+                />
+                <input
+                  type="range"
+                  min={0}
+                  max={10}
+                  step={1}
+                  value={openness}
+                  onChange={(e) => setOpenness(e.target.valueAsNumber)}
+                  list="tickmarks"
+                  className="absolute h-2 rounded-xl appearance-none outline-none bg-line w-full"
+                  style={{
+                    backgroundRepeat: "no-repeat",
+                  }}
+                />
+              </div>
             </div>
           </div>
           <button
             type="submit"
-            className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6"
+            className="flex w-full justify-center items-center gap-2.5 px-4 py-2 mt-6 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6"
           >
             ยืนยัน
           </button>

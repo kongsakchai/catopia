@@ -15,11 +15,21 @@
   top: 50%;
   transform: translateY(-50%);
   color: #2e2e2e; /* Set your desired color */
-  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
   display: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: #3fa8d0;
+  border: 1px solid #3fa8d0;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  border: solid 2px white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 :root {
