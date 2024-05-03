@@ -136,7 +136,11 @@ function EditKittenInfo({ params }: any) {
   };
 
   const postFile = async () => {
-    if (file === undefined) return selectedImage.replace(process.env.NEXT_PUBLIC_API_IMAGES || "", "");
+    if (file === undefined)
+      return selectedImage.replace(
+        process.env.NEXT_PUBLIC_API_IMAGES || "",
+        ""
+      );
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -244,8 +248,9 @@ function EditKittenInfo({ params }: any) {
             }}
             type="text"
             placeholder={`ชื่อ`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorRegisUsername ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={date}
@@ -257,8 +262,9 @@ function EditKittenInfo({ params }: any) {
             placeholder={`วัน เดือน ปี เกิด`}
             onFocus={(e) => (e.target.type = "date")}
             onBlur={(e) => (e.target.type = "text")}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
+              errorDate ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={weight}
@@ -269,8 +275,9 @@ function EditKittenInfo({ params }: any) {
             }}
             type="number"
             placeholder={`น้ำหนัก (กก.)`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorWeight ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorWeight ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <div className="flex items-start relative w-full">
             <input
@@ -282,8 +289,9 @@ function EditKittenInfo({ params }: any) {
               }}
               type="text"
               placeholder={`พันธุ์แมว`}
-              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorBreed ? "border-error" : "border-textfield"
-                } focus:outline-primary`}
+              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+                errorBreed ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
             />
             {activeSearch.length > 0 && (
               <div className="flex flex-col gap-4 z-20 absolute top-12 p-4 bg-white text-black01 border-b-2 border-l-2 border-r-2 w-full rounded left-1/2 -translate-x-1/2 ">
@@ -346,10 +354,29 @@ function EditKittenInfo({ params }: any) {
                   (0-10)
                 </span>
               </div>
-              <div className="relative">
+              <div className="relative flex">
+                <div className="absolute flex flex-row items-center justify-between z-10 top-0 left-0 h-2 rounded-xl bg-line w-full">
+                  {[...Array(10)].map((_, index) => (
+                    <Image
+                      key={index}
+                      src={"/dot.svg"}
+                      width={4}
+                      height={4}
+                      alt="markers"
+                    />
+                  ))}
+                </div>
                 <div
                   className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
-                  style={{ width: `calc(${aggressive * 10}% )` }}
+                  style={{
+                    width: `calc(${aggressive * 10}% ${
+                      aggressive === 10
+                        ? "- 3px"
+                        : aggressive === 1
+                        ? "+ 3px"
+                        : ""
+                    })`,
+                  }}
                 />
                 <input
                   type="range"
@@ -359,7 +386,7 @@ function EditKittenInfo({ params }: any) {
                   value={aggressive}
                   onChange={(e) => setAggressive(e.target.valueAsNumber)}
                   list="tickmarks"
-                  className="absolute h-2 rounded-xl appearance-none outline-none bg-line w-full"
+                  className="absolute h-2 rounded-xl z-10 appearance-none outline-none bg-transparent w-full"
                   style={{
                     backgroundRepeat: "no-repeat",
                   }}
@@ -376,9 +403,24 @@ function EditKittenInfo({ params }: any) {
                 </span>
               </div>
               <div className="relative">
+                <div className="absolute flex flex-row items-center justify-between z-10 top-0 left-0 h-2 rounded-xl bg-line w-full">
+                  {[...Array(10)].map((_, index) => (
+                    <Image
+                      key={index}
+                      src={"/dot.svg"}
+                      width={4}
+                      height={4}
+                      alt="markers"
+                    />
+                  ))}
+                </div>
                 <div
                   className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
-                  style={{ width: `calc(${shyness * 10}% )` }}
+                  style={{
+                    width: `calc(${shyness * 10}% ${
+                      shyness === 10 ? "- 3px" : shyness === 1 ? "+ 3px" : ""
+                    })`,
+                  }}
                 />
                 <input
                   type="range"
@@ -388,7 +430,7 @@ function EditKittenInfo({ params }: any) {
                   value={shyness}
                   onChange={(e) => setShyness(e.target.valueAsNumber)}
                   list="tickmarks"
-                  className="absolute h-2 rounded-xl appearance-none outline-none bg-line w-full"
+                  className="absolute h-2 rounded-xl z-10 appearance-none outline-none bg-transparent w-full"
                   style={{
                     backgroundRepeat: "no-repeat",
                   }}
@@ -405,9 +447,24 @@ function EditKittenInfo({ params }: any) {
                 </span>
               </div>
               <div className="relative">
+                <div className="absolute flex flex-row items-center justify-between z-10 top-0 left-0 h-2 rounded-xl bg-line w-full">
+                  {[...Array(10)].map((_, index) => (
+                    <Image
+                      key={index}
+                      src={"/dot.svg"}
+                      width={4}
+                      height={4}
+                      alt="markers"
+                    />
+                  ))}
+                </div>
                 <div
                   className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
-                  style={{ width: `calc(${openness * 10}% )` }}
+                  style={{
+                    width: `calc(${openness * 10}% ${
+                      openness === 10 ? "- 3px" : openness === 1 ? "+ 3px" : ""
+                    })`,
+                  }}
                 />
                 <input
                   type="range"
@@ -417,7 +474,7 @@ function EditKittenInfo({ params }: any) {
                   value={openness}
                   onChange={(e) => setOpenness(e.target.valueAsNumber)}
                   list="tickmarks"
-                  className="absolute h-2 rounded-xl appearance-none outline-none bg-line w-full"
+                  className="absolute h-2 rounded-xl z-10 appearance-none outline-none bg-transparent w-full"
                   style={{
                     backgroundRepeat: "no-repeat",
                   }}
