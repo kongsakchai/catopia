@@ -64,8 +64,10 @@ function EditProfile() {
       setEmail(response.data.data.email);
       setDate(response.data.data.date);
       setRegisUsername(response.data.data.username);
-      setGender(response.data.data.gender)
-      setSelectedImage(process.env.NEXT_PUBLIC_API_IMAGES+response.data.data.profile);
+      setGender(response.data.data.gender);
+      setSelectedImage(
+        process.env.NEXT_PUBLIC_API_IMAGES + response.data.data.profile
+      );
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -89,7 +91,7 @@ function EditProfile() {
 
   const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    setFile(file)
+    setFile(file);
     setSelectedImage(file ? URL.createObjectURL(file) : "/Pofile-test.svg");
   };
 
@@ -101,7 +103,8 @@ function EditProfile() {
     );
     const isDateValid = date.trim() !== "";
     const isRegisUsernameValid = username.length >= 4;
-    const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password) || password === "";
+    const isRegisPasswordValid =
+      /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password) || password === "";
 
     const isRegisPasswordMatch = confirmPassword === password;
     const isGenderSelected = !!gender;
@@ -109,7 +112,7 @@ function EditProfile() {
     setErrorEmail(!isEmailValid);
     setErrorDate(!isDateValid);
     setErrorRegisUsername(!isRegisUsernameValid);
-    
+
     setErrorRegisPassword(!isRegisPasswordValid);
 
     setErrorConfirmPassword(!isRegisPasswordMatch);
@@ -130,7 +133,7 @@ function EditProfile() {
       const resultPostUserInfo = await postUserInfo(profile);
       //
       // console.log("resultPostUserInfo: ", resultPostUserInfo);
-      
+
       if (resultPostUserInfo) {
         router.push("/main/profile");
       }
@@ -141,7 +144,11 @@ function EditProfile() {
   };
 
   const postFile = async () => {
-    if (file === undefined) return false;
+    if (file === undefined)
+      return selectedImage.replace(
+        process.env.NEXT_PUBLIC_API_IMAGES || "",
+        ""
+      );
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -162,12 +169,11 @@ function EditProfile() {
         return "";
       }
       throw new Error("Something went wrong");
-    }
-    catch (error) {
-      console.error(error)
+    } catch (error) {
+      console.error(error);
       return "";
     }
-  }
+  };
 
   const postUserInfo = async (profile: string) => {
     const data = {
@@ -180,7 +186,7 @@ function EditProfile() {
       gender,
     };
     // console.log(profile);
-    
+
     try {
       const response = await axios.put(
         process.env.NEXT_PUBLIC_API_URL + "/user",
@@ -246,8 +252,9 @@ function EditProfile() {
             }}
             type="text"
             placeholder={`อีเมล`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorEmail ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={date}
@@ -259,8 +266,9 @@ function EditProfile() {
             placeholder={`วัน เดือน ปี เกิด`}
             onFocus={(e) => (e.target.type = "date")}
             onBlur={(e) => (e.target.type = "text")}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
+              errorDate ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={username}
@@ -270,8 +278,9 @@ function EditProfile() {
             }}
             type="text"
             placeholder={`ชื่อผู้ใช้งาน`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorRegisUsername ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <div className="flex items-start relative">
             <input
@@ -282,8 +291,9 @@ function EditProfile() {
               }}
               type={passwordVisible ? "text" : "password"}
               placeholder={`รหัสผ่าน`}
-              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisPassword ? "border-error" : "border-textfield"
-                } focus:outline-primary`}
+              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
+                errorRegisPassword ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
             />
             <button
               className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
@@ -304,8 +314,9 @@ function EditProfile() {
               }}
               type={confirmPasswordVisible ? "text" : "password"}
               placeholder={`ยืนยันรหัสผ่าน`}
-              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisConfirmPassword ? "border-error" : "border-textfield"
-                } focus:outline-primary`}
+              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
+                errorRegisConfirmPassword ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
             />
             <button
               className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"

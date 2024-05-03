@@ -1,6 +1,6 @@
 import React from "react";
 
-function ResultSuggest({ params }: any) {
+function ResultCat({ params }: any) {
   return (
     <div
       className="flex flex-col h-[793px] w-full"
@@ -17,7 +17,7 @@ function ResultSuggest({ params }: any) {
           ลักษณะพันธุ์แมว
         </h1>
         <h3 className="text-center text-base text-primary not-italic font-semibold leading-6">
-          ที่เหมาะสมกับคุณ
+          ที่เหมาะสมกับแมวของคุณ
         </h3>
       </div>
       <div
@@ -33,4 +33,4 @@ function ResultSuggest({ params }: any) {
   );
 }
 
-export default ResultSuggest;
+export default ResultCat;

@@ -4,10 +4,13 @@ import React from 'react'
 import QuestionData from "@/public/QuestionData";
 import { useState, useEffect, useContext } from "react";
 import { SuggestContext } from '@/app/main/suggest/page';
+import { useRouter } from 'next/navigation';
 
 function GenQuesSugest({ progress, setProgress }: any) {
 
     const { setQuestionState }: any = useContext(SuggestContext);
+
+    const router = useRouter();
 
     const [current, setCurrent] = useState(0);
     const [selectChoice, setSelectChoice] = useState("");
@@ -34,7 +37,7 @@ function GenQuesSugest({ progress, setProgress }: any) {
     const nextQuestion = () => {
         setSelectChoice(""); // Clear selectChoice
         if (current === QuestionData.length - 1) {
-            setQuestionState("resultForPeople");
+            router.push("/main/suggest/result_user/1")
             // console.log(allSelected)
         } else setCurrent(current + 1);
     };

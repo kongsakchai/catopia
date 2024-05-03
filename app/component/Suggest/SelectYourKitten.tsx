@@ -29,7 +29,7 @@ function SelectYourKitten() {
         {kittenData?.map((kitten: any, index: number) => (
           <button
             key={index}
-            onClick={() => router.push(`/main/suggest/result/${kitten.id}`)}
+            onClick={() => router.push(`/main/suggest/result_cat/${kitten.id}`)}
             className="flex flex-col w-[350px] p-4 items-start gap-[10px] rounded-2xl border-[2px] border-solid border-black01"
           >
             <p className="text-center text-black01 text-base not-italic font-normal leading-6">

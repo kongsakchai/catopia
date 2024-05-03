@@ -213,7 +213,7 @@ function EditKittenInfo({ params }: any) {
         </button>
         <div className="relative w-24 h-24">
           <Image
-            src={ selectedImage}
+            src={selectedImage}
             width={88}
             height={88}
             alt="Your profile"
