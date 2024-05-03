@@ -19,6 +19,9 @@ function EditKittenInfo({ params }: any) {
   const [weight, setWeight] = useState<number>();
   const [breed, setBreed] = useState("");
   const [gender, setGender] = useState("");
+  const [aggressive, setAggressive] = useState<number>(0);
+  const [shyness, setShyness] = useState<number>(0);
+  const [openness, setOpenness] = useState<number>(0);
 
   const [errorDate, setErrorDate] = useState(false);
   const [errorRegisUsername, setErrorRegisUsername] = useState(false);
@@ -81,6 +84,10 @@ function EditKittenInfo({ params }: any) {
       setSelectedImage(
         process.env.NEXT_PUBLIC_API_IMAGES + response.data.data.profile
       );
+      setBreed(response.data.data.breeding);
+      setAggressive(response.data.data.aggression);
+      setShyness(response.data.data.shyness);
+      setOpenness(response.data.data.extraversion);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -129,7 +136,7 @@ function EditKittenInfo({ params }: any) {
   };
 
   const postFile = async () => {
-    if (file === undefined) return false;
+    if (file === undefined) return selectedImage.replace(process.env.NEXT_PUBLIC_API_IMAGES || "", "");
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -162,8 +169,11 @@ function EditKittenInfo({ params }: any) {
       name: username,
       date,
       weight,
-      breed,
+      breeding: breed,
       gender,
+      aggression: aggressive,
+      shyness,
+      extraversion: openness,
     };
     try {
       const response = await axios.put(
@@ -203,7 +213,7 @@ function EditKittenInfo({ params }: any) {
         </button>
         <div className="relative w-24 h-24">
           <Image
-            src={selectedImage}
+            src={ selectedImage}
             width={88}
             height={88}
             alt="Your profile"
@@ -234,9 +244,8 @@ function EditKittenInfo({ params }: any) {
             }}
             type="text"
             placeholder={`ชื่อ`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorRegisUsername ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={date}
@@ -248,9 +257,8 @@ function EditKittenInfo({ params }: any) {
             placeholder={`วัน เดือน ปี เกิด`}
             onFocus={(e) => (e.target.type = "date")}
             onBlur={(e) => (e.target.type = "text")}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
-              errorDate ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={weight}
@@ -261,9 +269,8 @@ function EditKittenInfo({ params }: any) {
             }}
             type="number"
             placeholder={`น้ำหนัก (กก.)`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorWeight ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorWeight ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <div className="flex items-start relative w-full">
             <input
@@ -275,12 +282,11 @@ function EditKittenInfo({ params }: any) {
               }}
               type="text"
               placeholder={`พันธุ์แมว`}
-              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-                errorBreed ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorBreed ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
             />
             {activeSearch.length > 0 && (
-              <div className="flex flex-col gap-4 absolute top-12 p-4 bg-white text-black01 border-b-2 border-l-2 border-r-2 w-full rounded left-1/2 -translate-x-1/2 ">
+              <div className="flex flex-col gap-4 z-20 absolute top-12 p-4 bg-white text-black01 border-b-2 border-l-2 border-r-2 w-full rounded left-1/2 -translate-x-1/2 ">
                 {activeSearch.map((cat: string, index: number) => (
                   <button
                     type="button"
@@ -330,9 +336,98 @@ function EditKittenInfo({ params }: any) {
               </span>
             </div>
           </div>
+          <div className="flex flex-col items-start gap-8 w-full">
+            <div className="flex flex-col gap-2 w-full">
+              <div className="flex items-start gap-2">
+                <span className=" text-black01 text-base not-italic font-normal leading-6">
+                  ความก้าวร้าว
+                </span>
+                <span className=" text-primary text-base not-italic font-bold leading-6">
+                  (0-10)
+                </span>
+              </div>
+              <div className="relative">
+                <div
+                  className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
+                  style={{ width: `calc(${aggressive * 10}% )` }}
+                />
+                <input
+                  type="range"
+                  min={0}
+                  max={10}
+                  step={1}
+                  value={aggressive}
+                  onChange={(e) => setAggressive(e.target.valueAsNumber)}
+                  list="tickmarks"
+                  className="absolute h-2 rounded-xl appearance-none outline-none bg-line w-full"
+                  style={{
+                    backgroundRepeat: "no-repeat",
+                  }}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col gap-2 w-full">
+              <div className="flex items-start gap-2">
+                <span className=" text-black01 text-base not-italic font-normal leading-6">
+                  ความเขินอาย
+                </span>
+                <span className=" text-primary text-base not-italic font-bold leading-6">
+                  (0-10)
+                </span>
+              </div>
+              <div className="relative">
+                <div
+                  className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
+                  style={{ width: `calc(${shyness * 10}% )` }}
+                />
+                <input
+                  type="range"
+                  min={0}
+                  max={10}
+                  step={1}
+                  value={shyness}
+                  onChange={(e) => setShyness(e.target.valueAsNumber)}
+                  list="tickmarks"
+                  className="absolute h-2 rounded-xl appearance-none outline-none bg-line w-full"
+                  style={{
+                    backgroundRepeat: "no-repeat",
+                  }}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col w-full gap-2">
+              <div className="flex items-start gap-2">
+                <span className=" text-black01 text-base not-italic font-normal leading-6">
+                  ความสนใจต่อสิ่งภายนอก
+                </span>
+                <span className=" text-primary text-base not-italic font-bold leading-6">
+                  (0-10)
+                </span>
+              </div>
+              <div className="relative">
+                <div
+                  className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
+                  style={{ width: `calc(${openness * 10}% )` }}
+                />
+                <input
+                  type="range"
+                  min={0}
+                  max={10}
+                  step={1}
+                  value={openness}
+                  onChange={(e) => setOpenness(e.target.valueAsNumber)}
+                  list="tickmarks"
+                  className="absolute h-2 rounded-xl appearance-none outline-none bg-line w-full"
+                  style={{
+                    backgroundRepeat: "no-repeat",
+                  }}
+                />
+              </div>
+            </div>
+          </div>
           <button
             type="submit"
-            className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6"
+            className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 mt-6 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6"
           >
             ยืนยัน
           </button>

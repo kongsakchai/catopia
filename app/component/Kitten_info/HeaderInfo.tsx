@@ -103,7 +103,7 @@ function HeaderInfo({ params }: any) {
             พันธุ์แมว
           </p>
           <h3 className="text-black01 text-center text-base not-italic font-bold leading-6">
-            สก็อตทิช
+            {kittenInfo.breeding}
           </h3>
         </div>
       </div>

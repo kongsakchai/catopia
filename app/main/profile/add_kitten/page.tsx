@@ -136,8 +136,11 @@ function AddKitten() {
       name: username,
       date,
       weight,
-      breed,
+      breeding: breed,
       gender,
+      aggression: aggressive,
+      shyness,
+      extraversion: openness,
     };
     try {
       const response = await axios.post(
@@ -205,9 +208,8 @@ function AddKitten() {
             }}
             type="text"
             placeholder={`ชื่อ`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorRegisUsername ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={date}
@@ -219,9 +221,8 @@ function AddKitten() {
             placeholder={`วัน เดือน ปี เกิด`}
             onFocus={(e) => (e.target.type = "date")}
             onBlur={(e) => (e.target.type = "text")}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
-              errorDate ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={weight}
@@ -231,9 +232,8 @@ function AddKitten() {
             }}
             type="number"
             placeholder={`น้ำหนัก (กก.)`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorWeight ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorWeight ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <div className="flex items-start relative w-full">
             <input
@@ -245,12 +245,11 @@ function AddKitten() {
               }}
               type="text"
               placeholder={`พันธุ์แมว`}
-              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-                errorBreed ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorBreed ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
             />
             {activeSearch.length > 0 && (
-              <div className="flex flex-col gap-4 absolute top-12 p-4 bg-white text-black01 border-b-2 border-l-2 border-r-2 w-full rounded left-1/2 -translate-x-1/2 ">
+              <div className="flex flex-col gap-4 absolute top-12 p-4 z-30 bg-white text-black01 border-b-2 border-l-2 border-r-2 w-full rounded left-1/2 -translate-x-1/2 ">
                 {activeSearch.map((cat: string, index: number) => (
                   <button
                     type="button"
@@ -342,7 +341,7 @@ function AddKitten() {
               <div className="relative">
                 <div
                   className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
-                  style={{ width: `calc(${shyness * 10}% )` }}
+                  style={{ width: `calc(${shyness * 10}%)` }}
                 />
                 <input
                   type="range"
