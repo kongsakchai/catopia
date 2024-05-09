@@ -1,6 +1,21 @@
-import React from "react";
+'use client';
+
+import axios from "axios";
+import React, { useEffect,useState } from "react";
+import learningcats from "@/public/learningcats.json";
 
 function ResultCat({ params }: any) {
+
+  const [resultSuggest, setResultSuggest] = useState<any>([]);
+
+  const getResultSuggest = async () => {
+    try {
+      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/suggest/" + params.id);
+    } catch (error) {
+      console.log('Error : ', error);
+    }
+  };
+
   return (
     <div
       className="flex flex-col h-[793px] w-full"

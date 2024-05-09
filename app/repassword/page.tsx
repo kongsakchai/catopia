@@ -33,7 +33,7 @@ export default function Forgotpassword() {
       const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/user/otp", data);
 
       if (res.status === 200) {
-        if (res.data.message === "success") {
+        if (res.data.success) {
           localStorage.setItem("keyotp", res.data.data.code);
           return true
         }

@@ -31,7 +31,7 @@ export default function Suggest() {
       );
 
       if (responseKittens.data.status === 200) {
-        if (responseKittens.data.message === "success") {
+        if (responseKittens.data.success) {
           setKittenData(responseKittens.data.data);
         }
       }

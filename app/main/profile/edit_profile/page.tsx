@@ -163,7 +163,7 @@ function EditProfile() {
       );
       if (response.status === 200) {
         const result = response.data;
-        if (result.message === "success") {
+        if (result.success) {
           return response.data.data.file_name;
         }
         return "";
@@ -199,7 +199,7 @@ function EditProfile() {
       if (response.status === 200) {
         const result = response.data;
 
-        if (result.message === "success") {
+        if (result.success) {
           return true;
         }
         return false;

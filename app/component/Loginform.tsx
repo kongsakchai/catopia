@@ -57,7 +57,7 @@ export default function Loginform() {
       });
       if (response.ok) {
         const data = await response.json();
-        if (data.message === "success") {
+        if (data.success) {
           localStorage.setItem("token", data.data.token);
           return true;
         }

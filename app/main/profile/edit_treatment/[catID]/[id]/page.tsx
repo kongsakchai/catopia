@@ -44,7 +44,7 @@ function EditTreatment({ params }: any) {
         }
       );
       if (res.status === 200) {
-        if (res.data.message === "success") {
+        if (res.data.success) {
           setKittenInfo(res.data.data);
         }
       }
@@ -74,7 +74,7 @@ function EditTreatment({ params }: any) {
 
       if (res.status === 200) {
         const reslt = res.data;
-        if (reslt.message === "success") {
+        if (reslt.success) {
           return true;
         }
         return false;
