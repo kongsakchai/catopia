@@ -59,7 +59,7 @@ export default function Genquestion({ progress, setProgress }: any) {
         </span>
       </div>
       <div className="flex flex-col items-start gap-4 max-h-[450px] overflow-auto">
-        {QuestionData[current].choices.map((choice, index) => (
+        {QuestionData[current].choices.map((choice : any, index : number) => (
           <button
             key={index}
             onClick={() => setSelectChoice(choice)}

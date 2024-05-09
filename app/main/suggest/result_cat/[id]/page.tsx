@@ -8,13 +8,34 @@ function ResultCat({ params }: any) {
 
   const [resultSuggest, setResultSuggest] = useState<any>([]);
 
+  useEffect(() => {
+    getResultSuggest();
+  }, []);
+
   const getResultSuggest = async () => {
     try {
-      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/suggest/" + params.id);
+      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/recommend/cat/" + params.id, {
+        headers:{
+          Authorization: `Bearer + ${localStorage.getItem('token')}`
+        }
+      });
+      if (response.status === 200) {
+        if(response.data.data.success){
+          // setResultSuggest(response.data.data.data);
+          matchSuggest(response.data.data.data);
+        }
+      }
     } catch (error) {
       console.log('Error : ', error);
     }
   };
+  
+  function matchSuggest(suggestArr: Array<string>){
+    const resultMatching = learningcats.filter((cat : any) => suggestArr.includes(cat.english_name))
+    setResultSuggest(resultMatching);
+  }
+
+  console.log(resultSuggest);
 
   return (
     <div

@@ -6,25 +6,18 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 export default function Nav() {
-
   const router = useRouter();
+
   const [active, setActive] = useState("home");
 
   const handleActive = (page: string) => {
     setActive(page);
-    router.push(`/main/${page}`)
+    router.push(`/main/${page}`);
   };
 
   useEffect(() => {
-    router.push(`/main/${active}`)
+    router.push(`/main/${active}`);
   }, []);
-
-  useEffect(() => {
-    setActive('home')
-    if (router.pathname) {
-      setActive(router.pathname.split("/")[2] || "home");
-    }
-  }, [router.pathname]);
 
   return (
     <div className=" flex w-full h-[104px] items-center justify-center shrink-0 fixed left-0 bottom-0 border-t-2 border-line">
@@ -42,8 +35,9 @@ export default function Nav() {
               style={{ width: "auto", height: "auto" }}
             />
             <span
-              className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${active === "home" ? "text-primary" : "text-textfield"
-                }`}
+              className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${
+                active === "home" ? "text-primary" : "text-textfield"
+              }`}
             >
               หน้าหลัก
             </span>
@@ -55,16 +49,18 @@ export default function Nav() {
             className="flex flex-col items-center justify-center"
           >
             <Image
-              src={`${active === "breeding" ? "/Breeding-active" : "/Breeding"
-                }.svg`}
+              src={`${
+                active === "breeding" ? "/Breeding-active" : "/Breeding"
+              }.svg`}
               width={28}
               height={28}
               alt="Breeding page"
               style={{ width: "auto", height: "auto" }}
             />
             <span
-              className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${active === "breeding" ? "text-primary" : "text-textfield"
-                }`}
+              className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${
+                active === "breeding" ? "text-primary" : "text-textfield"
+              }`}
             >
               ผสมพันธุ์
             </span>
@@ -76,16 +72,18 @@ export default function Nav() {
             className="flex flex-col items-center justify-center"
           >
             <Image
-              src={`${active === "suggest" ? "/Suggest-active" : "/Suggest"
-                }.svg`}
+              src={`${
+                active === "suggest" ? "/Suggest-active" : "/Suggest"
+              }.svg`}
               width={28}
               height={28}
               alt="Suggest page"
               style={{ width: "auto", height: "auto" }}
             />
             <span
-              className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${active === "suggest" ? "text-primary" : "text-textfield"
-                }`}
+              className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${
+                active === "suggest" ? "text-primary" : "text-textfield"
+              }`}
             >
               แนะนำ
             </span>
@@ -97,16 +95,18 @@ export default function Nav() {
             className="flex flex-col items-center justify-center"
           >
             <Image
-              src={`${active === "profile" ? "/Profile-active" : "/Profile"
-                }.svg`}
+              src={`${
+                active === "profile" ? "/Profile-active" : "/Profile"
+              }.svg`}
               width={28}
               height={28}
               alt="Profile page"
               style={{ width: "auto", height: "auto" }}
             />
             <span
-              className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${active === "profile" ? "text-primary" : "text-textfield"
-                }`}
+              className={`text-xs not-italic font-normal leading-5 text-center mt-1 ${
+                active === "profile" ? "text-primary" : "text-textfield"
+              }`}
             >
               ประวัติ
             </span>
