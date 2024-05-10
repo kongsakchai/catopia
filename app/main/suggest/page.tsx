@@ -30,9 +30,12 @@ export default function Suggest() {
         }
       );
 
-      if (responseKittens.data.status === 200) {
+      if (responseKittens.status === 200) {
         if (responseKittens.data.success) {
+          console.log("responseKittens: ", responseKittens.data.data);
+          
           setKittenData(responseKittens.data.data);
+
         }
       }
     } catch (error) {

@@ -34,7 +34,6 @@ function HeaderInfo({ params }: any) {
       setKittenInfo(response.data.data)
     } catch (error) {
       console.log("Error: ", error);
-
     }
   }
 

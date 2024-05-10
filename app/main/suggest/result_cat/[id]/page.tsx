@@ -3,6 +3,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import learningcats from "@/public/learningcats.json";
+import Image from "next/image";
 
 function ResultCat({ params }: any) {
 
@@ -15,27 +16,28 @@ function ResultCat({ params }: any) {
   const getResultSuggest = async () => {
     try {
       const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/recommend/cat/" + params.id, {
-        headers:{
-          Authorization: `Bearer + ${localStorage.getItem('token')}`
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
       if (response.status === 200) {
-        if(response.data.data.success){
-          // setResultSuggest(response.data.data.data);
-          matchSuggest(response.data.data.data);
+        if (response.data.success) {
+          console.log('Suggest : ', response.data.data);
+
+          matchSuggest(response.data.data);
         }
       }
     } catch (error) {
       console.log('Error : ', error);
     }
   };
-  
-  function matchSuggest(suggestArr: Array<string>){
-    const resultMatching = learningcats.filter((cat : any) => suggestArr.includes(cat.english_name))
+
+  function matchSuggest(suggestArr: Array<string>) {
+    const resultMatching = suggestArr.slice(0, 5).map((catname: string) => (learningcats.find((cat: any) => cat.english_name === catname)));
     setResultSuggest(resultMatching);
   }
 
-  console.log(resultSuggest);
+  console.log("resultSuggest: ", resultSuggest);
 
   return (
     <div
@@ -57,14 +59,31 @@ function ResultCat({ params }: any) {
         </h3>
       </div>
       <div
-        className=" flex items-center justify-center h-[605px] w-full mt-6 border border-solid border-red-800"
+        className="flex items-center justify-center h-[605px] w-full mt-6"
         style={{
           backgroundImage: "url(/ResultSuggestbg.svg)",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           height: "full",
         }}
-      ></div>
+      >
+        <div className="flex flex-col items-start gap-4">
+          {resultSuggest.map((cat: any) => (
+            <div key={cat.id} className="flex justify-between w-[364px] h-[96px] pl-4 pr-4 rounded-[20px] border-[2px] border-solid border-secondary">
+              <div className="flex items-center gap-5">
+                <Image src={cat.img_url} width={72} height={72} alt={cat.english_name} className=" rounded-lg" />
+                <div className=" flex flex-col gap-[6px]">
+                  <h1 className=" text-black01 text-base not-italic font-bold leading-6">{cat.name}</h1>
+                  <h3 className=" text-textfield text-xs not-italic font-semibold leading-5">{cat.english_name}</h3>
+                </div>
+              </div>
+              <button>
+                <Image src="/primary-about.svg" width={24} height={24} alt="aboutcat" />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

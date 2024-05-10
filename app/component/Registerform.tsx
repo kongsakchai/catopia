@@ -86,6 +86,7 @@ export default function Registerform() {
       isGenderSelected
     ) {
       const res = await fetchRegisterDB();
+      console.log('fetchRegisterDB', res);
       //
       if (res) {
         router.push("/");
@@ -96,6 +97,9 @@ export default function Registerform() {
   };
 
   async function fetchRegisterDB() {
+    console.log('username', username);
+    console.log('password', password);
+    
     const data = {
       email,
       date,

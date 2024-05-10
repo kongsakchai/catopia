@@ -129,9 +129,9 @@ function EditProfile() {
     ) {
       const profile = await postFile();
       // console.log("postFile: ", profile);
-      //
+  
       const resultPostUserInfo = await postUserInfo(profile);
-      //
+
       // console.log("resultPostUserInfo: ", resultPostUserInfo);
 
       if (resultPostUserInfo) {

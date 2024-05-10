@@ -21,7 +21,7 @@ function Catslist({ kittensData }: any) {
   }, [kittensData]);
 
   function checkHaveKitten() {
-    if (kittensData.data?.length === 0) {
+    if (kittensData.data === null) {
       return setHaveKitten(false);
     }
     return setHaveKitten(true);

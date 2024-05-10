@@ -42,7 +42,6 @@ function Treatment({ params }: any) {
 
   console.log("treatmentInfo: ", treatmentInfo);
 
-
   return (
     <>
       {!haveTreatment && (
