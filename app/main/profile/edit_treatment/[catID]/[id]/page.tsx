@@ -6,27 +6,27 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
 function EditTreatment({ params }: any) {
-//   console.log("EditTreatment_catID : ", params.catID);
-//   console.log("EditTreatment_id : ", params.id);
+  //   console.log("EditTreatment_catID : ", params.catID);
+  //   console.log("EditTreatment_id : ", params.id);
 
   const router = useRouter();
 
   const [kittenInfo, setKittenInfo] = useState<any>({});
 
-  const [medicalRecord, setMedicalRecord] = useState<number>();
+  const [medicalRecord, setMedicalRecord] = useState<number>(1);
   const [date, setDate] = useState("");
   const [veterinarian, setVeterinarian] = useState("");
   const [hospital, setHospital] = useState("");
   const [detail, setDetail] = useState("");
 
-  const [errorMedicalRecord, setErrorMedicalRecord] = useState(false);
+  // const [errorMedicalRecord, setErrorMedicalRecord] = useState(false);
   const [errorDate, setErrorDate] = useState(false);
   const [errorVeterinarian, setErrorVeterinarian] = useState(false);
   const [errorHospital, setErrorHospital] = useState(false);
   const [errorDetail, setErrorDetail] = useState(false);
   const [errorSave, setErrorSave] = useState("");
 
-//   const [treatmentInfo, setTreatmentInfo] = useState<any>([]);
+  //   const [treatmentInfo, setTreatmentInfo] = useState<any>([]);
 
   useEffect(() => {
     getKittenInfo();
@@ -106,27 +106,27 @@ function EditTreatment({ params }: any) {
     }
   }
 
-//   console.log("kittenInfo: ", kittenInfo);
-//   console.log("treatmentInfo: ", treatmentInfo);
+  //   console.log("kittenInfo: ", kittenInfo);
+  //   console.log("treatmentInfo: ", treatmentInfo);
 
   const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isMedicalRecordValid = medicalRecord !== undefined;
+    // const isMedicalRecordValid = medicalRecord !== undefined;
     const isDateValid = date.trim() !== "";
     const isVeterinarianValid = veterinarian.trim() !== "";
     const isHospitalValid = hospital.trim() !== "";
     const isDetailValid = detail.trim() !== "";
     const resultPostTreatment = await postTreatment();
 
-    setErrorMedicalRecord(!isMedicalRecordValid);
+    // setErrorMedicalRecord(!isMedicalRecordValid);
     setErrorDate(!isDateValid);
     setErrorVeterinarian(!isVeterinarianValid);
     setErrorHospital(!isHospitalValid);
     setErrorDetail(!isDetailValid);
 
     if (
-      isMedicalRecordValid &&
+      // isMedicalRecordValid &&
       isDateValid &&
       isVeterinarianValid &&
       isHospitalValid &&
@@ -169,11 +169,9 @@ function EditTreatment({ params }: any) {
             value={medicalRecord}
             onChange={(e) => {
               setMedicalRecord(parseInt(e.target.value));
-              setErrorMedicalRecord(false);
+              // setErrorMedicalRecord(false);
             }}
-            className={`flex w-[364px] h-10 flex-col items-start text-center text-base not-italic font-normal leading-6 pl-1 pt-1.5 border rounded ${
-              errorMedicalRecord ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-center text-base not-italic font-normal leading-6 pl-1 pt-1.5 border rounded border-textfield focus:outline-primary`}
           >
             <option
               className=" text-black01 text-base not-italic font-normal leading-6"
@@ -211,9 +209,8 @@ function EditTreatment({ params }: any) {
             placeholder={`วัน เดือน ปี เกิด`}
             onFocus={(e) => (e.target.type = "date")}
             onBlur={(e) => (e.target.type = "text")}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
-              errorDate ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={veterinarian}
@@ -223,9 +220,8 @@ function EditTreatment({ params }: any) {
             }}
             type="text"
             placeholder={`สัตวแพทย์ / เลขที่ใบอนุญาต`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorVeterinarian ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorVeterinarian ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={hospital}
@@ -235,9 +231,8 @@ function EditTreatment({ params }: any) {
             }}
             type="text"
             placeholder={`สถานที่รักษา`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorHospital ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorHospital ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={detail}
@@ -247,9 +242,8 @@ function EditTreatment({ params }: any) {
             }}
             type="text"
             placeholder={`รายละเอียดเพิ่มเติม`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorDetail ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDetail ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <button
             type="submit"

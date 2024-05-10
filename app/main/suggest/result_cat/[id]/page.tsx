@@ -1,6 +1,44 @@
-import React from "react";
+'use client';
+
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import learningcats from "@/public/learningcats.json";
 
 function ResultCat({ params }: any) {
+
+  const [resultSuggest, setResultSuggest] = useState<any>([]);
+
+  useEffect(() => {
+    getResultSuggest();
+  }, []);
+
+  const getResultSuggest = async () => {
+    try {
+      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + '/cat/' + params.id, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+
+      if (response.status === 200) {
+        if (response.data.message === "success") {
+          getMatch(response.data.data);
+        }
+      }
+
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  }
+
+  const getMatch = (matchData: any) => {
+    const matchCats = learningcats.filter((cat: any) => matchData.includes(cat.english_name));
+    setResultSuggest(matchCats);
+  }
+
+  console.log("resultSuggest: ", resultSuggest);
+  
+
   return (
     <div
       className="flex flex-col h-[793px] w-full"
