@@ -40,7 +40,7 @@ function AddTreatment({ params }: any) {
         }
       );
       if (res.status === 200) {
-        if (res.data.message === "success") {
+        if (res.data.success) {
           setKittenInfo(res.data.data);
         }
       }
@@ -70,7 +70,7 @@ function AddTreatment({ params }: any) {
 
       if (res.status === 201) {
         const reslt = res.data;
-        if (reslt.message === "success") {
+        if (reslt.success) {
           return true;
         }
         return false;

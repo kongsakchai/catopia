@@ -57,7 +57,7 @@ export default function InputOTP() {
       const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/user/otp/verify", data);
 
       if (res.status === 200) {
-        if (res.data.message === "success") {
+        if (res.data.success) {
           return true
         }
         return false

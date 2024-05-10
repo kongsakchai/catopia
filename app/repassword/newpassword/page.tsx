@@ -64,7 +64,7 @@ export default function Newpassword() {
       const res = await axios.put(process.env.NEXT_PUBLIC_API_URL + "/user/password", data);
 
       if (res.status === 201) {
-        if (res.data.message === 'success') {
+        if (res.data.success) {
           return true
         }
         return false

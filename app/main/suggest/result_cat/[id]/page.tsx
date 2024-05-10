@@ -14,30 +14,28 @@ function ResultCat({ params }: any) {
 
   const getResultSuggest = async () => {
     try {
-      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + '/cat/' + params.id, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
+      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + "/recommend/cat/" + params.id, {
+        headers:{
+          Authorization: `Bearer + ${localStorage.getItem('token')}`
+        }
       });
-
       if (response.status === 200) {
-        if (response.data.message === "success") {
-          getMatch(response.data.data);
+        if(response.data.data.success){
+          // setResultSuggest(response.data.data.data);
+          matchSuggest(response.data.data.data);
         }
       }
-
     } catch (error) {
-      console.log("Error: ", error);
+      console.log('Error : ', error);
     }
-  }
-
-  const getMatch = (matchData: any) => {
-    const matchCats = learningcats.filter((cat: any) => matchData.includes(cat.english_name));
-    setResultSuggest(matchCats);
-  }
-
-  console.log("resultSuggest: ", resultSuggest);
+  };
   
+  function matchSuggest(suggestArr: Array<string>){
+    const resultMatching = learningcats.filter((cat : any) => suggestArr.includes(cat.english_name))
+    setResultSuggest(resultMatching);
+  }
+
+  console.log(resultSuggest);
 
   return (
     <div

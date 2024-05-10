@@ -105,6 +105,8 @@ export default function Resultbreeding() {
     }
   };
 
+  const handleReload = () => window.location.reload();
+
   return (
     <div
       className="flex flex-col"
@@ -139,7 +141,7 @@ export default function Resultbreeding() {
               <Image src="/Refresh-btn.svg" width={24} height={24} alt="Refresh" />
               <p className="text-primary text-base not-italic font-normal leading-6">ลองใหม่อีกครั้ง</p>
             </button>
-            <button onClick={() => router.push('/main/home')} type="button" className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border border-solid border-primary bg-primary">
+            <button onClick={handleReload} type="button" className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border border-solid border-primary bg-primary">
               <p className="text-white text-base not-italic font-normal leading-6">กลับสูหน้าหลัก</p>
             </button>
           </div>

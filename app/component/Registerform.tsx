@@ -111,7 +111,7 @@ export default function Registerform() {
       });
       if (response.ok) {
         const data = await response.json();
-        if (data.message === "success") {
+        if (data.success) {
           // router.push("/");
           return true;
         }
