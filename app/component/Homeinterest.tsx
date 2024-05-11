@@ -19,7 +19,7 @@ export default function Homeinterest() {
     setInterest(newSlided);
   };
 
-  console.log("interest : ", interest);
+  // console.log("interest : ", interest);
 
   return (
     <div className="flex flex-col items-start gap-2 w-full">

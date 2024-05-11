@@ -14,8 +14,6 @@ export default function Loginform() {
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorLigon, setErrorLogin] = useState("");
 
-  const [passToMain, setPassToMain] = useState(false);
-
   const [passwordVisible, setPasswordVisible] = useState(false);
   const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -35,8 +33,8 @@ export default function Loginform() {
       const resPost = await fetchLoginrDB();
       console.log("resPost : ", resPost);
 
-      if (resPost) {
-        if (passToMain) {
+      if (resPost.success) {
+        if (!resPost.firstLogin) {
           router.push("/main/home");
         } else router.push("/register/getquestion");
       } else setErrorLogin("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
@@ -64,18 +62,20 @@ export default function Loginform() {
       );
 
       if (response.status === 201) {
-        const data = response.data;
-        if (data.success) {
-          localStorage.setItem("token", data.data.token);
-          setPassToMain(data.data.firstLogin);
-          return true;
+        const result = response.data;
+        if (result.success) {
+          localStorage.setItem("token", result.data.token);
+          console.log("firstLogin : ", result.data.firstLogin);
+          
+          // setPassToMain(!result.data.firstLogin);
+          return { success: true, firstLogin: result.data.firstLogin};
         }
-        return false;
+        return { success: false, firstLogin: false };
       }
-      return false;
+      return { success: false, firstLogin: false };
     } catch (error) {
       console.log(error);
-      return false;
+      return { success: false, firstLogin: false };
     }
   }
 
