@@ -30,7 +30,7 @@ export default function Forgotpassword() {
   const sendUsernameForOTP = async () => {
     const data = { username }
     try {
-      const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/user/otp", data);
+      const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/forget-password", data);
 
       if (res.status === 200) {
         if (res.data.success) {

@@ -2,6 +2,7 @@
 import QuestionData from "@/public/QuestionData";
 import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../register/getquestion/page";
+import axios from "axios";
 
 export default function Genquestion({ progress, setProgress }: any) {
 
@@ -13,6 +14,9 @@ export default function Genquestion({ progress, setProgress }: any) {
 
   useEffect(() => {
     console.log(allSelected);
+    if (allSelected.length === 8) {
+      handleSentAnswer();
+    }
   }, [allSelected]);
 
   const prevQuestion = () => {
@@ -37,16 +41,33 @@ export default function Genquestion({ progress, setProgress }: any) {
     } else setCurrent(current + 1);
   };
 
-  const handleSelectChoice = async () => {
-    await setAllSelected((prevAllSelected): any => [...prevAllSelected, selectChoice]);
+  const handleSelectChoice = () => {
+    setAllSelected((prevAllSelected): any => [...prevAllSelected, selectChoice]);
     setProgress(progress + 100 / 7);
     nextQuestion();
   };
 
-  // const handleSelectChoice = () => {
-  //     setAllSelected({...allSelected, [current]: selectChoice});
-  //     nextQuestion();
-  // };
+  const handleSentAnswer = async () => {
+    const answer = allSelected
+    console.log(answer);
+
+    console.log(process.env.NEXT_PUBLIC_API_URL);
+
+    try {
+      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + '/user/answer', { answer }, {
+        headers: {
+          authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      if (response.status === 200) {
+        if (response.data.success) {
+          console.log("success sent answer");
+        }
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  }
 
   return (
     <div className="flex flex-col items-start gap-4 mt-4">
@@ -59,7 +80,7 @@ export default function Genquestion({ progress, setProgress }: any) {
         </span>
       </div>
       <div className="flex flex-col items-start gap-4 max-h-[450px] overflow-auto">
-        {QuestionData[current].choices.map((choice : any, index : number) => (
+        {QuestionData[current].choices.map((choice: any, index: number) => (
           <button
             key={index}
             onClick={() => setSelectChoice(choice)}

@@ -5,6 +5,7 @@ import QuestionData from "@/public/QuestionData";
 import { useState, useEffect, useContext } from "react";
 import { SuggestContext } from '@/app/main/suggest/page';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 function GenQuesSugest({ progress, setProgress }: any) {
 
@@ -13,11 +14,14 @@ function GenQuesSugest({ progress, setProgress }: any) {
     const router = useRouter();
 
     const [current, setCurrent] = useState(0);
-    const [selectChoice, setSelectChoice] = useState("");
+    const [selectChoice, setSelectChoice] = useState<number>(0);
     const [allSelected, setAllSelected] = useState([]);
 
     useEffect(() => {
         console.log(allSelected);
+        if(allSelected.length === 8){
+            handleSentAnswer();
+        }
     }, [allSelected]);
 
     const prevQuestion = () => {
@@ -35,18 +39,41 @@ function GenQuesSugest({ progress, setProgress }: any) {
     };
 
     const nextQuestion = () => {
-        setSelectChoice(""); // Clear selectChoice
+        setSelectChoice(0); // Clear selectChoice
         if (current === QuestionData.length - 1) {
-            router.push("/main/suggest/result_user/1")
+
+            router.push("/main/suggest/result_user")
             // console.log(allSelected)
         } else setCurrent(current + 1);
     };
 
-    const handleSelectChoice = async () => {
-        await setAllSelected((prevAllSelected): any => [...prevAllSelected, selectChoice]);
+    const handleSelectChoice = () => {
+        setAllSelected((prevAllSelected): any => [...prevAllSelected, selectChoice]);
         setProgress(progress + 100 / 7);
         nextQuestion();
     };
+
+    const handleSentAnswer = async () => {
+        const answer = allSelected
+        console.log(answer);
+
+        console.log(process.env.NEXT_PUBLIC_API_URL);
+
+        try {
+            const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + '/user/answer', { answer }, {
+                headers: {
+                    authorization: "Bearer " + localStorage.getItem("token")
+                }
+            })
+            if (response.status === 200) {
+                if (response.data.success) {
+                    console.log("success sent answer");
+                }
+            }
+        } catch (error) {
+            console.log("Error: ", error);
+        }
+    }
 
     return (
         <div className="flex flex-col items-start gap-4 mt-4">
@@ -59,17 +86,17 @@ function GenQuesSugest({ progress, setProgress }: any) {
                 </span>
             </div>
             <div className='flex flex-col items-start gap-4 max-h-[450px] overflow-auto'>
-                {QuestionData[current].choices.map((choice, index) => (
+                {QuestionData[current].choices.map((choice: string, index: number) => (
                     <button
                         key={index}
-                        onClick={() => setSelectChoice(choice)}
-                        className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice !== selectChoice
+                        onClick={() => setSelectChoice(index + 1)}
+                        className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${index + 1 !== selectChoice
                             ? "rounded-lg border-2 border-solid"
                             : "border-primary rounded-lg border-2 border-solid"
                             } hover:bg-primary hover:text-white`}
                     >
                         <span>{choice}</span>
-                        {choice === selectChoice && (
+                        {index + 1 === selectChoice && (
                             <img
                                 src="/Check.svg"
                                 alt="Check"

@@ -36,7 +36,7 @@ function EditTreatment({ params }: any) {
   const getKittenInfo = async () => {
     try {
       const res = await axios.get(
-        process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`,
+        process.env.NEXT_PUBLIC_API_URL + `/cat/${params.catID}`,
         {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -133,7 +133,7 @@ function EditTreatment({ params }: any) {
       isDetailValid &&
       resultPostTreatment
     ) {
-      router.push(`/main/profile/kitten_info/${params.id}`);
+      router.push(`/main/profile/kitten_info/${params.catID}`);
     } else {
       setErrorSave("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
@@ -144,7 +144,7 @@ function EditTreatment({ params }: any) {
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
         <button
           type="button"
-          onClick={() => router.push(`/main/profile/kitten_info/${params.id}`)}
+          onClick={() => router.push(`/main/profile/kitten_info/${params.catID}`)}
         >
           <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />
         </button>

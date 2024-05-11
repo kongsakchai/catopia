@@ -61,7 +61,7 @@ export default function Newpassword() {
       password: newPassword
     }
     try {
-      const res = await axios.put(process.env.NEXT_PUBLIC_API_URL + "/user/password", data);
+      const res = await axios.put(process.env.NEXT_PUBLIC_API_URL + "/reset-password", data);
 
       if (res.status === 201) {
         if (res.data.success) {
