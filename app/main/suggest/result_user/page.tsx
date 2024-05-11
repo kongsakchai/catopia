@@ -3,8 +3,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import learningcats from "@/public/learningcats.json";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 function ResultUser() {
+  const router = useRouter();
 
   const [resultSuggest, setResultSuggest] = useState<any>([]);
 
@@ -59,14 +62,31 @@ function ResultUser() {
         </h3>
       </div>
       <div
-        className=" flex items-center justify-center h-[605px] w-full mt-6 border border-solid border-red-800"
+        className=" flex items-center justify-center h-[605px] w-full mt-6"
         style={{
           backgroundImage: "url(/ResultSuggestbg.svg)",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           height: "full",
         }}
-      ></div>
+      >
+        <div className="flex flex-col items-start gap-4">
+          {resultSuggest.map((cat: any) => (
+            <div key={cat.id} className="flex justify-between w-[364px] h-[96px] pl-4 pr-4 rounded-[20px] border-[2px] border-solid border-secondary">
+              <div className="flex items-center gap-5">
+                <Image src={cat.img_url} width={72} height={72} alt={cat.english_name} className=" rounded-lg" />
+                <div className=" flex flex-col gap-[6px]">
+                  <h1 className=" text-black01 text-base not-italic font-bold leading-6">{cat.name}</h1>
+                  <h3 className=" text-textfield text-xs not-italic font-semibold leading-5">{cat.english_name}</h3>
+                </div>
+              </div>
+              <button onClick={()=> router.push(`/main/home/learning/${cat.name}`)}>
+                <Image src="/primary-about.svg" width={24} height={24} alt="aboutcat" />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -39,7 +39,7 @@ export default function Home() {
   console.log("data : ", data);
  
   return (
-    <div className="flex flex-col items-start gap-4 mx-8 my-12 border border-solid border-red-500">
+    <div className="flex flex-col items-start gap-4 mx-8 my-12">
       <Homeheader />
       <Homerecommand />
       <Homeinterest />

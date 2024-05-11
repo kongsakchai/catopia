@@ -6,7 +6,7 @@ import { ActiveContext } from "@/app/main/layout";
 import Image from "next/image";
 import DataKitten from "@/public/DataKitten.json";
 import Catparent from "@/public/Catparent.json";
-import Homeinterest from "./Homeinterest";
+// import Homeinterest from "./Homeinterest";
 import { useRouter } from "next/navigation";
 
 export default function Resultbreeding() {
@@ -149,7 +149,7 @@ export default function Resultbreeding() {
               </p>
             </div>
           </div>
-          <Homeinterest />
+          {/* <Homeinterest /> */}
           <div className="flex flex-col justify-center items-start gap-4 mt-6">
             <button
               onClick={refreshQuestion}
@@ -286,7 +286,7 @@ export default function Resultbreeding() {
           </div>
           <div className="flex flex-col items-center absolute gap-6 top-[115px] w-full h-full rounded-t-2xl bg-white">
             <div className="flex mt-[320px]">
-              <Homeinterest />
+              {/* <Homeinterest /> */}
             </div>
             <div className="flex flex-col justify-center items-start gap-4">
               <button
