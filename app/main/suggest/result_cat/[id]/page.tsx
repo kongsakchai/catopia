@@ -4,8 +4,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import learningcats from "@/public/learningcats.json";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 function ResultCat({ params }: any) {
+
+  const router = useRouter();
 
   const [resultSuggest, setResultSuggest] = useState<any>([]);
 
@@ -22,7 +25,7 @@ function ResultCat({ params }: any) {
       });
       if (response.status === 200) {
         if (response.data.success) {
-          console.log('Suggest : ', response.data.data);
+          // console.log('Suggest : ', response.data.data);
 
           matchSuggest(response.data.data);
         }
@@ -37,11 +40,11 @@ function ResultCat({ params }: any) {
     setResultSuggest(resultMatching);
   }
 
-  console.log("resultSuggest: ", resultSuggest);
+  // console.log("resultSuggest: ", resultSuggest);
 
   return (
     <div
-      className="flex flex-col h-[793px] w-full"
+      className="flex flex-col h-screen w-full"
       style={{
         backgroundImage: "url(/Mainbg.svg)",
         backgroundSize: "cover",
@@ -77,7 +80,7 @@ function ResultCat({ params }: any) {
                   <h3 className=" text-textfield text-xs not-italic font-semibold leading-5">{cat.english_name}</h3>
                 </div>
               </div>
-              <button>
+              <button onClick={()=> router.push(`/main/home/learning/${cat.name}`)}>
                 <Image src="/primary-about.svg" width={24} height={24} alt="aboutcat" />
               </button>
             </div>
