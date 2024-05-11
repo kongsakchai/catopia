@@ -31,31 +31,36 @@ export default function Homeinterest() {
           ที่คุณอาจจะสนใจ
         </h1>
       </div>
-      <div className="flex flex-row w-full gap-4 overflow-x-auto">
-        {interest &&
-          Object.values(interest).map((cat: any, index: number) => (
-            <div
-              key={index}
-              className="flex flex-col justify-center items-center gap-2"
-            >
-              <button
-                type="button"
-                className="rounded-lg w-[155px] h-[130px]"
-                onClick={() => router.push(`/main/home/learning/${cat.name}`)}
+      <div
+        className="flex flex-col w-full overflow-y-auto"
+        style={{ maxHeight: "300px" }}
+      >
+        <div className="grid grid-cols-2 gap-4">
+          {interest &&
+            Object.values(interest).map((cat: any, index: number) => (
+              <div
+                key={index}
+                className="flex flex-col justify-center items-center gap-2"
               >
-                <Image
-                  src={cat.img_url}
-                  alt={cat.name}
-                  width={155}
-                  height={130}
-                  className="rounded-lg w-full h-full object-cover"
-                />
-              </button>
-              <h1 className="text-black01 text-nowrap text-xs not-italic font-normal leading-5">
-                {cat.name}
-              </h1>
-            </div>
-          ))}
+                <button
+                  type="button"
+                  className="rounded-lg w-[155px] h-[130px]"
+                  onClick={() => router.push(`/main/home/learning/${cat.name}`)}
+                >
+                  <Image
+                    src={cat.img_url}
+                    alt={cat.name}
+                    width={155}
+                    height={130}
+                    className="rounded-lg w-full h-full object-cover"
+                  />
+                </button>
+                <h1 className="text-black01 text-nowrap text-xs not-italic font-normal leading-5">
+                  {cat.name}
+                </h1>
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
