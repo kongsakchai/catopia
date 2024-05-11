@@ -5,17 +5,17 @@ import { DataContext } from "../register/getquestion/page";
 import axios from "axios";
 
 export default function Genquestion({ progress, setProgress }: any) {
-
   const { setQuestionState }: any = useContext(DataContext);
 
   const [current, setCurrent] = useState(0);
-  const [selectChoice, setSelectChoice] = useState("");
+  const [selectChoice, setSelectChoice] = useState<number>(-1);
   const [allSelected, setAllSelected] = useState([]);
 
   useEffect(() => {
     console.log(allSelected);
     if (allSelected.length === 8) {
       handleSentAnswer();
+      setQuestionState("complete");
     }
   }, [allSelected]);
 
@@ -34,32 +34,36 @@ export default function Genquestion({ progress, setProgress }: any) {
   };
 
   const nextQuestion = () => {
-    setSelectChoice(""); // Clear selectChoice
-    if (current === QuestionData.length - 1) {
-      setQuestionState("complete");
-      // console.log(allSelected)
-    } else setCurrent(current + 1);
+    setSelectChoice(-1); // Clear selectChoice
+    if (current < QuestionData.length - 1) setCurrent(current + 1);
   };
 
   const handleSelectChoice = () => {
-    setAllSelected((prevAllSelected): any => [...prevAllSelected, selectChoice]);
+    setAllSelected((prevAllSelected): any => [
+      ...prevAllSelected,
+      selectChoice,
+    ]);
     setProgress(progress + 100 / 7);
     nextQuestion();
   };
 
   const handleSentAnswer = async () => {
-    const answer = allSelected
-    console.log(answer);
+    const answer = allSelected;
+    console.log("answer: ", answer);
 
     console.log(process.env.NEXT_PUBLIC_API_URL);
 
     try {
-      const response = await axios.post(process.env.NEXT_PUBLIC_API_URL + '/user/answer', { answer }, {
-        headers: {
-          authorization: "Bearer " + localStorage.getItem("token")
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + "/user/answer",
+        { answer },
+        {
+          headers: {
+            authorization: "Bearer " + localStorage.getItem("token"),
+          },
         }
-      })
-      if (response.status === 200) {
+      );
+      if (response.status === 201) {
         if (response.data.success) {
           console.log("success sent answer");
         }
@@ -67,7 +71,7 @@ export default function Genquestion({ progress, setProgress }: any) {
     } catch (error) {
       console.log("Error: ", error);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col items-start gap-4 mt-4">
@@ -83,14 +87,15 @@ export default function Genquestion({ progress, setProgress }: any) {
         {QuestionData[current].choices.map((choice: any, index: number) => (
           <button
             key={index}
-            onClick={() => setSelectChoice(choice)}
-            className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${choice !== selectChoice
-              ? "rounded-lg border-2 border-solid"
-              : "border-primary rounded-lg border-2 border-solid"
-              } hover:bg-primary hover:text-white`}
+            onClick={() => setSelectChoice(index)}
+            className={`flex items-center justify-between w-[364px] gap-2.5 p-4 border-black01 ${
+              index !== selectChoice
+                ? "rounded-lg border-2 border-solid"
+                : "border-primary rounded-lg border-2 border-solid"
+            } hover:bg-primary hover:text-white`}
           >
             <span>{choice}</span>
-            {choice === selectChoice && (
+            {index === selectChoice && (
               <img
                 src="/Check.svg"
                 alt="Check"
