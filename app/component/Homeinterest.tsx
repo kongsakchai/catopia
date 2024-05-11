@@ -10,19 +10,6 @@ export default function Homeinterest({ suggestData }: any) {
 
   const router = useRouter();
 
-  const [interest, setInterest] = useState({});
-
-  useEffect(() => {
-    sliceInterest();
-  }, []);
-
-  const sliceInterest = () => {
-    const newSlided = learningcats.slice(0, 10);
-    setInterest(newSlided);
-  };
-
-  // console.log("interest : ", interest);
-
   const [resultSuggest, setResultSuggest] = useState<any>([]);
 
   useEffect(() => {
