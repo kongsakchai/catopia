@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
 import learningcats from "@/public/learningcats.json";
 import Headerlearning from "@/app/component/Headerlearning";
 import Detailslearning from "@/app/component/Detailslearning";
+import { ActiveContext } from "@/app/main/layout";
 
 interface learningcats {
   name: string;
@@ -21,6 +22,9 @@ interface learningcats {
 
 export default function Learning({ params }: any): JSX.Element {
   const router = useRouter();
+
+  const { setActive }: any = useContext(ActiveContext);
+
   const [currentCat, setCurrentCat] = useState<any>({} as learningcats);
 
   const encodedCat = decodeURI(params.slug);
@@ -35,6 +39,7 @@ export default function Learning({ params }: any): JSX.Element {
 
   function blackToHomePage() {
     setCurrentCat({} as learningcats);
+    setActive("home");
     router.push("/main/home");
   }
 

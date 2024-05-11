@@ -3,12 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { ActiveContext } from "@/app/main/layout";
 
 export default function Nav() {
   const router = useRouter();
 
-  const [active, setActive] = useState("home");
+  const { active, setActive }: any = useContext(ActiveContext);
 
   const handleActive = (page: string) => {
     setActive(page);

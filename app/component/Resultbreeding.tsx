@@ -2,6 +2,7 @@
 
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../main/breeding/page";
+import { ActiveContext } from "@/app/main/layout";
 import Image from "next/image";
 import DataKitten from "@/public/DataKitten.json";
 import Catparent from "@/public/Catparent.json";
@@ -9,7 +10,6 @@ import Homeinterest from "./Homeinterest";
 import { useRouter } from "next/navigation";
 
 export default function Resultbreeding() {
-
   const router = useRouter();
 
   useEffect(() => {
@@ -28,6 +28,8 @@ export default function Resultbreeding() {
     setBreedingState,
     setProgressBreeding,
   }: any = useContext(DataContext);
+
+  const { setActive }: any = useContext(ActiveContext);
 
   function isShowGender(show: string) {
     if (show === "showMaleKitten") {
@@ -105,7 +107,10 @@ export default function Resultbreeding() {
     }
   };
 
-  const handleReload = () => window.location.reload();
+  function blackToHomePage() {
+    setActive("home");
+    router.push("/main/home");
+  }
 
   return (
     <div
@@ -129,20 +134,45 @@ export default function Resultbreeding() {
       {showKitten.length === 0 ? (
         <div className="flex flex-col items-center shrink-0 z-0 top-[115px] w-full h-screen rounded-t-2xl bg-white">
           <div className="flex flex-col items-center gap-6 mt-20 mb-20">
-            <Image src="/Warning.svg" width={80} height={80} alt="Alert no have kitten" />
+            <Image
+              src="/Warning.svg"
+              width={80}
+              height={80}
+              alt="Alert no have kitten"
+            />
             <div className="flex flex-col items-center justify-center">
-              <p className="text-black01 text-center text-base not-italic font-bold leading-6">ไม่สามารถคาดคะเนสีของ</p>
-              <p className="text-black01 text-center text-base not-italic font-bold leading-6">ลูกแมวผ่านพ่อและแม่พันธุ์</p>
+              <p className="text-black01 text-center text-base not-italic font-bold leading-6">
+                ไม่สามารถคาดคะเนสีของ
+              </p>
+              <p className="text-black01 text-center text-base not-italic font-bold leading-6">
+                ลูกแมวผ่านพ่อและแม่พันธุ์
+              </p>
             </div>
           </div>
           <Homeinterest />
           <div className="flex flex-col justify-center items-start gap-4 mt-6">
-            <button onClick={refreshQuestion} type="button" className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border-[1.5px] border-solid border-primary">
-              <Image src="/Refresh-btn.svg" width={24} height={24} alt="Refresh" />
-              <p className="text-primary text-base not-italic font-normal leading-6">ลองใหม่อีกครั้ง</p>
+            <button
+              onClick={refreshQuestion}
+              type="button"
+              className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border-[1.5px] border-solid border-primary"
+            >
+              <Image
+                src="/Refresh-btn.svg"
+                width={24}
+                height={24}
+                alt="Refresh"
+              />
+              <p className="text-primary text-base not-italic font-normal leading-6">
+                ลองใหม่อีกครั้ง
+              </p>
             </button>
-            <button onClick={handleReload} type="button" className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border border-solid border-primary bg-primary">
-              <p className="text-white text-base not-italic font-normal leading-6">กลับสูหน้าหลัก</p>
+            <button
+              onClick={blackToHomePage}
+              className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border border-solid border-primary bg-primary"
+            >
+              <p className="text-white text-base not-italic font-normal leading-6">
+                กลับสู่หน้าหลัก
+              </p>
             </button>
           </div>
         </div>
@@ -155,8 +185,9 @@ export default function Resultbreeding() {
                   type="button"
                   onClick={() => isShowGender("showMaleKitten")}
                   style={{ transition: "background-color 0.3s, color 0.3s" }}
-                  className={`flex items-center justify-center gap-[6px] shrink-0 w-[152px] h-[34px] rounded ${showMaleKitten ? "bg-primary" : "bg-none"
-                    }`}
+                  className={`flex items-center justify-center gap-[6px] shrink-0 w-[152px] h-[34px] rounded ${
+                    showMaleKitten ? "bg-primary" : "bg-none"
+                  }`}
                 >
                   <Image
                     src="/male-gender.svg"
@@ -172,8 +203,9 @@ export default function Resultbreeding() {
                   type="button"
                   onClick={() => isShowGender("showFemaleKitten")}
                   style={{ transition: "background-color 0.3s, color 0.3s" }}
-                  className={`flex items-center justify-center gap-[6px] shrink-0 w-[152px] h-[34px] rounded ${showFemaleKitten ? "bg-primary" : "bg-none"
-                    }`}
+                  className={`flex items-center justify-center gap-[6px] shrink-0 w-[152px] h-[34px] rounded ${
+                    showFemaleKitten ? "bg-primary" : "bg-none"
+                  }`}
                 >
                   <Image
                     src="/female-gender.svg"
@@ -257,12 +289,29 @@ export default function Resultbreeding() {
               <Homeinterest />
             </div>
             <div className="flex flex-col justify-center items-start gap-4">
-              <button onClick={refreshQuestion} type="button" className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border-[1.5px] border-solid border-primary">
-                <Image src="/Refresh-btn.svg" width={24} height={24} alt="Refresh" />
-                <p className="text-primary text-base not-italic font-normal leading-6">ลองใหม่อีกครั้ง</p>
+              <button
+                onClick={refreshQuestion}
+                type="button"
+                className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border-[1.5px] border-solid border-primary"
+              >
+                <Image
+                  src="/Refresh-btn.svg"
+                  width={24}
+                  height={24}
+                  alt="Refresh"
+                />
+                <p className="text-primary text-base not-italic font-normal leading-6">
+                  ลองใหม่อีกครั้ง
+                </p>
               </button>
-              <button onClick={() => router.push('/main/home')} type="button" className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border border-solid border-primary bg-primary">
-                <p className="text-white text-base not-italic font-normal leading-6">กลับสูหน้าหลัก</p>
+              <button
+                onClick={blackToHomePage}
+                type="button"
+                className="flex w-[364px] px-4 py-2 justify-center items-center gap-[10px] rounded-lg border border-solid border-primary bg-primary"
+              >
+                <p className="text-white text-base not-italic font-normal leading-6">
+                  กลับสูหน้าหลัก
+                </p>
               </button>
             </div>
           </div>

@@ -4,12 +4,7 @@ import Titlebreeding from "@/app/component/Titlebreeding";
 import Selectbreeding from "@/app/component/Selectbreeding";
 import Resultbreeding from "@/app/component/Resultbreeding";
 
-import {
-  useState,
-  createContext,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useState, createContext, Dispatch, SetStateAction } from "react";
 
 type DataContextType = {
   breedingState: string;
