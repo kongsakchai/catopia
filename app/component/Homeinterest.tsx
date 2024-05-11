@@ -5,7 +5,9 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-export default function Homeinterest() {
+export default function Homeinterest({ suggestData }: any) {
+  console.log("suggestData from Home : ", suggestData);
+
   const router = useRouter();
 
   const [interest, setInterest] = useState({});
@@ -20,6 +22,24 @@ export default function Homeinterest() {
   };
 
   // console.log("interest : ", interest);
+
+  const [resultSuggest, setResultSuggest] = useState<any>([]);
+
+  useEffect(() => {
+    matchSuggest(suggestData);
+  }, [suggestData]);
+
+  function matchSuggest(suggestArr: Array<string>) {
+    if (Array.isArray(suggestArr)) {
+      const resultMatching = suggestArr
+        .map((catname: string) =>
+          learningcats.find((cat: any) => cat.english_name === catname)
+        );
+      setResultSuggest(resultMatching);
+    } else console.log("suggestArr is not an array");
+  }
+
+  console.log("resultSuggest: ", resultSuggest);
 
   return (
     <div className="flex flex-col items-start gap-2 w-full">
@@ -36,8 +56,8 @@ export default function Homeinterest() {
         style={{ maxHeight: "300px" }}
       >
         <div className="grid grid-cols-2 gap-4">
-          {interest &&
-            Object.values(interest).map((cat: any, index: number) => (
+          {resultSuggest &&
+            resultSuggest.map((cat: any, index: number) => (
               <div
                 key={index}
                 className="flex flex-col justify-center items-center gap-2"

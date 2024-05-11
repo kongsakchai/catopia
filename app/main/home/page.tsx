@@ -9,7 +9,7 @@ import Homerecommand from "@/app/component/Homerecommand";
 import Homerefer from "@/app/component/Homerefer";
 
 export default function Home() {
-  const [data, setData] = useState([]);
+  const [suggestData, setSuggestData] = useState([]);
 
   useEffect(() => {
     getSuggest();
@@ -26,7 +26,7 @@ export default function Home() {
         }
       );
       if (response.status === 200) {
-        setData(response.data.data);
+        setSuggestData(response.data.data);
         return true;
       }
       return false;
@@ -36,13 +36,13 @@ export default function Home() {
     }
   };
 
-  console.log("data : ", data);
- 
+  // console.log("suggestData : ", suggestData);
+
   return (
     <div className="flex flex-col items-start gap-4 mx-8 my-12">
       <Homeheader />
       <Homerecommand />
-      <Homeinterest />
+      <Homeinterest suggestData={suggestData} />
       <Homerefer />
     </div>
   );
