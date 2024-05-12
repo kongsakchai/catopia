@@ -1,13 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, {
-  MouseEvent,
-  ChangeEvent,
-  useState,
-  FormEvent,
-  useEffect,
-} from "react";
+import React, { MouseEvent, ChangeEvent, useState, FormEvent, useEffect } from "react";
 
 export default function Registerform() {
   const router = useRouter();
@@ -40,9 +34,7 @@ export default function Registerform() {
     setPasswordVisible(!passwordVisible);
   };
 
-  const toggleConfirmPasswordVisibility = (
-    e: MouseEvent<HTMLButtonElement>
-  ) => {
+  const toggleConfirmPasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
@@ -54,14 +46,10 @@ export default function Registerform() {
   const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-      email
-    );
+    const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
     const isDateValid = date !== null;
     const isRegisUsernameValid = username.length >= 4;
-    const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(
-      password
-    );
+    const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password);
     const isRegisPasswordMatch = confirmPassword === password;
     const isConfirmPasswordNotEmpty = confirmPassword.trim() !== "";
     const isGenderSelected = !!gender;
@@ -70,9 +58,7 @@ export default function Registerform() {
     setErrorDate(!isDateValid);
     setErrorRegisUsername(!isRegisUsernameValid);
     setErrorRegisPassword(!isRegisPasswordValid);
-    setErrorConfirmPassword(
-      !isConfirmPasswordNotEmpty || !isRegisPasswordMatch
-    ); //if confirmPassword is empty or if it doesn't match regisPassword
+    setErrorConfirmPassword(!isConfirmPasswordNotEmpty || !isRegisPasswordMatch); //if confirmPassword is empty or if it doesn't match regisPassword
     setErrorGender(!isGenderSelected);
 
     if (
@@ -108,13 +94,10 @@ export default function Registerform() {
       gender,
     };
     try {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL + "/auth/register",
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-        }
-      );
+      const response = await fetch("/api//auth/register", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
       if (response.ok) {
         const data = await response.json();
         if (data.success) {
@@ -138,13 +121,8 @@ export default function Registerform() {
   };
 
   return (
-    <form
-      onSubmit={validateForm}
-      className="flex flex-col justify-center items-start gap-2"
-    >
-      <h1 className="text-2xl not-italic font-semibold leading-8 text-black01 text-left mb-4">
-        ลงทะเบียน
-      </h1>
+    <form onSubmit={validateForm} className="flex flex-col justify-center items-start gap-2">
+      <h1 className="text-2xl not-italic font-semibold leading-8 text-black01 text-left mb-4">ลงทะเบียน</h1>
       <input
         value={email}
         onChange={(e) => {
@@ -199,10 +177,7 @@ export default function Registerform() {
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
           onClick={(e) => togglePasswordVisibility(e)}
         >
-          <img
-            src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"}
-            alt="Password Visibility"
-          />
+          <img src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"} alt="Password Visibility" />
         </button>
       </div>
       <div className="flex items-start relative">
@@ -222,18 +197,11 @@ export default function Registerform() {
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
           onClick={(e) => toggleConfirmPasswordVisibility(e)}
         >
-          <img
-            src={
-              confirmPasswordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"
-            }
-            alt="Password Visibility"
-          />
+          <img src={confirmPasswordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"} alt="Password Visibility" />
         </button>
       </div>
       <div className="text-left mt-2 mb-4">
-        <span className={`${errorGender ? "text-error" : "text-black01"}`}>
-          เพศ
-        </span>
+        <span className={`${errorGender ? "text-error" : "text-black01"}`}>เพศ</span>
         <div className="flex items-center">
           <input
             type="radio"
@@ -247,9 +215,7 @@ export default function Registerform() {
             }}
             className="ml-2 mr-2 mt-2"
           />
-          <span className="rounded-full h-6 w-6 flex items-center justify-center  text-black01 mt-2">
-            ชาย
-          </span>
+          <span className="rounded-full h-6 w-6 flex items-center justify-center  text-black01 mt-2">ชาย</span>
           <input
             type="radio"
             id="female"
@@ -262,9 +228,7 @@ export default function Registerform() {
             }}
             className="ml-6 mr-2 mt-2"
           />
-          <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">
-            หญิง
-          </span>
+          <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">หญิง</span>
         </div>
       </div>
       <button

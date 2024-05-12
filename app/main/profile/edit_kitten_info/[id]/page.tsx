@@ -11,8 +11,7 @@ function EditKittenInfo({ params }: any) {
 
   const router = useRouter();
 
-  const [selectedImage, setSelectedImage] =
-    useState<string>("/Pofile-test.svg");
+  const [selectedImage, setSelectedImage] = useState<string>("/Pofile-test.svg");
   const [file, setFile] = useState<File | undefined>(undefined);
   const [date, setDate] = useState("");
   const [username, setRegisUsername] = useState("");
@@ -48,11 +47,7 @@ function EditKittenInfo({ params }: any) {
       setActiveSearch([]);
       return false;
     }
-    setActiveSearch(
-      newListCats
-        .filter((words: any) => words.includes(e.target.value))
-        .slice(0, 5)
-    );
+    setActiveSearch(newListCats.filter((words: any) => words.includes(e.target.value)).slice(0, 5));
   }
 
   const selectSearch = (cat: string) => {
@@ -66,14 +61,11 @@ function EditKittenInfo({ params }: any) {
 
   const getKittenInfo = async () => {
     try {
-      const response = await axios.get(
-        process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
       //console.log("response: ", response.data.data);
 
       setRegisUsername(response.data.data.name);
@@ -81,9 +73,7 @@ function EditKittenInfo({ params }: any) {
       setWeight(response.data.data.weight);
       // setBreed(response.data.data.breed);
       setGender(response.data.data.gender);
-      setSelectedImage(
-        process.env.NEXT_PUBLIC_API_IMAGES + response.data.data.profile
-      );
+      setSelectedImage(process.env.NEXT_PUBLIC_API_IMAGES + response.data.data.profile);
       setBreed(response.data.data.breeding);
       setAggressive(response.data.data.aggression);
       setShyness(response.data.data.shyness);
@@ -120,14 +110,7 @@ function EditKittenInfo({ params }: any) {
     setErrorBreed(!isBreed);
     setErrorGender(!isGenderSelected);
 
-    if (
-      isDateValid &&
-      isRegisUsernameValid &&
-      isWeight &&
-      isBreed &&
-      isGenderSelected &&
-      resultPost
-    ) {
+    if (isDateValid && isRegisUsernameValid && isWeight && isBreed && isGenderSelected && resultPost) {
       //
       router.push("/main/profile");
     } else {
@@ -136,23 +119,15 @@ function EditKittenInfo({ params }: any) {
   };
 
   const postFile = async () => {
-    if (file === undefined)
-      return selectedImage.replace(
-        process.env.NEXT_PUBLIC_API_IMAGES || "",
-        ""
-      );
+    if (file === undefined) return selectedImage.replace(process.env.NEXT_PUBLIC_API_IMAGES || "", "");
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "/file/upload",
-        formData,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await axios.post("/api//file/upload", formData, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
       if (response.status === 200) {
         const result = response.data;
         if (result.success) {
@@ -180,15 +155,11 @@ function EditKittenInfo({ params }: any) {
       extraversion: openness,
     };
     try {
-      const response = await axios.put(
-        process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`,
-        data,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`, data, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
 
       if (response.status === 200) {
         const result = response.data;
@@ -215,10 +186,7 @@ function EditKittenInfo({ params }: any) {
   return (
     <div className="container flex justify-center">
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
-        <button
-          type="button"
-          onClick={() => router.push(`/main/profile/kitten_info/${params.id}`)}
-        >
+        <button type="button" onClick={() => router.push(`/main/profile/kitten_info/${params.id}`)}>
           <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />
         </button>
         <div className="relative w-24 h-24">
@@ -229,23 +197,12 @@ function EditKittenInfo({ params }: any) {
             alt="Your profile"
             className="rounded-full max-w-[88px] max-h-[88px] object-cover"
           />
-          <label
-            htmlFor="fileInput"
-            className="absolute bottom-0 right-0 p-1 bg-white rounded-full cursor-pointer"
-          >
+          <label htmlFor="fileInput" className="absolute bottom-0 right-0 p-1 bg-white rounded-full cursor-pointer">
             <Image src="/Camera.svg" width={24} height={24} alt="Camera" />
-            <input
-              type="file"
-              id="fileInput"
-              onChange={handleFileInput}
-              className="hidden"
-            />
+            <input type="file" id="fileInput" onChange={handleFileInput} className="hidden" />
           </label>
         </div>
-        <form
-          onSubmit={validateForm}
-          className="flex flex-col justify-center items-start gap-2"
-        >
+        <form onSubmit={validateForm} className="flex flex-col justify-center items-start gap-2">
           <input
             value={username}
             onChange={(e) => {
@@ -315,9 +272,7 @@ function EditKittenInfo({ params }: any) {
             )}
           </div>
           <div className="text-left mt-2 mb-4">
-            <span className={`${errorGender ? "text-error" : "text-black01"}`}>
-              เพศ
-            </span>
+            <span className={`${errorGender ? "text-error" : "text-black01"}`}>เพศ</span>
             <div className="flex items-center">
               <input
                 type="radio"
@@ -330,9 +285,7 @@ function EditKittenInfo({ params }: any) {
                 }}
                 className="ml-2 mr-2 mt-2"
               />
-              <span className="rounded-full h-6 w-6 flex items-center justify-center  text-black01 mt-2">
-                ชาย
-              </span>
+              <span className="rounded-full h-6 w-6 flex items-center justify-center  text-black01 mt-2">ชาย</span>
               <input
                 type="radio"
                 name="gender"
@@ -344,43 +297,25 @@ function EditKittenInfo({ params }: any) {
                 }}
                 className="ml-6 mr-2 mt-2"
               />
-              <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">
-                หญิง
-              </span>
+              <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">หญิง</span>
             </div>
           </div>
           <div className="flex flex-col items-start gap-8 w-full">
             <div className="flex flex-col gap-2 w-full">
               <div className="flex items-start gap-2">
-                <span className=" text-black01 text-base not-italic font-normal leading-6">
-                  ความก้าวร้าว
-                </span>
-                <span className=" text-primary text-base not-italic font-bold leading-6">
-                  (0-10)
-                </span>
+                <span className=" text-black01 text-base not-italic font-normal leading-6">ความก้าวร้าว</span>
+                <span className=" text-primary text-base not-italic font-bold leading-6">(0-10)</span>
               </div>
               <div className="relative flex">
                 <div className="absolute flex flex-row items-center justify-between z-10 top-0 left-0 h-2 rounded-xl bg-line w-full">
                   {[...Array(10)].map((_, index) => (
-                    <Image
-                      key={index}
-                      src={"/dot.svg"}
-                      width={4}
-                      height={4}
-                      alt="markers"
-                    />
+                    <Image key={index} src={"/dot.svg"} width={4} height={4} alt="markers" />
                   ))}
                 </div>
                 <div
                   className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
                   style={{
-                    width: `calc(${aggressive * 10}% ${
-                      aggressive === 10
-                        ? "- 3px"
-                        : aggressive === 1
-                        ? "+ 3px"
-                        : ""
-                    })`,
+                    width: `calc(${aggressive * 10}% ${aggressive === 10 ? "- 3px" : aggressive === 1 ? "+ 3px" : ""})`,
                   }}
                 />
                 <input
@@ -400,31 +335,19 @@ function EditKittenInfo({ params }: any) {
             </div>
             <div className="flex flex-col gap-2 w-full">
               <div className="flex items-start gap-2">
-                <span className=" text-black01 text-base not-italic font-normal leading-6">
-                  ความเขินอาย
-                </span>
-                <span className=" text-primary text-base not-italic font-bold leading-6">
-                  (0-10)
-                </span>
+                <span className=" text-black01 text-base not-italic font-normal leading-6">ความเขินอาย</span>
+                <span className=" text-primary text-base not-italic font-bold leading-6">(0-10)</span>
               </div>
               <div className="relative">
                 <div className="absolute flex flex-row items-center justify-between z-10 top-0 left-0 h-2 rounded-xl bg-line w-full">
                   {[...Array(10)].map((_, index) => (
-                    <Image
-                      key={index}
-                      src={"/dot.svg"}
-                      width={4}
-                      height={4}
-                      alt="markers"
-                    />
+                    <Image key={index} src={"/dot.svg"} width={4} height={4} alt="markers" />
                   ))}
                 </div>
                 <div
                   className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
                   style={{
-                    width: `calc(${shyness * 10}% ${
-                      shyness === 10 ? "- 3px" : shyness === 1 ? "+ 3px" : ""
-                    })`,
+                    width: `calc(${shyness * 10}% ${shyness === 10 ? "- 3px" : shyness === 1 ? "+ 3px" : ""})`,
                   }}
                 />
                 <input
@@ -444,31 +367,19 @@ function EditKittenInfo({ params }: any) {
             </div>
             <div className="flex flex-col w-full gap-2">
               <div className="flex items-start gap-2">
-                <span className=" text-black01 text-base not-italic font-normal leading-6">
-                  ความสนใจต่อสิ่งภายนอก
-                </span>
-                <span className=" text-primary text-base not-italic font-bold leading-6">
-                  (0-10)
-                </span>
+                <span className=" text-black01 text-base not-italic font-normal leading-6">ความสนใจต่อสิ่งภายนอก</span>
+                <span className=" text-primary text-base not-italic font-bold leading-6">(0-10)</span>
               </div>
               <div className="relative">
                 <div className="absolute flex flex-row items-center justify-between z-10 top-0 left-0 h-2 rounded-xl bg-line w-full">
                   {[...Array(10)].map((_, index) => (
-                    <Image
-                      key={index}
-                      src={"/dot.svg"}
-                      width={4}
-                      height={4}
-                      alt="markers"
-                    />
+                    <Image key={index} src={"/dot.svg"} width={4} height={4} alt="markers" />
                   ))}
                 </div>
                 <div
                   className="absolute z-10 top-0 left-0 h-2 rounded-xl bg-primary"
                   style={{
-                    width: `calc(${openness * 10}% ${
-                      openness === 10 ? "- 3px" : openness === 1 ? "+ 3px" : ""
-                    })`,
+                    width: `calc(${openness * 10}% ${openness === 10 ? "- 3px" : openness === 1 ? "+ 3px" : ""})`,
                   }}
                 />
                 <input

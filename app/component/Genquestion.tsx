@@ -39,10 +39,7 @@ export default function Genquestion({ progress, setProgress }: any) {
   };
 
   const handleSelectChoice = () => {
-    setAllSelected((prevAllSelected): any => [
-      ...prevAllSelected,
-      selectChoice,
-    ]);
+    setAllSelected((prevAllSelected): any => [...prevAllSelected, selectChoice]);
     setProgress(progress + 100 / 7);
     nextQuestion();
   };
@@ -55,7 +52,7 @@ export default function Genquestion({ progress, setProgress }: any) {
 
     try {
       const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "/user/answer",
+        "/api//user/answer",
         { answer },
         {
           headers: {
@@ -79,9 +76,7 @@ export default function Genquestion({ progress, setProgress }: any) {
         <img src="/ArrowLeft.svg" alt="Back" />
       </button>
       <div className="w-[364px]">
-        <span className="text-black01 text-2xl not-italic font-bold leading-10">
-          {QuestionData[current].question}
-        </span>
+        <span className="text-black01 text-2xl not-italic font-bold leading-10">{QuestionData[current].question}</span>
       </div>
       <div className="flex flex-col items-start gap-4 max-h-[450px] overflow-auto">
         {QuestionData[current].choices.map((choice: any, index: number) => (
@@ -96,11 +91,7 @@ export default function Genquestion({ progress, setProgress }: any) {
           >
             <span>{choice}</span>
             {index === selectChoice && (
-              <img
-                src="/Check.svg"
-                alt="Check"
-                style={{ marginRight: "5px", alignSelf: "center" }}
-              />
+              <img src="/Check.svg" alt="Check" style={{ marginRight: "5px", alignSelf: "center" }} />
             )}
           </button>
         ))}
