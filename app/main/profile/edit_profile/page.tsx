@@ -69,7 +69,7 @@ function EditProfile() {
         process.env.NEXT_PUBLIC_API_IMAGES + response.data.data.profile
       );
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   };
 
@@ -128,17 +128,17 @@ function EditProfile() {
       isGenderSelected
     ) {
       const profile = await postFile();
-      // console.log("postFile: ", profile);
+      // //console.log("postFile: ", profile);
   
       const resultPostUserInfo = await postUserInfo(profile);
 
-      // console.log("resultPostUserInfo: ", resultPostUserInfo);
+      // //console.log("resultPostUserInfo: ", resultPostUserInfo);
 
       if (resultPostUserInfo) {
         router.push("/main/profile");
       }
     } else {
-      // console.log({isDateValid, isRegisUsernameValid, isRegisPasswordValid, isRegisPasswordMatch, isGenderSelected});
+      // //console.log({isDateValid, isRegisUsernameValid, isRegisPasswordValid, isRegisPasswordMatch, isGenderSelected});
       setErrorRegister("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
@@ -185,7 +185,7 @@ function EditProfile() {
       confirmPassword,
       gender,
     };
-    // console.log(profile);
+    // //console.log(profile);
 
     try {
       const response = await axios.put(

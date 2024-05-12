@@ -41,7 +41,7 @@ export default function Forgotpassword() {
       }
 
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
       return false
     }
   }

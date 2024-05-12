@@ -14,7 +14,7 @@ function formatDateThai(date: string) {
 }
 
 function DetailTreatment({ params }: any) {
-  console.log("params: ", params);
+  //console.log("params: ", params);
   
   const router = useRouter();
 
@@ -36,11 +36,11 @@ function DetailTreatment({ params }: any) {
         setTreatmentInfo(response.data.data)
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   }
 
-  console.log("treatmentInfo: ", treatmentInfo);
+  //console.log("treatmentInfo: ", treatmentInfo);
   
   return (
     <div className="container mx-auto flex flex-col items-start gap-6 mt-12 pl-8 pr-8">

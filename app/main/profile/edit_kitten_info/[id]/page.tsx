@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 
 function EditKittenInfo({ params }: any) {
-  // console.log("params: ", params);
+  // //console.log("params: ", params);
 
   const router = useRouter();
 
@@ -74,7 +74,7 @@ function EditKittenInfo({ params }: any) {
           },
         }
       );
-      console.log("response: ", response.data.data);
+      //console.log("response: ", response.data.data);
 
       setRegisUsername(response.data.data.name);
       setDate(response.data.data.date);
@@ -89,7 +89,7 @@ function EditKittenInfo({ params }: any) {
       setShyness(response.data.data.shyness);
       setOpenness(response.data.data.extraversion);
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   };
 

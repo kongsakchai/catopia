@@ -12,7 +12,7 @@ export default function Genquestion({ progress, setProgress }: any) {
   const [allSelected, setAllSelected] = useState([]);
 
   useEffect(() => {
-    console.log(allSelected);
+    //console.log(allSelected);
     if (allSelected.length === 8) {
       handleSentAnswer();
       setQuestionState("complete");
@@ -49,9 +49,9 @@ export default function Genquestion({ progress, setProgress }: any) {
 
   const handleSentAnswer = async () => {
     const answer = allSelected;
-    console.log("answer: ", answer);
+    //console.log("answer: ", answer);
 
-    console.log(process.env.NEXT_PUBLIC_API_URL);
+    //console.log(process.env.NEXT_PUBLIC_API_URL);
 
     try {
       const response = await axios.post(
@@ -65,11 +65,11 @@ export default function Genquestion({ progress, setProgress }: any) {
       );
       if (response.status === 201) {
         if (response.data.success) {
-          console.log("success sent answer");
+          //console.log("success sent answer");
         }
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   };
 

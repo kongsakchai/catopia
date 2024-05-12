@@ -55,8 +55,8 @@ export default function Resultbreeding() {
         cat.color === allSelectedParent[3]
     );
 
-    console.log("father_id :", getFather_id[0].id);
-    console.log("mother_id :", getMother_id[0].id);
+    //console.log("father_id :", getFather_id[0].id);
+    //console.log("mother_id :", getMother_id[0].id);
 
     //show kitten
     const getKitten = DataKitten.filter(
@@ -64,7 +64,7 @@ export default function Resultbreeding() {
         kitten.father_id === getFather_id[0].id &&
         kitten.mother_id === getMother_id[0].id
     );
-    // console.log(getKitten.length === 0 ? "No kitten" : getKitten);
+    // //console.log(getKitten.length === 0 ? "No kitten" : getKitten);
 
     const getKittenMale = getKitten
       .filter((kitten) => kitten.sex === "M")
@@ -74,21 +74,21 @@ export default function Resultbreeding() {
       .filter((kitten) => kitten.sex === "F")
       .map((kitten) => kitten.color);
 
-    console.log(
-      getKittenMale.length === 0
-        ? "No kitten"
-        : `getKittenMale: ${getKittenMale}`
-    );
+    // console.log(
+    //   getKittenMale.length === 0
+    //     ? "No kitten"
+    //     : `getKittenMale: ${getKittenMale}`
+    // );
 
-    console.log(
-      getKittenFemale.length === 0
-        ? "No kitten"
-        : `getKittenFemale: ${getKittenFemale}`
-    );
+    // console.log(
+    //   getKittenFemale.length === 0
+    //     ? "No kitten"
+    //     : `getKittenFemale: ${getKittenFemale}`
+    // );
     setShowKitten(getKitten);
   }
 
-  console.log("showKitten: ", showKitten);
+  //console.log("showKitten: ", showKitten);
 
   const clearLastAnswer = () => {
     setAllSelectedParent((prevAllSelected: any) =>

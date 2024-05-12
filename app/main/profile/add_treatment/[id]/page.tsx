@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
 function AddTreatment({ params }: any) {
-  // console.log("AddTreatment : ", params.id);
+  // //console.log("AddTreatment : ", params.id);
 
   const router = useRouter();
 
@@ -45,7 +45,7 @@ function AddTreatment({ params }: any) {
         }
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   };
 
@@ -76,12 +76,12 @@ function AddTreatment({ params }: any) {
         return false;
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
       return false;
     }
   };
 
-  console.log("kittenInfo: ", kittenInfo);
+  //console.log("kittenInfo: ", kittenInfo);
 
   const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

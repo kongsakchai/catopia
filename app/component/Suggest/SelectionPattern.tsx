@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 function SelectionPattern() {
   const { setQuestionState, kittenData }: any = useContext(SuggestContext);
 
-  console.log("kittenData: ", kittenData.length);
+  //console.log("kittenData: ", kittenData.length);
 
   return (
     <div className="container flex flex-col items-start gap-4 pl-8 pr-8 mt-12">

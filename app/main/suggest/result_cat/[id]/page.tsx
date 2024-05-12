@@ -25,13 +25,13 @@ function ResultCat({ params }: any) {
       });
       if (response.status === 200) {
         if (response.data.success) {
-          // console.log('Suggest : ', response.data.data);
+          // //console.log('Suggest : ', response.data.data);
 
           matchSuggest(response.data.data);
         }
       }
     } catch (error) {
-      console.log('Error : ', error);
+      //console.log('Error : ', error);
     }
   };
 
@@ -40,7 +40,7 @@ function ResultCat({ params }: any) {
     setResultSuggest(resultMatching);
   }
 
-  // console.log("resultSuggest: ", resultSuggest);
+  // //console.log("resultSuggest: ", resultSuggest);
 
   return (
     <div

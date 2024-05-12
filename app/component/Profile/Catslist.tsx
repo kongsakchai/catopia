@@ -12,7 +12,7 @@ function formatDateThai(date: string) {
 }
 
 function Catslist({ kittensData }: any) {
-  console.log("kittensData: ", kittensData);
+  //console.log("kittensData: ", kittensData);
 
   const [haveKitten, setHaveKitten] = useState(false);
 

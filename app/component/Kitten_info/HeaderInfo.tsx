@@ -33,12 +33,12 @@ function HeaderInfo({ params }: any) {
       
       setKittenInfo(response.data.data)
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   }
 
-  // console.log("kittenInfo: ", kittenInfo);
-  // console.log("treatmentInfo: ", treatmentInfo);
+  // //console.log("kittenInfo: ", kittenInfo);
+  // //console.log("treatmentInfo: ", treatmentInfo);
 
   useEffect(() => {
     if (kittenInfo.date) {

@@ -64,7 +64,7 @@ export default function InputOTP() {
       }
 
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
       return false
     }
   }

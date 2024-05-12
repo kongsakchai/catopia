@@ -31,12 +31,12 @@ export default function Home() {
       }
       return false;
     } catch (error) {
-      console.log("Error : ", error);
+      //console.log("Error : ", error);
       return false;
     }
   };
 
-  // console.log("suggestData : ", suggestData);
+  // //console.log("suggestData : ", suggestData);
 
   return (
     <div className="flex flex-col items-start gap-4 mx-8 my-12">

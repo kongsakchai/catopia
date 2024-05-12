@@ -38,7 +38,7 @@ export default function Genbreeding() {
   ]; //unique typecolor
 
   useEffect(() => {
-    console.log(allSelectedParent);
+    //console.log(allSelectedParent);
   }, [allSelectedParent]);
 
   const clearLastAnswer = () => {
@@ -61,7 +61,7 @@ export default function Genbreeding() {
     setSelectChoice(""); // Clear selectChoice
     if (current === QuestionBreeding.length - 1) {
       setBreedingState("resultbreeding");
-      // console.log(allSelected)
+      // //console.log(allSelected)
     } else setCurrent(current + 1);
   };
 

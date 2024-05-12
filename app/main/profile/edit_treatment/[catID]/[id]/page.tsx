@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
 function EditTreatment({ params }: any) {
-  //   console.log("EditTreatment_catID : ", params.catID);
-  //   console.log("EditTreatment_id : ", params.id);
+  //   //console.log("EditTreatment_catID : ", params.catID);
+  //   //console.log("EditTreatment_id : ", params.id);
 
   const router = useRouter();
 
@@ -49,7 +49,7 @@ function EditTreatment({ params }: any) {
         }
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   };
 
@@ -80,7 +80,7 @@ function EditTreatment({ params }: any) {
         return false;
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
       return false;
     }
   };
@@ -102,12 +102,12 @@ function EditTreatment({ params }: any) {
         setDetail(response.data.data.detail)
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   }
 
-  //   console.log("kittenInfo: ", kittenInfo);
-  //   console.log("treatmentInfo: ", treatmentInfo);
+  //   //console.log("kittenInfo: ", kittenInfo);
+  //   //console.log("treatmentInfo: ", treatmentInfo);
 
   const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function Homeinterest({ suggestData }: any) {
-  console.log("suggestData from Home : ", suggestData);
+  //console.log("suggestData from Home : ", suggestData);
 
   const router = useRouter();
 
@@ -23,10 +23,10 @@ export default function Homeinterest({ suggestData }: any) {
           learningcats.find((cat: any) => cat.english_name === catname)
         );
       setResultSuggest(resultMatching);
-    } else console.log("suggestArr is not an array");
+    }
   }
 
-  console.log("resultSuggest: ", resultSuggest);
+  //console.log("resultSuggest: ", resultSuggest);
 
   return (
     <div className="flex flex-col items-start gap-2 w-full">

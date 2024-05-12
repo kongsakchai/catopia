@@ -45,7 +45,7 @@ export default function Profile() {
             setUserData(responseUser.data.data)
             setKittensData(responseKittens.data)
         } catch (error) {
-            console.log("Error: ", error);
+            //console.log("Error: ", error);
         }
     }
 
@@ -54,7 +54,7 @@ export default function Profile() {
         router.push("/")
     }
 
-    // console.log("userData: ", userData);
+    // //console.log("userData: ", userData);
 
     return (
         <div

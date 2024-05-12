@@ -36,11 +36,11 @@ function Treatment({ params }: any) {
         setTreatmentInfo(response.data.data)
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   }
 
-  console.log("treatmentInfo: ", treatmentInfo);
+  //console.log("treatmentInfo: ", treatmentInfo);
 
   return (
     <>

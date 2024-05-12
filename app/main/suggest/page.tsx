@@ -32,14 +32,14 @@ export default function Suggest() {
 
       if (responseKittens.status === 200) {
         if (responseKittens.data.success) {
-          console.log("responseKittens: ", responseKittens.data.data);
+          //console.log("responseKittens: ", responseKittens.data.data);
           
           setKittenData(responseKittens.data.data);
 
         }
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   };
 
