@@ -49,7 +49,7 @@ export default function Loginform() {
 
     try {
       const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "/auth/login",
+        "/api//auth/login",
         {
           username: username,
           password: password,
@@ -66,9 +66,9 @@ export default function Loginform() {
         if (result.success) {
           localStorage.setItem("token", result.data.token);
           //console.log("firstLogin : ", result.data.firstLogin);
-          
+
           // setPassToMain(!result.data.firstLogin);
-          return { success: true, firstLogin: result.data.firstLogin};
+          return { success: true, firstLogin: result.data.firstLogin };
         }
         return { success: false, firstLogin: false };
       }
@@ -80,10 +80,7 @@ export default function Loginform() {
   }
 
   return (
-    <form
-      onSubmit={validateForm}
-      className="flex justify-center flex-col items-end gap-2 mt-8"
-    >
+    <form onSubmit={validateForm} className="flex justify-center flex-col items-end gap-2 mt-8">
       <input
         value={username}
         onChange={(e) => {
@@ -121,16 +118,10 @@ export default function Loginform() {
           className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
           onClick={(e) => togglePasswordVisibility(e)}
         >
-          <img
-            src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"}
-            alt="Password Visibility"
-          />
+          <img src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"} alt="Password Visibility" />
         </button>
       </div>
-      <Link
-        href="/repassword"
-        className="text-xs not-italic font-semibold leading-5 mb-2 text-primary text-right"
-      >
+      <Link href="/repassword" className="text-xs not-italic font-semibold leading-5 mb-2 text-primary text-right">
         ลืมรหัสผ่าน?
       </Link>
       <button

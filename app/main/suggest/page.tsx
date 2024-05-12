@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 // export const SuggestContext = createContext<unknown>(null);
 
 export default function Suggest() {
-
   const [questionState, setQuestionState] = useState<string>("begin");
 
   const [kittenData, setKittenData] = useState<any[]>([]);
@@ -22,21 +21,17 @@ export default function Suggest() {
 
   const getKittenData = async () => {
     try {
-      const responseKittens = await axios.get(
-        process.env.NEXT_PUBLIC_API_URL + "/cat",
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      const responseKittens = await axios.get("/api//cat", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
 
       if (responseKittens.status === 200) {
         if (responseKittens.data.success) {
           //console.log("responseKittens: ", responseKittens.data.data);
-          
-          setKittenData(responseKittens.data.data);
 
+          setKittenData(responseKittens.data.data);
         }
       }
     } catch (error) {
