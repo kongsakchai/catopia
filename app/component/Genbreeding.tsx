@@ -3,7 +3,8 @@
 import { useState, useEffect, useContext } from "react";
 import { DataContext } from "../main/breeding/page";
 import QuestionBreeding from "@/public/QuestionBreeding";
-import Catparent from "@/public/catparent.json";
+// import Catparent from "@/public/catparent.json";
+import Catparent from "../file/catparent.json";
 
 interface Catparent {
   id: string;

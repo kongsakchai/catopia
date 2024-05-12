@@ -4,8 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import { DataContext } from "../main/breeding/page";
 import { ActiveContext } from "@/app/main/layout";
 import Image from "next/image";
-import DataKitten from "@/public/dataKitten.json";
-import Catparent from "@/public/catparent.json";
+// import DataKitten from "@/public/dataKitten.json";
+import DataKitten from '../file/dataKitten.json';
+// import Catparent from "@/public/catparent.json";
+import Catparent from '../file/catparent.json';
 // import Homeinterest from "./Homeinterest";
 import { useRouter } from "next/navigation";
 

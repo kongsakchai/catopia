@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import learningcats from "@/public/learningcats.json";
+// import learningcats from "@/public/learningcats.json";
+import learningcats from "../file/learningcats.json";
 
 export default function Homeheader() {
   const router = useRouter();

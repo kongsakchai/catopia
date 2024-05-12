@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
-import learningcats from "@/public/learningcats.json";
+// import learningcats from "@/public/learningcats.json";
+import learningcats from "../../../../file/learningcats.json";
 import Headerlearning from "@/app/component/Headerlearning";
 import Detailslearning from "@/app/component/Detailslearning";
 import { ActiveContext } from "@/app/main/layout";
