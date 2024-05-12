@@ -15,12 +15,15 @@
     "next": "14.0.4",
     "node": "^21.6.2",
     "react": "^18",
+    "react-datepicker": "^6.9.0",
     "react-datetime": "^3.2.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
+    "@types/react-datepicker": "^6.2.0",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",

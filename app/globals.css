@@ -8,15 +8,6 @@
   position: relative;
 }
 
-.custom-date-input:before {
-  /* content: "\1F4C5"; */
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #2e2e2e; /* Set your desired color */
-}
-
 ::-webkit-scrollbar {
   display: none;
 }

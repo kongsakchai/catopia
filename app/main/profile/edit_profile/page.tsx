@@ -129,7 +129,7 @@ function EditProfile() {
     ) {
       const profile = await postFile();
       // //console.log("postFile: ", profile);
-  
+
       const resultPostUserInfo = await postUserInfo(profile);
 
       // //console.log("resultPostUserInfo: ", resultPostUserInfo);
@@ -212,6 +212,12 @@ function EditProfile() {
     }
   };
 
+  const [inputType, setInputType] = useState("text"); // State to manage input type
+
+  const handleTouchStart = () => {
+    setInputType("date");
+  };
+
   return (
     <div className="container flex justify-center">
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
@@ -262,10 +268,9 @@ function EditProfile() {
               setDate(e.target.value);
               setErrorDate(false);
             }}
-            type={"text"}
-            placeholder={`วัน เดือน ปี เกิด`}
-            onFocus={(e) => (e.target.type = "date")}
-            onBlur={(e) => (e.target.type = "text")}
+            type={inputType}
+            placeholder="วัน เดือน ปี เกิด"
+            onTouchStart={handleTouchStart}
             className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
               errorDate ? "border-error" : "border-textfield"
             } focus:outline-primary`}

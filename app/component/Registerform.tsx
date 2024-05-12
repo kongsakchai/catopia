@@ -8,14 +8,13 @@ import React, {
   FormEvent,
   useEffect,
 } from "react";
-import "react-datetime/css/react-datetime.css";
 
 export default function Registerform() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
-  // const [showCalendar, setShowCalendar] = useState(false);
+
   const [username, setRegisUsername] = useState("");
   const [password, setRegisPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -33,7 +32,7 @@ export default function Registerform() {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
   useEffect(() => {
-    //console.log(date);
+    console.log(date);
   }, [date]);
 
   const togglePasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
@@ -58,7 +57,7 @@ export default function Registerform() {
     const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       email
     );
-    const isDateValid = date.trim() !== "";
+    const isDateValid = date !== null;
     const isRegisUsernameValid = username.length >= 4;
     const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(
       password
@@ -99,7 +98,7 @@ export default function Registerform() {
   async function fetchRegisterDB() {
     //console.log('username', username);
     //console.log('password', password);
-    
+
     const data = {
       email,
       date,
@@ -109,10 +108,13 @@ export default function Registerform() {
       gender,
     };
     try {
-      const response = await fetch(process.env.NEXT_PUBLIC_API_URL+ "/auth/register", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_URL + "/auth/register",
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+        }
+      );
       if (response.ok) {
         const data = await response.json();
         if (data.success) {
@@ -128,6 +130,12 @@ export default function Registerform() {
       return false;
     }
   }
+
+  const [inputType, setInputType] = useState("text"); // State to manage input type
+
+  const handleTouchStart = () => {
+    setInputType("date");
+  };
 
   return (
     <form
@@ -155,10 +163,9 @@ export default function Registerform() {
           setDate(e.target.value);
           setErrorDate(false);
         }}
-        type={"text"}
+        type={inputType}
         placeholder="วัน เดือน ปี เกิด"
-        onFocus={(e) => (e.target.type = "date")}
-        onBlur={(e) => (e.target.type = "text")}
+        onTouchStart={handleTouchStart}
         className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
           errorDate ? "border-error" : "border-textfield"
         } focus:outline-primary`}

@@ -113,6 +113,12 @@ function AddTreatment({ params }: any) {
     }
   };
 
+  const [inputType, setInputType] = useState("text"); // State to manage input type
+
+  const handleTouchStart = () => {
+    setInputType("date");
+  };
+
   return (
     <div className="container flex justify-center">
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
@@ -172,19 +178,18 @@ function AddTreatment({ params }: any) {
               อาการเจ็บป่วย
             </option>
           </select>
-
           <input
             value={date}
             onChange={(e) => {
               setDate(e.target.value);
               setErrorDate(false);
             }}
-            type={"text"}
-            placeholder={`วัน เดือน ปี เกิด`}
-            onFocus={(e) => (e.target.type = "date")}
-            onBlur={(e) => (e.target.type = "text")}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            type={inputType}
+            placeholder="วัน เดือน ปี เกิด"
+            onTouchStart={handleTouchStart}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
+              errorDate ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={veterinarian}
@@ -194,8 +199,9 @@ function AddTreatment({ params }: any) {
             }}
             type="text"
             placeholder={`สัตวแพทย์ / เลขที่ใบอนุญาต`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorVeterinarian ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorVeterinarian ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={hospital}
@@ -205,8 +211,9 @@ function AddTreatment({ params }: any) {
             }}
             type="text"
             placeholder={`สถานที่รักษา`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorHospital ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorHospital ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={detail}
@@ -216,8 +223,9 @@ function AddTreatment({ params }: any) {
             }}
             type="text"
             placeholder={`รายละเอียดเพิ่มเติม`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDetail ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorDetail ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <button
             type="submit"
