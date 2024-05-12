@@ -3,9 +3,9 @@
 import React from "react";
 import QuestionData from "@/public/QuestionData";
 import { useState, useEffect, useContext } from "react";
-import { SuggestContext } from "@/app/main/suggest/page";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { SuggestContext } from "@/app/store/context";
 
 function GenQuesSugest({ progress, setProgress }: any) {
   const { setQuestionState }: any = useContext(SuggestContext);

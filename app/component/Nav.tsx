@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useContext } from "react";
-import { ActiveContext } from "@/app/main/layout";
+import { ActiveContext } from "../store/context";
+// import { ActiveContext } from "@/app/main/layout";
 
 export default function Nav() {
   const router = useRouter();

@@ -1,6 +1,6 @@
 "use client";
 
-import { SuggestContext } from "@/app/main/suggest/page";
+import { SuggestContext } from "@/app/store/context";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";

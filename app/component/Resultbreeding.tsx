@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { ActiveContext } from "@/app/main/layout";
+// import { ActiveContext } from "@/app/main/layout";
 import Image from "next/image";
 // import DataKitten from "@/public/dataKitten.json";
 import DataKitten from '../file/dataKitten.json';
@@ -10,6 +10,7 @@ import Catparent from '../file/catparent.json';
 // import Homeinterest from "./Homeinterest";
 import { useRouter } from "next/navigation";
 import { BreedingContext } from "../store/breeding";
+import { ActiveContext } from "../store/context";
 
 export default function Resultbreeding() {
   const router = useRouter();
