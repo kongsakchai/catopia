@@ -1,11 +1,11 @@
 "use client";
 import QuestionData from "@/public/QuestionData";
 import { useState, useEffect, useContext } from "react";
-import { DataContext } from "../register/getquestion/page";
 import axios from "axios";
+import { RegisContext } from "../store/context";
 
 export default function Genquestion({ progress, setProgress }: any) {
-  const { setQuestionState }: any = useContext(DataContext);
+  const { setQuestionState }: any = useContext(RegisContext);
 
   const [current, setCurrent] = useState(0);
   const [selectChoice, setSelectChoice] = useState<number>(-1);

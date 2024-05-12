@@ -4,11 +4,9 @@ import { Noto_Sans_Thai } from "next/font/google";
 import Nav from "../component/Nav";
 import "../globals.css";
 import React, {
-  useState,
-  createContext,
-  Dispatch,
-  SetStateAction,
+  useState
 } from "react";
+import { ActiveContext } from "../store/context";
 
 const noto_san_thai = Noto_Sans_Thai({
   subsets: ["latin"],
@@ -16,14 +14,14 @@ const noto_san_thai = Noto_Sans_Thai({
   variable: "--font-noto-sans-thai",
 });
 
-type ActiveContextType = {
-  active: string;
-  setActive: Dispatch<SetStateAction<string>>;
-};
+// type ActiveContextType = {
+//   active: string;
+//   setActive: Dispatch<SetStateAction<string>>;
+// };
 
-export const ActiveContext = createContext<ActiveContextType | undefined>(
-  undefined
-);
+// export const ActiveContext = createContext<ActiveContextType | undefined>(
+//   undefined
+// );
 
 export default function RootLayout({
   children,

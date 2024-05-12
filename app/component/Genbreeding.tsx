@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useContext } from "react";
-import { DataContext } from "../main/breeding/page";
 import QuestionBreeding from "@/public/QuestionBreeding";
 // import Catparent from "@/public/catparent.json";
 import Catparent from "../file/catparent.json";
+import { BreedingContext } from "../store/breeding";
 
 interface Catparent {
   id: string;
@@ -22,7 +22,7 @@ export default function Genbreeding() {
     setCurrent,
     progressBreeding,
     setProgressBreeding,
-  }: any = useContext(DataContext);
+  }: any = useContext(BreedingContext);
 
   const [selectChoice, setSelectChoice] = useState("");
   const [typecolorDad, setTypecolorDad] = useState("");

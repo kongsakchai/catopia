@@ -4,10 +4,11 @@ import AnsQuesForProple from "@/app/component/Suggest/AnsQuesForProple";
 import Begin from "@/app/component/Suggest/Begin";
 import SelectYourKitten from "@/app/component/Suggest/SelectYourKitten";
 import SelectionPattern from "@/app/component/Suggest/SelectionPattern";
+import { SuggestContext } from "@/app/store/context";
 import axios from "axios";
-import { createContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-export const SuggestContext = createContext<unknown>(null);
+// export const SuggestContext = createContext<unknown>(null);
 
 export default function Suggest() {
 
