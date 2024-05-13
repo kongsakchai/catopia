@@ -61,7 +61,7 @@ function EditKittenInfo({ params }: any) {
 
   const getKittenInfo = async () => {
     try {
-      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`, {
+      const response = await axios.get(`/api/cat/${params.id}`, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -155,7 +155,7 @@ function EditKittenInfo({ params }: any) {
       extraversion: openness,
     };
     try {
-      const response = await axios.put(process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`, data, {
+      const response = await axios.put(`/api/cat/${params.id}`, data, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },

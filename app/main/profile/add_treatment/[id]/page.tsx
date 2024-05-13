@@ -31,14 +31,11 @@ function AddTreatment({ params }: any) {
 
   const getKittenInfo = async () => {
     try {
-      const res = await axios.get(
-        process.env.NEXT_PUBLIC_API_URL + `/cat/${params.id}`,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      const res = await axios.get(`/api/cat/${params.id}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
       if (res.status === 200) {
         if (res.data.success) {
           setKittenInfo(res.data.data);
@@ -58,15 +55,11 @@ function AddTreatment({ params }: any) {
       detail: detail,
     };
     try {
-      const res = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + `/treatment/${params.id}`,
-        data,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      const res = await axios.post(`/api/treatment/${params.id}`, data, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
 
       if (res.status === 201) {
         const reslt = res.data;
@@ -122,10 +115,7 @@ function AddTreatment({ params }: any) {
   return (
     <div className="container flex justify-center">
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
-        <button
-          type="button"
-          onClick={() => router.push(`/main/profile/kitten_info/${params.id}`)}
-        >
+        <button type="button" onClick={() => router.push(`/main/profile/kitten_info/${params.id}`)}>
           <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />
         </button>
         <div className="flex flex-col gap-4">
@@ -137,14 +127,9 @@ function AddTreatment({ params }: any) {
             alt="Your profile"
             className="rounded-full max-w-[88px] max-h-[88px] object-cover"
           />
-          <h1 className=" text-black01 text-center apply text-2xl not-italic font-bold leading-10 mt-4">
-            ก๋วยจั๊บ
-          </h1>
+          <h1 className=" text-black01 text-center apply text-2xl not-italic font-bold leading-10 mt-4">ก๋วยจั๊บ</h1>
         </div>
-        <form
-          onSubmit={validateForm}
-          className="flex flex-col justify-center items-start gap-2"
-        >
+        <form onSubmit={validateForm} className="flex flex-col justify-center items-start gap-2">
           <select
             value={medicalRecord}
             onChange={(e) => {
@@ -153,28 +138,16 @@ function AddTreatment({ params }: any) {
             }}
             className={`flex w-[364px] h-10 flex-col items-start text-center text-base not-italic font-normal leading-6 pl-1 pt-1.5 border rounded border-textfield focus:outline-primary`}
           >
-            <option
-              className=" text-black01 text-base not-italic font-normal leading-6"
-              value={1}
-            >
+            <option className=" text-black01 text-base not-italic font-normal leading-6" value={1}>
               การฉีดวัคซีน
             </option>
-            <option
-              className=" text-black01 text-base not-italic font-normal leading-6"
-              value={2}
-            >
+            <option className=" text-black01 text-base not-italic font-normal leading-6" value={2}>
               การตรวจสุขภาพ
             </option>
-            <option
-              className=" text-black01 text-base not-italic font-normal leading-6"
-              value={3}
-            >
+            <option className=" text-black01 text-base not-italic font-normal leading-6" value={3}>
               อุบัติเหตุ
             </option>
-            <option
-              className=" text-black01 text-base not-italic font-normal leading-6"
-              value={4}
-            >
+            <option className=" text-black01 text-base not-italic font-normal leading-6" value={4}>
               อาการเจ็บป่วย
             </option>
           </select>
