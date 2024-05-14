@@ -44,10 +44,11 @@ function Catslist({ kittensData }: any) {
                     width={50}
                     height={50}
                     alt="Your kitten img"
-                    style={{
-                      border: "1px solid var(--Primary, #3FA8D0)",
-                      borderRadius: "88px",
-                    }}
+                    // style={{
+                    //   border: "1px solid var(--Primary, #3FA8D0)",
+                    //   borderRadius: "88px",
+                    // }}
+                    className="rounded-full w-[50px] h-[50px] object-cover overflow-hidden"
                   />
                   <div className="flex flex-col items-start">
                     <h2 className="text-black01 text-base not-italic font-normal leading-6">

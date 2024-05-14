@@ -195,7 +195,7 @@ function EditKittenInfo({ params }: any) {
             width={88}
             height={88}
             alt="Your profile"
-            className="rounded-full max-w-[88px] max-h-[88px] object-cover"
+            className="rounded-full w-[88px] h-[88px] object-cover overflow-hidden"
           />
           <label htmlFor="fileInput" className="absolute bottom-0 right-0 p-1 bg-white rounded-full cursor-pointer">
             <Image src="/Camera.svg" width={24} height={24} alt="Camera" />

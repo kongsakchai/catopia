@@ -1,6 +1,5 @@
 "use client";
 
-// import learningcats from "@/public/learningcats.json";
 import learningcats from "../file/learningcats.json";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";

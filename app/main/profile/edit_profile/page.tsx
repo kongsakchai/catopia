@@ -202,7 +202,7 @@ function EditProfile() {
             width={88}
             height={88}
             alt="Your profile"
-            className="rounded-full max-w-[88px] max-h-[88px] object-cover"
+            className="rounded-full w-[88px] h-[88px] object-cover overflow-hidden"
           />
           <label htmlFor="fileInput" className="absolute bottom-0 right-0 p-1 bg-white rounded-full cursor-pointer">
             <Image src="/Camera.svg" width={24} height={24} alt="Camera" />
@@ -218,9 +218,8 @@ function EditProfile() {
             }}
             type="text"
             placeholder={`อีเมล`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorEmail ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorEmail ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={date}
@@ -231,9 +230,8 @@ function EditProfile() {
             type={inputType}
             placeholder="วัน เดือน ปี เกิด"
             onTouchStart={handleTouchStart}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
-              errorDate ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={username}
@@ -243,9 +241,8 @@ function EditProfile() {
             }}
             type="text"
             placeholder={`ชื่อผู้ใช้งาน`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorRegisUsername ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <div className="flex items-start relative">
             <input
@@ -256,9 +253,8 @@ function EditProfile() {
               }}
               type={passwordVisible ? "text" : "password"}
               placeholder={`รหัสผ่าน`}
-              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-                errorRegisPassword ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisPassword ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
             />
             <button
               className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
@@ -276,9 +272,8 @@ function EditProfile() {
               }}
               type={confirmPasswordVisible ? "text" : "password"}
               placeholder={`ยืนยันรหัสผ่าน`}
-              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-                errorRegisConfirmPassword ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+              className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisConfirmPassword ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
             />
             <button
               className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"

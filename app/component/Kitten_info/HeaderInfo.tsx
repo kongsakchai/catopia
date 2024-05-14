@@ -54,7 +54,7 @@ function HeaderInfo({ params }: any) {
           width={88}
           height={88}
           alt="Cat profile"
-          style={{ borderRadius: "88px" }}
+          className="rounded-full w-[88px] h-[88px] object-cover overflow-hidden"
         />
         <div className="flex gap-1">
           <h1 className="text-black01 text-center text-2xl not-italic font-bold leading-10">{kittenInfo.name}</h1>

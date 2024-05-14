@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useContext } from "react";
 import { ActiveContext } from "../store/context";
-// import { ActiveContext } from "@/app/main/layout";
 
 export default function Nav() {
   const router = useRouter();
@@ -22,7 +21,7 @@ export default function Nav() {
   }, []);
 
   return (
-    <div className=" flex w-full h-[104px] items-center justify-center shrink-0 fixed left-0 bottom-0 bg-white border-t-2 border-line">
+    <div className=" flex w-full h-[104px] items-center justify-center shrink-0 fixed left-0 bottom-0 z-50 bg-white border-t-2 border-line">
       <div className="flex w-[364px] h-auto justify-between pl-6 pr-6 ">
         <Link href="/main/home">
           <button

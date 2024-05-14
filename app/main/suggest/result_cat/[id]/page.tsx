@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-// import learningcats from "@/public/learningcats.json";
 import learningcats from "@/app/file/learningcats.json";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

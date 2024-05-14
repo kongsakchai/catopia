@@ -42,7 +42,7 @@ function AddTreatment({ params }: any) {
         }
       }
     } catch (error) {
-      //console.log("Error: ", error);
+      console.log("Error: ", error);
     }
   };
 
@@ -74,7 +74,7 @@ function AddTreatment({ params }: any) {
     }
   };
 
-  //console.log("kittenInfo: ", kittenInfo);
+  // console.log("kittenInfo: ", kittenInfo);
 
   const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -125,9 +125,9 @@ function AddTreatment({ params }: any) {
             width={88}
             height={88}
             alt="Your profile"
-            className="rounded-full max-w-[88px] max-h-[88px] object-cover"
+            className="rounded-full w-[88px] h-[88px] object-cover overflow-hidden"
           />
-          <h1 className=" text-black01 text-center apply text-2xl not-italic font-bold leading-10 mt-4">ก๋วยจั๊บ</h1>
+          <h1 className=" text-black01 text-center apply text-2xl not-italic font-bold leading-10 mt-4">{kittenInfo.name}</h1>
         </div>
         <form onSubmit={validateForm} className="flex flex-col justify-center items-start gap-2">
           <select
@@ -136,18 +136,18 @@ function AddTreatment({ params }: any) {
               setMedicalRecord(parseInt(e.target.value));
               // setErrorMedicalRecord(false);
             }}
-            className={`flex w-[364px] h-10 flex-col items-start text-center text-base not-italic font-normal leading-6 pl-1 pt-1.5 border rounded border-textfield focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start justify-center text-center text-base not-italic font-normal leading-6 pl-1 pt-1.5 border rounded border-textfield focus:outline-primary`}
           >
-            <option className=" text-black01 text-base not-italic font-normal leading-6" value={1}>
+            <option className="text-center text-black01 text-base not-italic font-normal leading-6" value={1}>
               การฉีดวัคซีน
             </option>
-            <option className=" text-black01 text-base not-italic font-normal leading-6" value={2}>
+            <option className="text-center text-black01 text-base not-italic font-normal leading-6" value={2}>
               การตรวจสุขภาพ
             </option>
-            <option className=" text-black01 text-base not-italic font-normal leading-6" value={3}>
+            <option className="text-center text-black01 text-base not-italic font-normal leading-6" value={3}>
               อุบัติเหตุ
             </option>
-            <option className=" text-black01 text-base not-italic font-normal leading-6" value={4}>
+            <option className="text-center text-black01 text-base not-italic font-normal leading-6" value={4}>
               อาการเจ็บป่วย
             </option>
           </select>

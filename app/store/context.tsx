@@ -12,5 +12,5 @@ type ActiveContextType = {
 export const ActiveContext = createContext<ActiveContextType | undefined>(
     undefined
   );
-
-  export const SuggestContext = createContext<unknown>(null);
+  
+export const SuggestContext = createContext<unknown>(null);

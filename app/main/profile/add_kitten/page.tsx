@@ -1,6 +1,5 @@
 "use client";
 
-// import learningcats from "@/public/learningcats.json";
 import learningcats from "@/app/file/learningcats.json";
 import axios from "axios";
 import Image from "next/image";

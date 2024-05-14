@@ -20,7 +20,7 @@ function SelectionPattern() {
       <h3 className="text-textfield text-xs not-italic font-normal leading-5">
         ข้อมูลที่แสดงผลเป็นเป็นเพียงการคาดคะเนจากข้อมูลเท่านั้น
       </h3>
-      {kittenData.length > 0 ? (
+      {kittenData !== null ? (
         <button
           type="button"
           onClick={() => setQuestionState("selectYourKitten")}
