@@ -1,9 +1,11 @@
 import Link from "next/link";
 import Registerform from "../component/Registerform";
+import PreLoader from "../component/Loader/PreLoader";
 
 export default function Register() {
   return (
     <div className="flex flex-col justify-center items-center mt-40">
+      {/* <PreLoader /> */}
       <Registerform />
       <div className="text-center">
         <div className="flex items-center">
