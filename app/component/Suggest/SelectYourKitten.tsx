@@ -1,6 +1,6 @@
 "use client";
 
-import { SuggestContext } from "@/app/main/suggest/page";
+import { SuggestContext } from "@/app/store/context";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
@@ -10,7 +10,7 @@ function SelectYourKitten() {
 
   const router = useRouter();
 
-  console.log("kittenData: ", kittenData);
+  //console.log("kittenData: ", kittenData);
 
   return (
     <div className=" container mx-auto flex flex-col items-start gap-4 pl-8 pr-8 mt-12">

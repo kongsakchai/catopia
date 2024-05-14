@@ -1,11 +1,11 @@
 'use client';
 
 import { useContext } from "react";
-import { DataContext } from "../main/breeding/page";
+import { BreedingContext } from "../store/breeding";
 
 export default function Headerbreeding() {
 
-    const {progressBreeding}:any = useContext(DataContext);
+    const {progressBreeding}:any = useContext(BreedingContext);
     return (
         <div className="flex justify-center container mx-auto mt-12 mb-10">
             <div className="progress w-[364px] bg-line h-2 rounded-full">

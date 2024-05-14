@@ -34,13 +34,7 @@ export default function InputOTP() {
     setErrorThirdOTP(!isThirdOTPValid);
     setErrorFourthOTP(!isFourthOTPValid);
 
-    if (
-      isFirstOTPValid &&
-      isSecondOTPValid &&
-      isThirdOTPValid &&
-      isFourthOTPValid &&
-      isOTPValid
-    ) {
+    if (isFirstOTPValid && isSecondOTPValid && isThirdOTPValid && isFourthOTPValid && isOTPValid) {
       router.push("/repassword/newpassword");
     } else {
       setErrorOTP("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
@@ -49,36 +43,30 @@ export default function InputOTP() {
 
   const postOTP = async () => {
     const otp = firstOTP + secondtOTP + thirdOTP + fourthOTP;
-    const data ={
+    const data = {
       otp,
-      code: localStorage.getItem("keyotp")
-    }
+      code: localStorage.getItem("keyotp"),
+    };
     try {
-      const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + "/otp/verify", data);
+      const res = await axios.post("/api//otp/verify", data);
 
       if (res.status === 200) {
         if (res.data.success) {
-          return true
+          return true;
         }
-        return false
+        return false;
       }
-
     } catch (error) {
-      console.log("Error: ", error);
-      return false
+      //console.log("Error: ", error);
+      return false;
     }
-  }
+  };
 
   return (
     <form onSubmit={validateForm} className="flex flex-col justify-center">
       <div className="flex mb-4">
-        <span className="text-xs not-italic font-normal leading-5 text-textfield">
-          ไม่ได้รับรหัส OTP
-        </span>
-        <Link
-          href="/"
-          className="text-xs not-italic font-semibold leading-5 ml-1 text-primary"
-        >
+        <span className="text-xs not-italic font-normal leading-5 text-textfield">ไม่ได้รับรหัส OTP</span>
+        <Link href="/" className="text-xs not-italic font-semibold leading-5 ml-1 text-primary">
           ส่งใหม่อีกครั้ง
         </Link>
       </div>
@@ -96,8 +84,9 @@ export default function InputOTP() {
             }
           }}
           type="text"
-          className={`text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid ${errorFirstOTP ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+          className={`text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid ${
+            errorFirstOTP ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
           style={{
             fontSize: "40px",
             fontStyle: "normal",
@@ -120,8 +109,9 @@ export default function InputOTP() {
             }
           }}
           type="text"
-          className={`text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid ${errorSecondOTP ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+          className={`text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid ${
+            errorSecondOTP ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
           style={{
             fontSize: "40px",
             fontStyle: "normal",
@@ -144,8 +134,9 @@ export default function InputOTP() {
             }
           }}
           type="text"
-          className={`text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid ${errorThirdOTP ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+          className={`text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid ${
+            errorThirdOTP ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
           style={{
             fontSize: "40px",
             fontStyle: "normal",
@@ -165,8 +156,9 @@ export default function InputOTP() {
             }
           }}
           type="text"
-          className={`text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid ${errorFourthOTP ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+          className={`text-center w-[79px] h-[70px] shrink-0 border rounded-lg border-solid ${
+            errorFourthOTP ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
           style={{
             fontSize: "40px",
             fontStyle: "normal",

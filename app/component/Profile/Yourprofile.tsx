@@ -20,11 +20,11 @@ function Yourprofile({ userData }: YourprofileProps) {
   const router = useRouter();
 
   const { username, email, profile } = userData;
-  // console.log("profile: ", profile);
+  // //console.log("profile: ", profile);
 
   const [selectedImage, setSelectedImage] =
     useState<string>("/Pofile-test.svg");
-  // console.log("selectedImage: ", selectedImage);
+  // //console.log("selectedImage: ", selectedImage);
 
   useEffect(() => {
     if (profile) {

@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { DataContext } from "../main/breeding/page";
 import { useContext } from "react";
+import { BreedingContext } from "../store/breeding";
 
 export default function Titlebreeding() {
 
-  const { setBreedingState } = useContext(DataContext) as { setBreedingState: (state: string) => void };
+  const { setBreedingState } = useContext(BreedingContext) as { setBreedingState: (state: string) => void };
 
   const handleBreedingState = (state: string) => {
     setBreedingState(state);

@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useEffect, useContext } from "react";
-import { DataContext } from "../main/breeding/page";
 import QuestionBreeding from "@/public/QuestionBreeding";
-import Catparent from "@/public/Catparent.json";
+// import Catparent from "@/public/catparent.json";
+import Catparent from "../file/catparent.json";
+import { BreedingContext } from "../store/breeding";
 
 interface Catparent {
   id: string;
@@ -21,7 +22,7 @@ export default function Genbreeding() {
     setCurrent,
     progressBreeding,
     setProgressBreeding,
-  }: any = useContext(DataContext);
+  }: any = useContext(BreedingContext);
 
   const [selectChoice, setSelectChoice] = useState("");
   const [typecolorDad, setTypecolorDad] = useState("");
@@ -38,7 +39,7 @@ export default function Genbreeding() {
   ]; //unique typecolor
 
   useEffect(() => {
-    console.log(allSelectedParent);
+    //console.log(allSelectedParent);
   }, [allSelectedParent]);
 
   const clearLastAnswer = () => {
@@ -61,7 +62,7 @@ export default function Genbreeding() {
     setSelectChoice(""); // Clear selectChoice
     if (current === QuestionBreeding.length - 1) {
       setBreedingState("resultbreeding");
-      // console.log(allSelected)
+      // //console.log(allSelected)
     } else setCurrent(current + 1);
   };
 

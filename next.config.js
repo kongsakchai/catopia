@@ -1,8 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['cdn.pixabay.com','47.254.216.80','188.166.188.219','cdn.onemars.net'],
-    }
-}
+  images: {
+    domains: [
+      process.env.NEXT_PUBLIC_DOMAIN1,
+      process.env.NEXT_PUBLIC_DOMAIN2,
+      process.env.NEXT_PUBLIC_DOMAIN3,
+      process.env.NEXT_PUBLIC_DOMAIN4,
+    ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: process.env.NEXT_PUBLIC_API_URL + "/:path*",
+      },
+    ];
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

@@ -30,24 +30,15 @@ export default function Newpassword() {
   const validateForm = async (e: any) => {
     e.preventDefault();
 
-    const isNewPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(
-      newPassword
-    );
+    const isNewPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(newPassword);
     const isNewPasswordValidMatch = confirmNewPassword === newPassword;
     const isConfirmNewPasswordNotEmpty = confirmNewPassword.trim() !== "";
     const isPostNewPassword = await postNewPassword();
 
     setErrorNewPassword(!isNewPasswordValid);
-    setErrorConfirmNewPassword(
-      !isConfirmNewPasswordNotEmpty || !isNewPasswordValidMatch
-    );
+    setErrorConfirmNewPassword(!isConfirmNewPasswordNotEmpty || !isNewPasswordValidMatch);
 
-    if (
-      isNewPasswordValid &&
-      isNewPasswordValidMatch &&
-      isConfirmNewPasswordNotEmpty &&
-      isPostNewPassword
-    ) {
+    if (isNewPasswordValid && isNewPasswordValidMatch && isConfirmNewPasswordNotEmpty && isPostNewPassword) {
       localStorage.removeItem("keyotp");
       router.push("/");
     } else {
@@ -56,41 +47,32 @@ export default function Newpassword() {
   };
 
   const postNewPassword = async () => {
-    const data ={
+    const data = {
       code: localStorage.getItem("keyotp"),
-      password: newPassword
-    }
+      password: newPassword,
+    };
     try {
-      const res = await axios.put(process.env.NEXT_PUBLIC_API_URL + "/reset-password", data);
+      const res = await axios.put("/api//reset-password", data);
 
       if (res.status === 201) {
         if (res.data.success) {
-          return true
+          return true;
         }
-        return false
+        return false;
       }
-
     } catch (error) {
-      console.log("Error: ", error);
-      return false
+      //console.log("Error: ", error);
+      return false;
     }
-  }
+  };
 
   return (
     <div className="flex flex-col items-center mt-40">
       <div className="mb-8">
-        <Image
-          src="../Catlogo.svg"
-          width={194}
-          height={181}
-          alt="Logo"
-          priority={true}
-        />
+        <Image src="../Catlogo.svg" width={194} height={181} alt="Logo" priority={true} />
       </div>
       <form onSubmit={validateForm} className="flex flex-col items-start gap-2">
-        <h1 className="text-2xl not-italic font-semibold leading-8 text-black01 mb-2">
-          รีเซ็ทรหัสผ่าน
-        </h1>
+        <h1 className="text-2xl not-italic font-semibold leading-8 text-black01 mb-2">รีเซ็ทรหัสผ่าน</h1>
         <div className="flex items-start relative ">
           <input
             value={newPassword}
@@ -100,17 +82,15 @@ export default function Newpassword() {
             }}
             type={passwordVisible ? "text" : "password"}
             placeholder="รหัสผ่าน"
-            className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorNewPassword ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorNewPassword ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <button
             className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
             onClick={(e) => togglePasswordVisibility(e)}
           >
-            <img
-              src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"}
-              alt="Password Visibility"
-            />
+            <img src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"} alt="Password Visibility" />
           </button>
         </div>
         <div className="flex items-start relative mb-2">
@@ -122,19 +102,15 @@ export default function Newpassword() {
             }}
             type={confirmPasswordVisible ? "text" : "password"}
             placeholder="ยืนยันรหัสผ่าน"
-            className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorConfirmNewPassword ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorConfirmNewPassword ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <button
             className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
             onClick={(e) => toggleConfirmPasswordVisibility(e)}
           >
-            <img
-              src={
-                confirmPasswordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"
-              }
-              alt="Password Visibility"
-            />
+            <img src={confirmPasswordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"} alt="Password Visibility" />
           </button>
         </div>
         <button className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6">
@@ -150,20 +126,13 @@ export default function Newpassword() {
       <div className="text-center mt-2 mb-4">
         <div className="flex items-center">
           <div className="flex-1 w-[320px] h-[0.001px] shrink-0 border border-line"></div>
-          <span className="text-xs not-italic font-normal leading-5 text-textfield px-2">
-            หรือ
-          </span>
+          <span className="text-xs not-italic font-normal leading-5 text-textfield px-2">หรือ</span>
           <div className="flex-1 border border-line"></div>
         </div>
       </div>
       <div className="flex">
-        <span className="text-xs not-italic font-normal leading-5 text-textfield">
-          มีบัญชีแล้วใช่ไหม?
-        </span>
-        <Link
-          href="/"
-          className="text-xs not-italic font-semibold leading-5 ml-1 text-primary"
-        >
+        <span className="text-xs not-italic font-normal leading-5 text-textfield">มีบัญชีแล้วใช่ไหม?</span>
+        <Link href="/" className="text-xs not-italic font-semibold leading-5 ml-1 text-primary">
           เข้าสู่ระบบ
         </Link>
       </div>

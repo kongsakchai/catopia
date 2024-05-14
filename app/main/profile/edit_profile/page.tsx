@@ -3,13 +3,7 @@
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, {
-  useState,
-  useEffect,
-  MouseEvent,
-  ChangeEvent,
-  FormEvent,
-} from "react";
+import React, { useState, useEffect, MouseEvent, ChangeEvent, FormEvent } from "react";
 
 // interface UserData {
 //   username: string;
@@ -23,8 +17,7 @@ import React, {
 function EditProfile() {
   const router = useRouter();
 
-  const [selectedImage, setSelectedImage] =
-    useState<string>("/Pofile-test.svg");
+  const [selectedImage, setSelectedImage] = useState<string>("/Pofile-test.svg");
   const [file, setFile] = useState<File | undefined>(undefined);
   const [email, setEmail] = useState("");
   const [date, setDate] = useState("");
@@ -52,24 +45,19 @@ function EditProfile() {
 
   const getUserData = async () => {
     try {
-      const response = await axios.get(
-        process.env.NEXT_PUBLIC_API_URL + "/user",
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await axios.get("/api//user", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
       // setUserInfo(response.data.data);
       setEmail(response.data.data.email);
       setDate(response.data.data.date);
       setRegisUsername(response.data.data.username);
       setGender(response.data.data.gender);
-      setSelectedImage(
-        process.env.NEXT_PUBLIC_API_IMAGES + response.data.data.profile
-      );
+      setSelectedImage(process.env.NEXT_PUBLIC_API_IMAGES + response.data.data.profile);
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   };
 
@@ -78,9 +66,7 @@ function EditProfile() {
     setPasswordVisible(!passwordVisible);
   };
 
-  const toggleConfirmPasswordVisibility = (
-    e: MouseEvent<HTMLButtonElement>
-  ) => {
+  const toggleConfirmPasswordVisibility = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setConfirmPasswordVisible(!confirmPasswordVisible);
   };
@@ -98,13 +84,10 @@ function EditProfile() {
   const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-      email
-    );
+    const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
     const isDateValid = date.trim() !== "";
     const isRegisUsernameValid = username.length >= 4;
-    const isRegisPasswordValid =
-      /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password) || password === "";
+    const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password) || password === "";
 
     const isRegisPasswordMatch = confirmPassword === password;
     const isGenderSelected = !!gender;
@@ -128,39 +111,31 @@ function EditProfile() {
       isGenderSelected
     ) {
       const profile = await postFile();
-      // console.log("postFile: ", profile);
-  
+      // //console.log("postFile: ", profile);
+
       const resultPostUserInfo = await postUserInfo(profile);
 
-      // console.log("resultPostUserInfo: ", resultPostUserInfo);
+      // //console.log("resultPostUserInfo: ", resultPostUserInfo);
 
       if (resultPostUserInfo) {
         router.push("/main/profile");
       }
     } else {
-      // console.log({isDateValid, isRegisUsernameValid, isRegisPasswordValid, isRegisPasswordMatch, isGenderSelected});
+      // //console.log({isDateValid, isRegisUsernameValid, isRegisPasswordValid, isRegisPasswordMatch, isGenderSelected});
       setErrorRegister("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
 
   const postFile = async () => {
-    if (file === undefined)
-      return selectedImage.replace(
-        process.env.NEXT_PUBLIC_API_IMAGES || "",
-        ""
-      );
+    if (file === undefined) return selectedImage.replace(process.env.NEXT_PUBLIC_API_IMAGES || "", "");
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "/file/upload",
-        formData,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      const response = await axios.post("/api//file/upload", formData, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
       if (response.status === 200) {
         const result = response.data;
         if (result.success) {
@@ -185,16 +160,12 @@ function EditProfile() {
       confirmPassword,
       gender,
     };
-    // console.log(profile);
+    // //console.log(profile);
 
     try {
-      const response = await axios.put(
-        process.env.NEXT_PUBLIC_API_URL + "/user",
-        data,
-        {
-          headers: { Authorization: "Bearer " + localStorage.getItem("token") },
-        }
-      );
+      const response = await axios.put("/api//user", data, {
+        headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+      });
 
       if (response.status === 200) {
         const result = response.data;
@@ -212,6 +183,12 @@ function EditProfile() {
     }
   };
 
+  const [inputType, setInputType] = useState("text"); // State to manage input type
+
+  const handleTouchStart = () => {
+    setInputType("date");
+  };
+
   return (
     <div className="container flex justify-center">
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
@@ -227,23 +204,12 @@ function EditProfile() {
             alt="Your profile"
             className="rounded-full max-w-[88px] max-h-[88px] object-cover"
           />
-          <label
-            htmlFor="fileInput"
-            className="absolute bottom-0 right-0 p-1 bg-white rounded-full cursor-pointer"
-          >
+          <label htmlFor="fileInput" className="absolute bottom-0 right-0 p-1 bg-white rounded-full cursor-pointer">
             <Image src="/Camera.svg" width={24} height={24} alt="Camera" />
-            <input
-              type="file"
-              id="fileInput"
-              onChange={handleFileInput}
-              className="hidden"
-            />
+            <input type="file" id="fileInput" onChange={handleFileInput} className="hidden" />
           </label>
         </div>
-        <form
-          onSubmit={validateForm}
-          className="flex flex-col justify-center items-start gap-2"
-        >
+        <form onSubmit={validateForm} className="flex flex-col justify-center items-start gap-2">
           <input
             value={email}
             onChange={(e) => {
@@ -262,10 +228,9 @@ function EditProfile() {
               setDate(e.target.value);
               setErrorDate(false);
             }}
-            type={"text"}
-            placeholder={`วัน เดือน ปี เกิด`}
-            onFocus={(e) => (e.target.type = "date")}
-            onBlur={(e) => (e.target.type = "text")}
+            type={inputType}
+            placeholder="วัน เดือน ปี เกิด"
+            onTouchStart={handleTouchStart}
             className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
               errorDate ? "border-error" : "border-textfield"
             } focus:outline-primary`}
@@ -299,10 +264,7 @@ function EditProfile() {
               className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
               onClick={(e) => togglePasswordVisibility(e)}
             >
-              <img
-                src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"}
-                alt="Password Visibility"
-              />
+              <img src={passwordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"} alt="Password Visibility" />
             </button>
           </div>
           <div className="flex items-start relative">
@@ -322,20 +284,11 @@ function EditProfile() {
               className="absolute right-0 top-0 h-full px-2 border-[none] rounded border-textfield focus:outline-primary flex items-center"
               onClick={(e) => toggleConfirmPasswordVisibility(e)}
             >
-              <img
-                src={
-                  confirmPasswordVisible
-                    ? "/EyeUnblocked.svg"
-                    : "/EyeBlocked.svg"
-                }
-                alt="Password Visibility"
-              />
+              <img src={confirmPasswordVisible ? "/EyeUnblocked.svg" : "/EyeBlocked.svg"} alt="Password Visibility" />
             </button>
           </div>
           <div className="text-left mt-2 mb-4">
-            <span className={`${errorGender ? "text-error" : "text-black01"}`}>
-              เพศ
-            </span>
+            <span className={`${errorGender ? "text-error" : "text-black01"}`}>เพศ</span>
             <div className="flex items-center">
               <input
                 type="radio"
@@ -348,9 +301,7 @@ function EditProfile() {
                 }}
                 className="ml-2 mr-2 mt-2"
               />
-              <span className="rounded-full h-6 w-6 flex items-center justify-center  text-black01 mt-2">
-                ชาย
-              </span>
+              <span className="rounded-full h-6 w-6 flex items-center justify-center  text-black01 mt-2">ชาย</span>
               <input
                 type="radio"
                 name="gender"
@@ -362,9 +313,7 @@ function EditProfile() {
                 }}
                 className="ml-6 mr-2 mt-2"
               />
-              <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">
-                หญิง
-              </span>
+              <span className="rounded-full h-6 w-6 flex items-center justify-center text-black01 mt-2">หญิง</span>
             </div>
           </div>
           <button

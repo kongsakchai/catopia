@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
 function EditTreatment({ params }: any) {
-  //   console.log("EditTreatment_catID : ", params.catID);
-  //   console.log("EditTreatment_id : ", params.id);
+  //   //console.log("EditTreatment_catID : ", params.catID);
+  //   //console.log("EditTreatment_id : ", params.id);
 
   const router = useRouter();
 
@@ -30,26 +30,23 @@ function EditTreatment({ params }: any) {
 
   useEffect(() => {
     getKittenInfo();
-    getTreatment()
+    getTreatment();
   }, []);
 
   const getKittenInfo = async () => {
     try {
-      const res = await axios.get(
-        process.env.NEXT_PUBLIC_API_URL + `/cat/${params.catID}`,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      const res = await axios.get(`/api/cat/${params.catID}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
       if (res.status === 200) {
         if (res.data.success) {
           setKittenInfo(res.data.data);
         }
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
   };
 
@@ -62,15 +59,11 @@ function EditTreatment({ params }: any) {
       detail: detail,
     };
     try {
-      const res = await axios.put(
-        process.env.NEXT_PUBLIC_API_URL + `/treatment/${params.catID}/${params.id}`,
-        data,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
+      const res = await axios.put(`/api/treatment/${params.catID}/${params.id}`, data, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
 
       if (res.status === 200) {
         const reslt = res.data;
@@ -80,34 +73,34 @@ function EditTreatment({ params }: any) {
         return false;
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
       return false;
     }
   };
 
   const getTreatment = async () => {
     try {
-      const response = await axios.get(process.env.NEXT_PUBLIC_API_URL + `/treatment/${params.catID}/${params.id}`, {
+      const response = await axios.get(`/api/treatment/${params.catID}/${params.id}`, {
         headers: {
-          Authorization: "Bearer " + localStorage.getItem("token")
-        }
-      })
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
 
       if (response.data.data !== null) {
         // setTreatmentInfo(response.data.data)
-        setMedicalRecord(response.data.data.treatmentTypeID)
-        setDate(response.data.data.date)
-        setVeterinarian(response.data.data.vet)
-        setHospital(response.data.data.location)
-        setDetail(response.data.data.detail)
+        setMedicalRecord(response.data.data.treatmentTypeID);
+        setDate(response.data.data.date);
+        setVeterinarian(response.data.data.vet);
+        setHospital(response.data.data.location);
+        setDetail(response.data.data.detail);
       }
     } catch (error) {
-      console.log("Error: ", error);
+      //console.log("Error: ", error);
     }
-  }
+  };
 
-  //   console.log("kittenInfo: ", kittenInfo);
-  //   console.log("treatmentInfo: ", treatmentInfo);
+  //   //console.log("kittenInfo: ", kittenInfo);
+  //   //console.log("treatmentInfo: ", treatmentInfo);
 
   const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -139,13 +132,16 @@ function EditTreatment({ params }: any) {
     }
   };
 
+  const [inputType, setInputType] = useState("text"); // State to manage input type
+
+  const handleTouchStart = () => {
+    setInputType("date");
+  };
+
   return (
     <div className="container flex justify-center">
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
-        <button
-          type="button"
-          onClick={() => router.push(`/main/profile/kitten_info/${params.catID}`)}
-        >
+        <button type="button" onClick={() => router.push(`/main/profile/kitten_info/${params.catID}`)}>
           <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />
         </button>
         <div className="flex flex-col gap-4">
@@ -157,14 +153,9 @@ function EditTreatment({ params }: any) {
             alt="Your profile"
             className="rounded-full max-w-[88px] max-h-[88px] object-cover"
           />
-          <h1 className=" text-black01 text-center apply text-2xl not-italic font-bold leading-10 mt-4">
-            ก๋วยจั๊บ
-          </h1>
+          <h1 className=" text-black01 text-center apply text-2xl not-italic font-bold leading-10 mt-4">ก๋วยจั๊บ</h1>
         </div>
-        <form
-          onSubmit={validateForm}
-          className="flex flex-col justify-center items-start gap-2"
-        >
+        <form onSubmit={validateForm} className="flex flex-col justify-center items-start gap-2">
           <select
             value={medicalRecord}
             onChange={(e) => {
@@ -173,44 +164,31 @@ function EditTreatment({ params }: any) {
             }}
             className={`flex w-[364px] h-10 flex-col items-start text-center text-base not-italic font-normal leading-6 pl-1 pt-1.5 border rounded border-textfield focus:outline-primary`}
           >
-            <option
-              className=" text-black01 text-base not-italic font-normal leading-6"
-              value={1}
-            >
+            <option className=" text-black01 text-base not-italic font-normal leading-6" value={1}>
               การฉีดวัคซีน
             </option>
-            <option
-              className=" text-black01 text-base not-italic font-normal leading-6"
-              value={2}
-            >
+            <option className=" text-black01 text-base not-italic font-normal leading-6" value={2}>
               การตรวจสุขภาพ
             </option>
-            <option
-              className=" text-black01 text-base not-italic font-normal leading-6"
-              value={3}
-            >
+            <option className=" text-black01 text-base not-italic font-normal leading-6" value={3}>
               อุบัติเหตุ
             </option>
-            <option
-              className=" text-black01 text-base not-italic font-normal leading-6"
-              value={4}
-            >
+            <option className=" text-black01 text-base not-italic font-normal leading-6" value={4}>
               อาการเจ็บป่วย
             </option>
           </select>
-
           <input
             value={date}
             onChange={(e) => {
               setDate(e.target.value);
               setErrorDate(false);
             }}
-            type={"text"}
-            placeholder={`วัน เดือน ปี เกิด`}
-            onFocus={(e) => (e.target.type = "date")}
-            onBlur={(e) => (e.target.type = "text")}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            type={inputType}
+            placeholder="วัน เดือน ปี เกิด"
+            onTouchStart={handleTouchStart}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
+              errorDate ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={veterinarian}
@@ -220,8 +198,9 @@ function EditTreatment({ params }: any) {
             }}
             type="text"
             placeholder={`สัตวแพทย์ / เลขที่ใบอนุญาต`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorVeterinarian ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorVeterinarian ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={hospital}
@@ -231,8 +210,9 @@ function EditTreatment({ params }: any) {
             }}
             type="text"
             placeholder={`สถานที่รักษา`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorHospital ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorHospital ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <input
             value={detail}
@@ -242,8 +222,9 @@ function EditTreatment({ params }: any) {
             }}
             type="text"
             placeholder={`รายละเอียดเพิ่มเติม`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDetail ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
+              errorDetail ? "border-error" : "border-textfield"
+            } focus:outline-primary`}
           />
           <button
             type="submit"
