@@ -19,21 +19,21 @@ export default function Completeregister() {
           height={123}
           width={123}
           alt="register success"
-        ></Image>
+        />
       </div>
       <div className="flex flex-col items-center gap-2.5">
         <h1 className="text-2xl text-black01 not-italic font-bold leading-10">
-          ลงทะเบียนเสร็จสิ้น
+          ตอบคำถามครั้งแรกเสร็จสิ้น
         </h1>
         <p className="text-center text-base text-textfield not-italic font-normal leading-6">
-          ขอบคุณสำหรับการลงทะเบียนในครั้งนี้
+          ขอบคุณสำหรับการตอบคำถามครั้งนี้
         </p>
         <Link href="/main/home">
           <button
             type="submit"
             className="flex w-[364px] justify-center items-center gap-2.5 px-4 py-2 bg-primary text-white border rounded-lg border-solid text-base not-italic font-normal leading-6"
           >
-            กลับไปหน้าเข้าสู่ระบบ
+            เริ่มต้นใช้งาน
           </button>
         </Link>
       </div>

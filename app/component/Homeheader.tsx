@@ -74,7 +74,7 @@ export default function Homeheader() {
         </button>
         <input
           type="text"
-          placeholder="ค้นหา"
+          placeholder="ค้นหาสายพันธุ์แมว"
           onChange={(e) => handleSearch(e)}
           className={`flex w-full h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 ml-8 focus:outline-none border-[none]`}
         />

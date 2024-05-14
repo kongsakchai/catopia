@@ -4,7 +4,7 @@ import React from 'react';
 
 function PreLoader() {
     return (
-        <div className='absolute top-0 left-0 right-0 bottom-0 bg-secondary flex items-center justify-center opacity-100 visible z-40 transition-opacity duration-[0.25s] ease-[ease]'>
+        <div className='absolute top-0 left-0 right-0 bottom-0 bg-secondary/90 flex items-center justify-center opacity-100 visible z-40 transition-opacity duration-[0.25s] ease-[ease]'>
             <div className='relative w-[142px] h-[40px] bg-transparent'>
                 <span className='absolute w-4 h-4 top-3 left-4 bg-primary rounded-full translate-x-0 animate-dot'></span>
                 <div className='translate-x-0 mt-3 ml-[31px]'>
