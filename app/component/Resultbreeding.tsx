@@ -114,7 +114,7 @@ export default function Resultbreeding() {
 
   return (
     <div
-      className="flex flex-col h-screen"
+      className="flex flex-col h-full"
       style={{
         backgroundImage: "url(/Mainbg.svg)",
         backgroundSize: "cover",
