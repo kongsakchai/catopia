@@ -11,10 +11,10 @@ import React, {
 } from "react";
 
 interface RegisterformProps {
-  setAnblePreloader: React.Dispatch<SetStateAction<boolean>>;
+  setEnablePreloader: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export default function Registerform({ setAnblePreloader }: RegisterformProps) {
+export default function Registerform({ setEnablePreloader }: RegisterformProps) {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
@@ -59,12 +59,12 @@ export default function Registerform({ setAnblePreloader }: RegisterformProps) {
   const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setAnblePreloader(true);
+    setEnablePreloader(true);
 
     const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
       email
     );
-    const isDateValid = date !== null;
+    const isDateValid = date.trim() !== "" && date !;
     const isRegisUsernameValid = username.length >= 4;
     const isRegisPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(
       password
@@ -94,13 +94,13 @@ export default function Registerform({ setAnblePreloader }: RegisterformProps) {
       const res = await fetchRegisterDB();
       //console.log('fetchRegisterDB', res);
 
-      setAnblePreloader(false);
+      setEnablePreloader(false);
 
       if (res) {
         router.push("/");
       }
     } else {
-      setAnblePreloader(false);
+      setEnablePreloader(false);
       setErrorRegister("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };

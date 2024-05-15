@@ -1,12 +1,16 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import PreLoader from "./Loader/PreLoader";
+
 import Link from "next/link";
 import axios from "axios";
+import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 
 export default function InputOTP() {
   const router = useRouter();
+
+  const [enablePreloader, setEnablePreloader] = useState(false);
 
   const [firstOTP, setFirstOTP] = useState("");
   const [secondtOTP, setSecondOTP] = useState("");
@@ -24,11 +28,16 @@ export default function InputOTP() {
   const validateForm = async (e: any) => {
     e.preventDefault();
 
+    setEnablePreloader(true);
+
     const isFirstOTPValid = firstOTP.length === 1;
     const isSecondOTPValid = secondtOTP.length === 1;
     const isThirdOTPValid = thirdOTP.length === 1;
     const isFourthOTPValid = fourthOTP.length === 1;
     const isOTPValid = await postOTP();
+
+    setEnablePreloader(false);
+
     setErrorFirstOTP(!isFirstOTPValid);
     setErrorSecondOTP(!isSecondOTPValid);
     setErrorThirdOTP(!isThirdOTPValid);
@@ -37,6 +46,7 @@ export default function InputOTP() {
     if (isFirstOTPValid && isSecondOTPValid && isThirdOTPValid && isFourthOTPValid && isOTPValid) {
       router.push("/repassword/newpassword");
     } else {
+      setEnablePreloader(false);
       setErrorOTP("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
@@ -64,6 +74,7 @@ export default function InputOTP() {
 
   return (
     <form onSubmit={validateForm} className="flex flex-col justify-center">
+      {enablePreloader && <PreLoader />}
       <div className="flex mb-4">
         <span className="text-xs not-italic font-normal leading-5 text-textfield">ไม่ได้รับรหัส OTP</span>
         <Link href="/" className="text-xs not-italic font-semibold leading-5 ml-1 text-primary">

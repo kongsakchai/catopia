@@ -1,6 +1,8 @@
 "use client";
 
+import PreLoader from "@/app/component/Loader/PreLoader";
 import learningcats from "@/app/file/learningcats.json";
+
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -10,6 +12,8 @@ function EditKittenInfo({ params }: any) {
   // //console.log("params: ", params);
 
   const router = useRouter();
+
+  const [enablePreloader, setEnablePreloader] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState<string>("/Pofile-test.svg");
   const [file, setFile] = useState<File | undefined>(undefined);
@@ -96,6 +100,8 @@ function EditKittenInfo({ params }: any) {
   const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setEnablePreloader(true);
+
     const isDateValid = date.trim() !== "";
     const isRegisUsernameValid = username.length >= 4;
     const isWeight = weight !== 0;
@@ -103,6 +109,8 @@ function EditKittenInfo({ params }: any) {
     const isGenderSelected = !!gender;
     const resultFile = await postFile();
     const resultPost = await putKitten(resultFile);
+
+    setEnablePreloader(false);
 
     setErrorDate(!isDateValid);
     setErrorRegisUsername(!isRegisUsernameValid);
@@ -114,6 +122,7 @@ function EditKittenInfo({ params }: any) {
       //
       router.push("/main/profile");
     } else {
+      setEnablePreloader(false);
       setErrorRegister("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
@@ -185,6 +194,7 @@ function EditKittenInfo({ params }: any) {
 
   return (
     <div className="container flex justify-center">
+      {enablePreloader && <PreLoader />}
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
         <button type="button" onClick={() => router.push(`/main/profile/kitten_info/${params.id}`)}>
           <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />
@@ -211,9 +221,8 @@ function EditKittenInfo({ params }: any) {
             }}
             type="text"
             placeholder={`ชื่อ`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorRegisUsername ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorRegisUsername ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={date}
@@ -224,9 +233,8 @@ function EditKittenInfo({ params }: any) {
             type={inputType}
             placeholder="วัน เดือน ปี เกิด"
             onTouchStart={handleTouchStart}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
-              errorDate ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <input
             value={weight}
@@ -237,9 +245,8 @@ function EditKittenInfo({ params }: any) {
             }}
             type="number"
             placeholder={`น้ำหนัก (กก.)`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorWeight ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorWeight ? "border-error" : "border-textfield"
+              } focus:outline-primary`}
           />
           <div className="flex items-start relative w-full">
             <input
@@ -251,9 +258,8 @@ function EditKittenInfo({ params }: any) {
               }}
               type="text"
               placeholder={`พันธุ์แมว`}
-              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-                errorBreed ? "border-error" : "border-textfield"
-              } focus:outline-primary`}
+              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorBreed ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
             />
             {activeSearch.length > 0 && (
               <div className="flex flex-col gap-4 z-20 absolute top-12 p-4 bg-white text-black01 border-b-2 border-l-2 border-r-2 w-full rounded left-1/2 -translate-x-1/2 ">

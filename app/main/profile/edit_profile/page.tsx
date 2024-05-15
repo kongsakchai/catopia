@@ -1,21 +1,16 @@
 "use client";
 
+import PreLoader from "@/app/component/Loader/PreLoader";
+
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, MouseEvent, ChangeEvent, FormEvent } from "react";
 
-// interface UserData {
-//   username: string;
-//   email: string;
-//   id: number;
-//   gender: string;
-//   date: string;
-//   createdAt: string;
-// }
-
 function EditProfile() {
   const router = useRouter();
+
+  const [enablePreloader, setEnablePreloader] = useState(false);
 
   const [selectedImage, setSelectedImage] = useState<string>("/Pofile-test.svg");
   const [file, setFile] = useState<File | undefined>(undefined);
@@ -36,8 +31,6 @@ function EditProfile() {
 
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-
-  // const [useInfo, setUserInfo] = useState({} as UserData);
 
   useEffect(() => {
     getUserData();
@@ -84,6 +77,8 @@ function EditProfile() {
   const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setEnablePreloader(true);
+
     const isEmailValid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
     const isDateValid = date.trim() !== "";
     const isRegisUsernameValid = username.length >= 4;
@@ -117,11 +112,14 @@ function EditProfile() {
 
       // //console.log("resultPostUserInfo: ", resultPostUserInfo);
 
+      setEnablePreloader(false);
+
       if (resultPostUserInfo) {
         router.push("/main/profile");
       }
     } else {
       // //console.log({isDateValid, isRegisUsernameValid, isRegisPasswordValid, isRegisPasswordMatch, isGenderSelected});
+      setEnablePreloader(false);
       setErrorRegister("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
@@ -188,9 +186,9 @@ function EditProfile() {
   const handleTouchStart = () => {
     setInputType("date");
   };
-
   return (
     <div className="container flex justify-center">
+      {enablePreloader && <PreLoader />}
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
         <button type="button" onClick={() => router.push("/main/profile")}>
           <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />

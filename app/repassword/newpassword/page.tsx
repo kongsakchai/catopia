@@ -1,12 +1,17 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+
+import PreLoader from "@/app/component/Loader/PreLoader";
+
 import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Newpassword() {
   const router = useRouter();
+
+  const [enablePreloader, setEnablePreloader] = useState(false);
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -30,10 +35,14 @@ export default function Newpassword() {
   const validateForm = async (e: any) => {
     e.preventDefault();
 
+    setEnablePreloader(true);
+
     const isNewPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(newPassword);
     const isNewPasswordValidMatch = confirmNewPassword === newPassword;
     const isConfirmNewPasswordNotEmpty = confirmNewPassword.trim() !== "";
     const isPostNewPassword = await postNewPassword();
+
+    setEnablePreloader(false);
 
     setErrorNewPassword(!isNewPasswordValid);
     setErrorConfirmNewPassword(!isConfirmNewPasswordNotEmpty || !isNewPasswordValidMatch);
@@ -42,6 +51,7 @@ export default function Newpassword() {
       localStorage.removeItem("keyotp");
       router.push("/");
     } else {
+      setEnablePreloader(false);
       setErrorPassword("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
@@ -68,6 +78,7 @@ export default function Newpassword() {
 
   return (
     <div className="flex flex-col items-center mt-40">
+      {enablePreloader && <PreLoader />}
       <div className="mb-8">
         <Image src="../Catlogo.svg" width={194} height={181} alt="Logo" priority={true} />
       </div>

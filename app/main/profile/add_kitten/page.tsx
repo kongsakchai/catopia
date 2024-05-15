@@ -1,14 +1,17 @@
 "use client";
 
+import PreLoader from "@/app/component/Loader/PreLoader";
 import learningcats from "@/app/file/learningcats.json";
+
 import axios from "axios";
 import Image from "next/image";
-
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 
 function AddKitten() {
   const router = useRouter();
+
+  const [enablePreloader, setEnablePreloader] = useState(false);
 
   const [selectedImage, setSelectedImage] =
     useState<string>("/Pofile-test.svg");
@@ -72,6 +75,8 @@ function AddKitten() {
   const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setEnablePreloader(true);
+
     const isDateValid = date.trim() !== "";
     const isRegisUsernameValid = username.length >= 4;
     const isWeight = weight !== 0;
@@ -80,6 +85,8 @@ function AddKitten() {
 
     const resultFile = await postFile();
     const resultPost = await postKitten(resultFile);
+
+    setEnablePreloader(false);
 
     setErrorDate(!isDateValid);
     setErrorRegisUsername(!isRegisUsernameValid);
@@ -98,6 +105,7 @@ function AddKitten() {
       //
       router.push("/main/profile");
     } else {
+      setEnablePreloader(false);
       setErrorRegister("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
@@ -169,6 +177,7 @@ function AddKitten() {
 
   return (
     <div className="container flex justify-center">
+      {enablePreloader && <PreLoader />}
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
         <button type="button" onClick={() => router.push("/main/profile")}>
           <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />

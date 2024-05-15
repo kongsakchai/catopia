@@ -5,7 +5,11 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
 
-export default function Loginform() {
+interface LoginformProps {
+  setEnablePreloader: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function Loginform({ setEnablePreloader }: LoginformProps) {
   const router = useRouter();
 
   const [username, setUsername] = useState("");
@@ -23,6 +27,8 @@ export default function Loginform() {
   const validateForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setEnablePreloader(true);
+
     const isUsernameValid = username.length >= 4;
     const isPasswordValid = /^(?=.*[a-zA-Z])(?=.*\d).{8,16}$/.test(password);
 
@@ -33,12 +39,15 @@ export default function Loginform() {
       const resPost = await fetchLoginrDB();
       //console.log("resPost : ", resPost);
 
+      setEnablePreloader(false);
+
       if (resPost.success) {
         if (!resPost.firstLogin) {
           router.push("/main/home");
         } else router.push("/register/getquestion");
       } else setErrorLogin("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     } else {
+      setEnablePreloader(false);
       setErrorLogin("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
@@ -89,9 +98,8 @@ export default function Loginform() {
         }}
         type="text"
         placeholder="ชื่อผู้ใช้งาน"
-        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-          errorUsername ? "border-error" : "border-textfield"
-        } focus:outline-primary`}
+        className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorUsername ? "border-error" : "border-textfield"
+          } focus:outline-primary`}
         style={{
           color: errorUsername ? "#e50914" : "",
         }}
@@ -105,9 +113,8 @@ export default function Loginform() {
           }}
           type={passwordVisible ? "text" : "password"}
           placeholder="รหัสผ่าน"
-          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${
-            errorPassword ? "border-error" : "border-textfield"
-          }
+          className={`items-start pr-10 py-0 flex w-[364px] h-10 text-base not-italic font-normal leading-6 pl-2 border rounded ${errorPassword ? "border-error" : "border-textfield"
+            }
                      focus:outline-primary`}
           style={{
             color: errorPassword ? "#e50914" : "",

@@ -1,5 +1,7 @@
 "use client";
 
+import PreLoader from "@/app/component/Loader/PreLoader";
+
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -9,6 +11,8 @@ function AddTreatment({ params }: any) {
   // //console.log("AddTreatment : ", params.id);
 
   const router = useRouter();
+
+  const [enablePreloader, setEnablePreloader] = useState(false);
 
   const [kittenInfo, setKittenInfo] = useState<any>({});
 
@@ -79,12 +83,16 @@ function AddTreatment({ params }: any) {
   const validateForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setEnablePreloader(true);
+
     // const isMedicalRecordValid = medicalRecord !== undefined;
     const isDateValid = date.trim() !== "";
     const isVeterinarianValid = veterinarian.trim() !== "";
     const isHospitalValid = hospital.trim() !== "";
     const isDetailValid = detail.trim() !== "";
     const resultPostTreatment = await postTreatment();
+
+    setEnablePreloader(false);
 
     // setErrorMedicalRecord(!isMedicalRecordValid);
     setErrorDate(!isDateValid);
@@ -102,6 +110,7 @@ function AddTreatment({ params }: any) {
     ) {
       router.push(`/main/profile/kitten_info/${params.id}`);
     } else {
+      setEnablePreloader(false);
       setErrorSave("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
@@ -114,6 +123,7 @@ function AddTreatment({ params }: any) {
 
   return (
     <div className="container flex justify-center">
+      {enablePreloader && <PreLoader />}
       <div className="flex flex-col justify-center items-start gap-8 mt-20 w-[364px]">
         <button type="button" onClick={() => router.push(`/main/profile/kitten_info/${params.id}`)}>
           <Image src="/ArrowLeft.svg" width={24} height={24} alt="arrow-left" />

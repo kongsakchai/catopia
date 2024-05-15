@@ -1,13 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import PreLoader from "../component/Loader/PreLoader";
+
 import Link from "next/link";
 import Image from "next/image";
 import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Forgotpassword() {
   const router = useRouter();
+
+  const [enablePreloader, setEnablePreloader] = useState(false);
 
   const [username, setUsername] = useState("");
   const [errorUsername, setErrorUsername] = useState(false);
@@ -16,13 +20,19 @@ export default function Forgotpassword() {
   const validateForm = async (e: any) => {
     e.preventDefault();
 
+    setEnablePreloader(true);
+
     const isUsernameValid = username.length >= 4;
     const isUsernameExist = await sendUsernameForOTP();
+
+    setEnablePreloader(false);
+
     setErrorUsername(!isUsernameValid);
 
     if (isUsernameValid && isUsernameExist) {
       router.push("/repassword/checkOTP");
     } else {
+      setEnablePreloader(false);
       setErrorSentConfirm("ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง");
     }
   };
@@ -47,6 +57,7 @@ export default function Forgotpassword() {
 
   return (
     <div className="flex flex-col items-center mt-40  ">
+      {enablePreloader && <PreLoader />}
       <div className="mb-8">
         <Image src="../Catlogo.svg" width={194} height={181} alt="Logo" priority={true} />
       </div>

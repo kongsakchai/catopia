@@ -1,12 +1,19 @@
+'use client'
 import Link from "next/link"
 import Loginform from "./component/Loginform"
 import Image from "next/image"
+import { useState } from "react"
+import PreLoader from "./component/Loader/PreLoader"
 
 export default function Home() {
+
+  const [enablePreloader, setEnablePreloader] = useState(false);
+
   return (
     <div className="flex flex-col items-center justify-center mt-40">
       <Image src="Catlogo.svg" width={194} height={181} alt="Logo" priority={true} />
-      <Loginform />
+      {enablePreloader && <PreLoader />}
+      <Loginform setEnablePreloader={setEnablePreloader}/>
       <div className="text-center">
         <div className="flex items-center">
           <div className="flex-1 w-[320px] h-[0.001px] shrink-0 border border-line"></div>
