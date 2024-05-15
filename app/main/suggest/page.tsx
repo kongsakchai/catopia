@@ -35,7 +35,7 @@ export default function Suggest() {
         }
       }
     } catch (error) {
-      //console.log("Error: ", error);
+      console.log("Error: ", error);
     }
   };
 
