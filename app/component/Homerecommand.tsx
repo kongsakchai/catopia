@@ -22,7 +22,7 @@ export default function Homerecommand() {
           />
         </button>
         <h3 className=" text-black01 text-xs not-italic font-normal leading-5">
-          ระแบบแนะนำแมวที่เหมาะสมกับคุณ
+          ระบบแนะนำแมวที่เหมาะสมกับคุณ
         </h3>
       </div>
     </div>

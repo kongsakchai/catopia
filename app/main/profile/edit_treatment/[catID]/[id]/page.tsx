@@ -22,6 +22,8 @@ function EditTreatment({ params }: any) {
   const [veterinarian, setVeterinarian] = useState("");
   const [hospital, setHospital] = useState("");
   const [detail, setDetail] = useState("");
+  const [appointment, setAppointment] = useState("");
+  const [appointmentDetail, setAppointmentDetail] = useState("");
 
   // const [errorMedicalRecord, setErrorMedicalRecord] = useState(false);
   const [errorDate, setErrorDate] = useState(false);
@@ -61,6 +63,8 @@ function EditTreatment({ params }: any) {
       vet: veterinarian,
       location: hospital,
       detail: detail,
+      appointment,
+      appointmentDetail
     };
     try {
       const res = await axios.put(`/api/treatment/${params.catID}/${params.id}`, data, {
@@ -141,11 +145,14 @@ function EditTreatment({ params }: any) {
     }
   };
 
-  const [inputType, setInputType] = useState("text"); // State to manage input type
+  const [inputTypeForDate, setInputTypeForDate] = useState("text"); // State to manage input type
+  const [inputTypeForAppointment, setInputTypeForAppointment] = useState("text"); // State to manage input type
 
-  const handleTouchStart = () => {
-    setInputType("date");
-  };
+  const handleTouchStartDate = () => setInputTypeForDate("date");
+  const handleBlurDate = () => setInputTypeForDate('text');
+
+  const handleTouchStartApointment = () => setInputTypeForAppointment("datetime-local");
+  const handleBlurAppointment = () => setInputTypeForAppointment("text");
 
   return (
     <div className="container flex justify-center">
@@ -187,54 +194,117 @@ function EditTreatment({ params }: any) {
               อาการเจ็บป่วย
             </option>
           </select>
+          <div className="relative">
+            <input
+              id="date"
+              value={date}
+              onChange={(e) => {
+                setDate(e.target.value);
+                setErrorDate(false);
+              }}
+              type={inputTypeForDate}
+              onTouchStart={handleTouchStartDate}
+              onBlur={handleBlurDate}
+              className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${errorDate ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
+            />
+            {date.trim() === "" && inputTypeForDate === "text" && (
+              <label
+                htmlFor="date"
+                className={`absolute pointer-events-none left-2 top-2 text-base not-italic font-normal leading-6 text-textfield`}
+              >
+                วันที่ทำการรักษา
+                <span className="text-error text-base not-italic font-normal leading-6">*</span>
+              </label>
+            )}
+          </div>
+          <div className="relative">
+            <input
+              id="veterinarian"
+              value={veterinarian}
+              onChange={(e) => {
+                setVeterinarian(e.target.value);
+                setErrorVeterinarian(false);
+              }}
+              type="text"
+              className={`w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorVeterinarian ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
+            />
+            {veterinarian.trim() === "" && (
+              <label
+                htmlFor="veterinarian"
+                className={`absolute pointer-events-none left-2 top-2 text-base not-italic font-normal leading-6 text-textfield`}
+              >
+                สัตวแพทย์ / เลขที่ใบอนุญาต
+                <span className="text-error text-base not-italic font-normal leading-6">*</span>
+              </label>
+            )}
+          </div>
+          <div className=" relative">
+            <input
+              id="hospital"
+              value={hospital}
+              onChange={(e) => {
+                setHospital(e.target.value);
+                setErrorHospital(false);
+              }}
+              type="text"
+              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorHospital ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
+            />
+            {hospital.trim() === "" && (
+              <label
+                htmlFor="hospital"
+                className={`absolute pointer-events-none left-2 top-2 text-base not-italic font-normal leading-6 text-textfield`}
+              >
+                สถานที่รักษา
+                <span className="text-error text-base not-italic font-normal leading-6">*</span>
+              </label>
+            )}
+          </div>
+          <div className=" relative">
+            <input
+              id="detail"
+              value={detail}
+              onChange={(e) => {
+                setDetail(e.target.value);
+                setErrorDetail(false);
+              }}
+              type="text"
+              className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${errorDetail ? "border-error" : "border-textfield"
+                } focus:outline-primary`}
+            />
+            {detail.trim() === "" && (
+              <label htmlFor="detail" className={`absolute pointer-events-none left-2 top-2 text-base not-italic font-normal leading-6 text-textfield`}>
+                รายละเอียดเพิ่มเติม
+                <span className="text-error text-base not-italic font-normal leading-6">*</span>
+              </label>
+            )}
+          </div>
+          <div className="relative">
+            <input
+              value={appointment}
+              onChange={(e) => setAppointment(e.target.value)}
+              type={inputTypeForAppointment}
+              onTouchStart={handleTouchStartApointment}
+              onBlur={handleBlurAppointment}
+              className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded border-textfield focus:outline-primary`}
+            />
+            {appointment.trim() === "" && inputTypeForAppointment === "text" && (
+              <label
+                htmlFor="appointment"
+                className={`absolute pointer-events-none left-2 top-2 text-base not-italic font-normal leading-6 text-textfield`}
+              >
+                เวลานัดหมาย
+              </label>
+            )}
+          </div>
           <input
-            value={date}
-            onChange={(e) => {
-              setDate(e.target.value);
-              setErrorDate(false);
-            }}
-            type={inputType}
-            placeholder="วัน เดือน ปี เกิด"
-            onTouchStart={handleTouchStart}
-            className={`w-[364px] h-10 text-base text-black01 not-italic font-normal leading-6 pl-2 pr-2 border rounded ${
-              errorDate ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
-          />
-          <input
-            value={veterinarian}
-            onChange={(e) => {
-              setVeterinarian(e.target.value);
-              setErrorVeterinarian(false);
-            }}
+            value={appointmentDetail}
+            onChange={(e) => setAppointmentDetail(e.target.value)}
             type="text"
-            placeholder={`สัตวแพทย์ / เลขที่ใบอนุญาต`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorVeterinarian ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
-          />
-          <input
-            value={hospital}
-            onChange={(e) => {
-              setHospital(e.target.value);
-              setErrorHospital(false);
-            }}
-            type="text"
-            placeholder={`สถานที่รักษา`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorHospital ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
-          />
-          <input
-            value={detail}
-            onChange={(e) => {
-              setDetail(e.target.value);
-              setErrorDetail(false);
-            }}
-            type="text"
-            placeholder={`รายละเอียดเพิ่มเติม`}
-            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded ${
-              errorDetail ? "border-error" : "border-textfield"
-            } focus:outline-primary`}
+            placeholder="รายละเอียดการนัดหมาย"
+            className={`flex w-[364px] h-10 flex-col items-start text-base not-italic font-normal leading-6 pl-2 border rounded border-textfield focus:outline-primary`}
           />
           <button
             type="submit"
