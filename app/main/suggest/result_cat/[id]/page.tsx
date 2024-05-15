@@ -17,7 +17,7 @@ function ResultCat({ params }: any) {
 
   const getResultSuggest = async () => {
     try {
-      const response = await axios.get("/api//recommend/cat/" + params.id, {
+      const response = await axios.get("/api/recommend/cat/" + params.id, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

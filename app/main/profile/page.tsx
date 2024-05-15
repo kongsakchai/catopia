@@ -30,12 +30,12 @@ export default function Profile() {
   const getUserData = async () => {
     try {
       const [responseUser, responseKittens] = await Promise.all([
-        axios.get("/api//user", {
+        axios.get("/api/user", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },
         }),
-        axios.get("/api//cat", {
+        axios.get("/api/cat", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },

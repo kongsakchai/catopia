@@ -59,7 +59,7 @@ function GenQuesSugest({ progress, setProgress }: any) {
 
     try {
       const response = await axios.post(
-        "/api//user/answer",
+        "/api/user/answer",
         { answer },
         {
           headers: {

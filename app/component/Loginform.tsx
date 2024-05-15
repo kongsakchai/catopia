@@ -58,7 +58,7 @@ export default function Loginform({ setEnablePreloader }: LoginformProps) {
 
     try {
       const response = await axios.post(
-        "/api//auth/login",
+        "/api/auth/login",
         {
           username: username,
           password: password,

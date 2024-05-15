@@ -40,7 +40,7 @@ function DetailTreatment({ params }: any) {
     }
   };
 
-  //console.log("treatmentInfo: ", treatmentInfo);
+  console.log("treatmentInfo: ", treatmentInfo);
 
   return (
     <div className="container mx-auto flex flex-col items-start gap-6 mt-12 pl-8 pr-8">

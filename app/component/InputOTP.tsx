@@ -58,7 +58,7 @@ export default function InputOTP() {
       code: localStorage.getItem("keyotp"),
     };
     try {
-      const res = await axios.post("/api//otp/verify", data);
+      const res = await axios.post("/api/otp/verify", data);
 
       if (res.status === 200) {
         if (res.data.success) {

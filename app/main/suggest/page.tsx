@@ -21,7 +21,7 @@ export default function Suggest() {
 
   const getKittenData = async () => {
     try {
-      const responseKittens = await axios.get("/api//cat", {
+      const responseKittens = await axios.get("/api/cat", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },

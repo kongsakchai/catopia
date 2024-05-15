@@ -17,7 +17,7 @@ export default function Home() {
 
   const getSuggest = async () => {
     try {
-      const response = await axios.get("/api//recommend/cat/", {
+      const response = await axios.get("/api/recommend/cat/", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

@@ -38,7 +38,7 @@ function EditProfile() {
 
   const getUserData = async () => {
     try {
-      const response = await axios.get("/api//user", {
+      const response = await axios.get("/api/user", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -129,7 +129,7 @@ function EditProfile() {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const response = await axios.post("/api//file/upload", formData, {
+      const response = await axios.post("/api/file/upload", formData, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -161,7 +161,7 @@ function EditProfile() {
     // //console.log(profile);
 
     try {
-      const response = await axios.put("/api//user", data, {
+      const response = await axios.put("/api/user", data, {
         headers: { Authorization: "Bearer " + localStorage.getItem("token") },
       });
 

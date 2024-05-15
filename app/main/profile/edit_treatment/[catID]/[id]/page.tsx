@@ -63,8 +63,8 @@ function EditTreatment({ params }: any) {
       vet: veterinarian,
       location: hospital,
       detail: detail,
-      appointment,
-      appointmentDetail
+      appointmentDate: appointment,
+      appointment: appointmentDetail
     };
     try {
       const res = await axios.put(`/api/treatment/${params.catID}/${params.id}`, data, {
@@ -101,6 +101,8 @@ function EditTreatment({ params }: any) {
         setVeterinarian(response.data.data.vet);
         setHospital(response.data.data.location);
         setDetail(response.data.data.detail);
+        setAppointment(response.data.data.appointmentDate);
+        setAppointmentDetail(response.data.data.appointment);
       }
     } catch (error) {
       //console.log("Error: ", error);
@@ -121,6 +123,8 @@ function EditTreatment({ params }: any) {
     const isHospitalValid = hospital.trim() !== "";
     const isDetailValid = detail.trim() !== "";
     const resultPostTreatment = await postTreatment();
+    console.log("resultPostTreatment: ", resultPostTreatment);
+    
 
     setEnablePreloader(false);
 

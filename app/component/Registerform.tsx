@@ -118,7 +118,7 @@ export default function Registerform({ setEnablePreloader }: RegisterformProps) 
       gender,
     };
     try {
-      const response = await fetch("/api//auth/register", {
+      const response = await fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify(data),
       });

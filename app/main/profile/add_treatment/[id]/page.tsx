@@ -6,7 +6,6 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import { log } from "util";
 
 function AddTreatment({ params }: any) {
   // //console.log("AddTreatment : ", params.id);
@@ -59,8 +58,8 @@ function AddTreatment({ params }: any) {
       vet: veterinarian,
       location: hospital,
       detail: detail,
-      appointment,
-      appointmentDetail,
+      appointmentDate: appointment,
+      appointment: appointmentDetail
     };
     try {
       const res = await axios.post(`/api/treatment/${params.id}`, data, {
@@ -94,6 +93,8 @@ function AddTreatment({ params }: any) {
     const isHospitalValid = hospital.trim() !== "";
     const isDetailValid = detail.trim() !== "";
     const resultPostTreatment = await postTreatment();
+    console.log("resultPostTreatment: ", resultPostTreatment);
+    
 
     setEnablePreloader(false);
 

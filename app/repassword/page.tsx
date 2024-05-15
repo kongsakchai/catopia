@@ -40,7 +40,7 @@ export default function Forgotpassword() {
   const sendUsernameForOTP = async () => {
     const data = { username };
     try {
-      const res = await axios.post("/api//forget-password", data);
+      const res = await axios.post("/api/forget-password", data);
 
       if (res.status === 200) {
         if (res.data.success) {
