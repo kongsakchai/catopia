@@ -39,7 +39,7 @@ export default function DrawerExample({ openDrawer, setOpenDrawer }: any) {
         }
     }
 
-    console.log('notification : ', notification);
+    // console.log('notification : ', notification);
 
     function formatThaiDate(dateString : string) {
         const date = new Date(dateString);
