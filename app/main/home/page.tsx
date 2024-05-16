@@ -7,9 +7,13 @@ import Homeheader from "@/app/component/Homeheader";
 import Homeinterest from "@/app/component/Homeinterest";
 import Homerecommand from "@/app/component/Homerecommand";
 import Homerefer from "@/app/component/Homerefer";
+import Drawer from "@/app/component/MUI/Drawer";
 
 export default function Home() {
+
   const [suggestData, setSuggestData] = useState([]);
+
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   useEffect(() => {
     getSuggest();
@@ -33,14 +37,15 @@ export default function Home() {
     }
   };
 
-  // //console.log("suggestData : ", suggestData);
+  // console.log("suggestData : ", suggestData);
 
   return (
     <div className="flex flex-col items-start gap-4 mx-8 my-12">
-      <Homeheader />
+      <Homeheader setOpenDrawer={setOpenDrawer} />
       <Homerecommand />
       <Homeinterest suggestData={suggestData} />
       <Homerefer />
+      <Drawer openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
     </div>
   );
 }

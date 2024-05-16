@@ -4,7 +4,7 @@ import { Noto_Sans_Thai } from "next/font/google";
 import axios from "axios";
 import Nav from "../component/Nav";
 import "../globals.css";
-import React, {useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { ActiveContext } from "../store/context";
 import { useRouter } from "next/navigation";
 
@@ -25,7 +25,7 @@ export default function RootLayout({
 
   useEffect(() => {
     verifyToken()
-  }, [localStorage.getItem("token")])
+  }, [])
 
   const verifyToken = async () => {
     try {
@@ -35,7 +35,7 @@ export default function RootLayout({
         }
       })
 
-      console.log("res", res.data);
+      // console.log("res", res.data);
 
       if (!res.data) {
         router.push("/")
